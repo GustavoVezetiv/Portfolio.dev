@@ -14,6 +14,41 @@
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .hidden-page { display: none !important; }
 
+/* --- BACKGROUND ANIMADO (Aurora Azul/Violeta com Vignette) --- */
+.animated-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Camadas: ciano à esquerda, azul no centro, violeta à direita, vinheta escura nas bordas */
+    background-image:
+        radial-gradient(80% 120% at 15% 55%, rgba(34, 211, 238, 0.35), rgba(0,0,0,0) 60%),
+        radial-gradient(90% 140% at 50% 40%, rgba(59, 130, 246, 0.45), rgba(0,0,0,0) 65%),
+        radial-gradient(80% 120% at 82% 52%, rgba(99, 102, 241, 0.38), rgba(0,0,0,0) 60%),
+        radial-gradient(130% 130% at 50% 50%, rgba(0,0,0,0) 42%, rgba(0,0,0,0.85) 100%);
+    background-repeat: no-repeat;
+    background-size: 135% 140%, 150% 130%, 140% 140%, 100% 100%;
+    background-position: 12% 60%, 50% 45%, 85% 55%, 50% 50%;
+    filter: blur(48px) saturate(1.05);
+    transform: translateZ(0);
+    animation: auroraMove 16s ease-in-out infinite alternate;
+}
+
+@keyframes auroraMove {
+    0% {
+        background-position: 12% 60%, 50% 45%, 85% 55%, 50% 50%;
+        filter: blur(50px) saturate(1.05);
+    }
+    50% {
+        background-position: 18% 52%, 46% 50%, 80% 48%, 50% 50%;
+        filter: blur(56px) saturate(1.08);
+    }
+    100% {
+        background-position: 14% 58%, 54% 42%, 90% 60%, 50% 50%;
+        filter: blur(48px) saturate(1.05);
+    }
+}
+
 /* --- DRAG MARQUEE (Certificados) --- */
 .marquee-container { overflow: hidden; position: relative; cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; }
 .marquee-container:active { cursor: grabbing; }
