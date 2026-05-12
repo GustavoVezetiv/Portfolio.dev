@@ -97,12 +97,65 @@ function resetDice() {
 }
 
 function generateChaosContent(roll) {
-    // Gera apenas uma mensagem de erro simples para o Chaos Mode
+    const variants = [
+        {
+            className: 'chaos-terminal',
+            icon: 'fa-terminal',
+            title: 'KERNEL PANIC',
+            subtitle: 'A interface tentou subir em modo produção e perdeu o save.',
+            accent: 'text-emerald-300',
+            border: 'border-emerald-400/50',
+            button: 'border-emerald-300 text-emerald-300 hover:bg-emerald-300'
+        },
+        {
+            className: 'chaos-breach',
+            icon: 'fa-shield-virus',
+            title: 'BREACH DETECTED',
+            subtitle: 'Pacotes estranhos foram encontrados no corredor entre o dado e o dashboard.',
+            accent: 'text-red-300',
+            border: 'border-red-400/50',
+            button: 'border-red-300 text-red-300 hover:bg-red-300'
+        },
+        {
+            className: 'chaos-static',
+            icon: 'fa-satellite-dish',
+            title: 'SIGNAL LOST',
+            subtitle: 'A transmissão chegou com ruído demais. O sistema está recompondo a frequência.',
+            accent: 'text-cyan-300',
+            border: 'border-cyan-300/50',
+            button: 'border-cyan-300 text-cyan-300 hover:bg-cyan-300'
+        },
+        {
+            className: 'chaos-arcane',
+            icon: 'fa-dice-d20',
+            title: 'ARCANE MISFIRE',
+            subtitle: 'O D20 abriu uma versão instável demais da interface. Culpa dos modificadores.',
+            accent: 'text-fuchsia-300',
+            border: 'border-fuchsia-300/50',
+            button: 'border-fuchsia-300 text-fuchsia-300 hover:bg-fuchsia-300'
+        }
+    ];
+    const variant = variants[roll % variants.length];
+    chaosPage.className = `page-section h-full w-full overflow-y-auto flex flex-col p-8 gap-8 items-center justify-start ${variant.className}`;
     chaosPage.innerHTML = `
-        <div class="w-full max-w-2xl mx-auto bg-red-500/20 border border-red-500/50 p-6 rounded-lg text-center mt-20">
-            <h3 class="text-red-400 font-bold text-xl mb-4">⚠ GLITCH DETECTED ⚠</h3>
-            <p class="text-white/80 font-mono mb-4">O sistema falhou ao carregar a interface (Roll: ${roll}).</p>
-            <button onclick="rollDestiny()" class="px-6 py-2 border-2 border-yellow-400 text-yellow-400 font-bold rounded hover:bg-yellow-400 hover:text-black transition-all duration-200 cursor-pointer animate-pulse hover:animate-none">Tente rolar novamente!</button>
+        <div class="chaos-scanlines"></div>
+        <div class="chaos-window w-full max-w-3xl mx-auto bg-black/60 border ${variant.border} p-6 sm:p-8 rounded-lg text-center mt-20 relative overflow-hidden">
+            <div class="chaos-noise"></div>
+            <div class="relative z-10">
+                <div class="mx-auto mb-5 w-16 h-16 rounded-2xl border ${variant.border} flex items-center justify-center ${variant.accent} text-3xl bg-white/5">
+                    <i class="fas ${variant.icon}"></i>
+                </div>
+                <p class="font-mono text-xs uppercase tracking-[4px] ${variant.accent} mb-2">Roll ${roll} / Access unstable</p>
+                <h3 class="chaos-title ${variant.accent} font-black text-3xl sm:text-5xl mb-4">${variant.title}</h3>
+                <p class="text-white/75 font-mono mb-6 max-w-xl mx-auto">${variant.subtitle}</p>
+                <div class="chaos-code text-left font-mono text-[11px] sm:text-xs text-white/50 bg-black/40 border border-white/10 rounded-lg p-4 mb-6">
+                    <p>&gt; boot --interface perfect-form</p>
+                    <p>&gt; entropy_check: failed</p>
+                    <p>&gt; fallback_channel: ${variant.className}</p>
+                    <p>&gt; reroll_required: true</p>
+                </div>
+                <button onclick="rollDestiny()" class="px-6 py-2 border-2 ${variant.button} hover:text-black font-bold rounded transition-all duration-200 cursor-pointer animate-pulse hover:animate-none">Tente rolar novamente!</button>
+            </div>
         </div>
     `;
 }
