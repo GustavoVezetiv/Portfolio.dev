@@ -260,33 +260,23 @@
 
 #page-chaos {
     background-color: #050505;
-    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-    /* Noise mais agressivo */
-    background-blend-mode: hard-light;
-    background-size: 150px;
-    /* Bloqueia interação com o conteúdo */
-    pointer-events: none;
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(239, 68, 68, 0.18), transparent 28%),
+        radial-gradient(circle at 80% 70%, rgba(34, 211, 238, 0.12), transparent 30%),
+        linear-gradient(135deg, rgba(255,255,255,0.035) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.035) 50%, rgba(255,255,255,0.035) 75%, transparent 75%, transparent);
+    background-blend-mode: screen;
+    background-size: auto, auto, 18px 18px;
+    pointer-events: auto;
     user-select: none;
-    /* Filtro global de ruído */
     filter: contrast(1.5) brightness(0.8);
 }
 
-/* Mata todas as animações internas e interações no modo Chaos */
-#page-chaos * {
-    animation: none !important;
-    transition: none !important;
-    cursor: not-allowed !important;
-    pointer-events: none !important;
-}
-
-/* Exceção: Botão de rolar deve ser clicável */
 #page-chaos button {
     pointer-events: auto !important;
     cursor: pointer !important;
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
 }
 
-/* Exceção: O efeito de glitch em si deve rodar (é um "defeito", não uma feature) */
 @keyframes chaos-flicker {
     0% { opacity: 1; filter: hue-rotate(0deg); }
     5% { opacity: 0.4; filter: hue-rotate(90deg); transform: skewX(10deg); }
@@ -306,6 +296,72 @@
 .chaos-filter-1 { filter: hue-rotate(90deg) blur(2px); }
 .chaos-filter-2 { filter: invert(1) grayscale(1) contrast(5); }
 .chaos-filter-3 { filter: sepia(1) saturate(10) brightness(0.5); }
+
+.chaos-window {
+    animation: chaosWindowIn 0.35s steps(2, end), chaos-flicker 1.8s infinite alternate;
+}
+
+.chaos-title {
+    text-shadow: 2px 0 rgba(34, 211, 238, 0.65), -2px 0 rgba(236, 72, 153, 0.65);
+}
+
+.chaos-code {
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.45);
+}
+
+.chaos-noise,
+.chaos-scanlines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.chaos-noise {
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,0.22) 1px, transparent 1px);
+    background-size: 9px 9px;
+    mix-blend-mode: screen;
+    opacity: 0.08;
+    animation: chaosNoise 0.45s steps(2, end) infinite;
+}
+
+.chaos-scanlines {
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.06) 0,
+        rgba(255,255,255,0.06) 1px,
+        transparent 1px,
+        transparent 5px
+    );
+    opacity: 0.25;
+}
+
+.chaos-terminal {
+    background-color: #020807 !important;
+}
+
+.chaos-breach {
+    background-color: #110205 !important;
+}
+
+.chaos-static {
+    background-color: #020812 !important;
+}
+
+.chaos-arcane {
+    background-color: #0c0213 !important;
+}
+
+@keyframes chaosWindowIn {
+    from { transform: translateY(18px) skewX(-4deg); opacity: 0; }
+    to { transform: translateY(0) skewX(0); opacity: 1; }
+}
+
+@keyframes chaosNoise {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(6px, -4px); }
+    100% { transform: translate(-3px, 5px); }
+}
 
 /* --- BIO EXPAND ANIMATION --- */
 #bio-expanded-content {

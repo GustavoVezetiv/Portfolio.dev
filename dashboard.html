@@ -89,6 +89,9 @@
                     <div id="v3-app-body" class="flex-1 overflow-y-auto overflow-x-hidden p-6 relative">
                         <!-- Conteúdo será preenchido aqui -->
                     </div>
+                    <p class="modal-close-hint shrink-0 border-t border-white/5 px-4 py-2 text-center text-[10px] uppercase tracking-[2px] text-white/35">
+                        Clique fora da janela para sair
+                    </p>
                 </div>
             </div>
 
@@ -117,6 +120,13 @@
                             class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Currículo</span>
                     </div>
 
+                    <div onclick="loadApp('dossie')"
+                        class="dock-item group relative w-12 h-12 bg-white/10 rounded-xl flex justify-center items-center text-white/90 text-2xl border border-white/5 cursor-pointer shadow-lg">
+                        <i class="fas fa-scroll"></i>
+                        <span
+                            class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Dossiê</span>
+                    </div>
+
                     <div class="w-[1px] h-8 bg-white/20 mx-1 self-center"></div>
 
                     <div onclick="loadApp('sobre')"
@@ -140,6 +150,9 @@
                 <div id="cert-modal-content" class="space-y-4">
                     <!-- Conteúdo será preenchido dinamicamente -->
                 </div>
+                <p class="modal-close-hint mt-5 border-t border-white/5 pt-3 text-center text-[10px] uppercase tracking-[2px] text-white/35">
+                    Clique fora para sair
+                </p>
             </div>
         </div>
 
@@ -452,11 +465,30 @@
             </div>
         </div>
 
+        <div id="template-dossie" class="hidden">
+            <div class="pt-10 px-4 pb-24">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 border-b border-white/10 pb-4">
+                    <div>
+                        <h2 class="font-montserrat text-4xl font-black text-white mb-1 tracking-tighter">DOSSIÊ</h2>
+                        <p class="text-white/50 text-xs font-inter tracking-widest uppercase">Recomendações • Bastidores • Confiança</p>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-400/10 text-[10px] text-cyan-200 border border-cyan-400/20 uppercase tracking-widest">
+                        <i class="fas fa-dice-d20"></i>
+                        <span>Arquivo Vezetiv</span>
+                    </div>
+                </div>
+
+                <div id="dossie-recommendations" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Conteúdo renderizado pelo array recomendacoes -->
+                </div>
+            </div>
+        </div>
+
         <div id="template-curriculo" class="hidden">
             <div class="flex flex-col items-center justify-center h-full p-6">
                 <i class="far fa-file-pdf text-6xl text-red-500 mb-4"></i>
                 <h2 class="text-2xl font-bold mb-2">Visualizador de PDF</h2>
-                <p class="text-white/50 mb-6">Clique aqui para vizualizar em PDF o currículo.</p>
+                <p class="text-white/50 mb-6">Clique aqui para visualizar em PDF o currículo.</p>
                 <p class="text-white/50 mb-6 text-center">
                     <a href="mailto:gustavovezetiv8@gmail.com?subject=Oportunidade%20de%20Trabalho&body=Ol%C3%A1%20Gustavo%2C%0A%0AGostaria%20de%20conversar%20sobre%20uma%20oportunidade..." 
                        class="text-cyan-400 hover:text-cyan-300 transition-colors underline">
@@ -464,7 +496,7 @@
                     </a>
                 </p>
 
-                <a href="arc/Curriculo 2025.pdf" download="Curriculo 2025.pdf" target="_blank"
+                <a href="arc/Curriculo_Gustavo_Vezetiv_Python_Dados_Integracoes.pdf" download="Curriculo_Gustavo_Vezetiv_Python_Dados_Integracoes.pdf" target="_blank"
                     class="px-6 py-2 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform cursor-pointer mb-8">
                     Baixar PDF
                 </a>
@@ -474,7 +506,7 @@
                     <div class="bg-white/10 px-4 py-2 border-b border-white/20">
                         <p class="text-sm text-white/60">Prévia do Currículo</p>
                     </div>
-                    <iframe src="arc/Curriculo 2025.pdf" class="w-full h-96 bg-white"></iframe>
+                    <iframe src="arc/Curriculo_Gustavo_Vezetiv_Python_Dados_Integracoes.pdf" class="w-full h-96 bg-white"></iframe>
                 </div>
             </div>
         </div>
@@ -510,6 +542,11 @@
         window.history.replaceState(null, null, window.location.href);
 
         let currentOpenApp = null;
+
+        // ===== DOSSIÊ / RECOMENDAÇÕES =====
+        // Para adicionar uma recomendação, duplique um objeto abaixo e preencha:
+        // { nome: 'Nome da pessoa', contexto: 'Cargo / empresa / relação', texto: 'Texto da recomendação', icon: 'fa-handshake' }
+        const recomendacoes = [];
 
         // ===== BANCO DE DADOS DE CERTIFICAÇÕES =====
         const certificacoes = {
@@ -757,6 +794,42 @@
             }
         }
 
+        function renderDossie() {
+            const container = document.getElementById('dossie-recommendations');
+            if (!container) return;
+
+            if (!recomendacoes.length) {
+                container.innerHTML = `
+                    <div class="md:col-span-2 border border-dashed border-white/15 rounded-2xl p-8 text-center bg-white/[0.03]">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-cyan-500/30 to-purple-500/30 border border-white/10 flex items-center justify-center text-2xl text-cyan-200">
+                            <i class="fas fa-scroll"></i>
+                        </div>
+                        <h3 class="font-montserrat text-xl font-bold text-white mb-2">Recomendações em preparação</h3>
+                        <p class="text-white/55 max-w-xl mx-auto text-sm leading-relaxed">
+                            Este espaço vai reunir relatos de pessoas que trabalharam, estudaram ou construíram algo comigo.
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = recomendacoes.map((recomendacao) => `
+                <article class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 hover:border-cyan-400/30 transition-colors">
+                    <div class="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-cyan-400/10"></div>
+                    <div class="relative flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/30 to-purple-500/30 border border-white/10 flex items-center justify-center text-xl text-cyan-200 shrink-0">
+                            <i class="fas ${recomendacao.icon || 'fa-quote-left'}"></i>
+                        </div>
+                        <div>
+                            <p class="text-white/80 text-sm leading-relaxed mb-4">"${recomendacao.texto}"</p>
+                            <h3 class="font-montserrat text-white font-bold text-sm">${recomendacao.nome || 'Recomendação profissional'}</h3>
+                            <p class="text-white/45 text-xs mt-1">${recomendacao.contexto || 'Experiência compartilhada'}</p>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
         function loadApp(appId) {
             console.log('loadApp chamado com:', appId);
             const windowEl = document.getElementById('v3-app-window');
@@ -794,6 +867,7 @@
                 if (appId === 'certificados') title = "Certificados.app";
                 if (appId === 'sobre') title = "Bio.txt";
                 if (appId === 'curriculo') title = "Curriculo.pdf";
+                if (appId === 'dossie') title = "Dossie.log";
                 titleEl.innerText = title;
 
                 windowEl.classList.remove('hidden');
@@ -804,6 +878,10 @@
                         const marquees = bodyEl.querySelectorAll('.marquee-container');
                         marquees.forEach(marquee => createDraggableMarquee(marquee, -0.5));
                     }, 100);
+                }
+
+                if (appId === 'dossie') {
+                    renderDossie();
                 }
             } else {
                 console.error('Template não encontrado:', templateId);
