@@ -4,7 +4,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vezetiv</title>
+
+    <!-- ===== SEO ===== -->
+    <title>Gustavo Vezetiv — Full Stack Developer (Python, Django, React)</title>
+    <meta name="description" content="Portfólio de Gustavo Vezetiv, desenvolvedor Full Stack em Cuiabá-MT. Python, Django, React, Docker, automações com IA e dados/BI. Disponível para oportunidades CLT e freelance.">
+    <meta name="author" content="Gustavo Vezetiv">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vezetiv.dev/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Gustavo Vezetiv">
+    <meta property="og:title" content="Gustavo Vezetiv — Full Stack Developer">
+    <meta property="og:description" content="Python, Django, React, Docker, automações com IA e dados/BI. Disponível para oportunidades CLT e freelance.">
+    <meta property="og:url" content="https://vezetiv.dev/">
+    <!-- TODO: trocar por uma imagem PNG/JPG 1200x630 para melhor suporte nas redes -->
+    <meta property="og:image" content="https://vezetiv.dev/img/Group%20266.svg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gustavo Vezetiv — Full Stack Developer">
+    <meta name="twitter:description" content="Python, Django, React, Docker, automações com IA e dados/BI. Disponível para oportunidades CLT e freelance.">
+    <meta name="twitter:image" content="https://vezetiv.dev/img/Group%20266.svg">
+
+    <!-- JSON-LD: Person -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Gustavo Vezetiv",
+      "url": "https://vezetiv.dev/",
+      "jobTitle": "Full Stack Developer",
+      "email": "mailto:gustavovezetiv8@gmail.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "Cuiabá", "addressRegion": "MT", "addressCountry": "BR" },
+      "knowsAbout": ["Python", "Django", "React", "React Native", "Docker", "PostgreSQL", "Power BI", "Machine Learning", "Automação com IA"],
+      "sameAs": [
+        "https://github.com/gustavovezetiv",
+        "https://linkedin.com/in/gustavovezetiv",
+        "https://instagram.com/gustavovezetiv"
+      ]
+    }
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -28,14 +69,22 @@
         <hr style="margin: 20px 0; border: 1px solid #ccc;">
         <h2>Dados do Desenvolvedor:</h2>
         <ul>
-            <li>Nome: Gustavo</li>
+            <li>Nome: Gustavo Vezetiv</li>
             <li>Classe: Full Stack</li>
-            <li>Localização: Campo Verde, MT</li>
+            <li>Localização: Cuiabá, MT</li>
             <li>Stack: React, Python, Docker, PostgreSQL</li>
         </ul>
         <p>Para inicializar a interface gráfica avançada, é necessário realizar um teste de habilidade.</p>
         <p>Por favor, utilize o <strong>Artefato D20</strong> localizado no canto inferior direito da sua tela.</p>
         <p>Você precisará de sorte para ver a verdadeira interface.</p>
+        <hr style="margin: 20px 0; border: 1px solid #ccc;">
+        <h2>Páginas (modo texto):</h2>
+        <ul>
+            <li><a href="projetos.html">Projetos</a></li>
+            <li><a href="servicos.html">Serviços</a></li>
+            <li><a href="sobre.html">Sobre mim</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
     </div>
 
     <div id="destiny-dice-container" onclick="rollDestiny()">
@@ -59,66 +108,6 @@
 
         <div class="animated-bg"></div>
 
-        <section id="page-3"
-            class="page-section hidden-page h-full w-full flex flex-col items-center justify-center font-inter bg-transparent relative z-10">
-
-            <div id="v3-hero"
-                class="flex-1 flex flex-col justify-center items-center mb-24 animate-fadeIn transition-all duration-500">
-                <h1
-                    class="font-montserrat font-black text-main text-[clamp(3rem,10vw,8rem)] leading-[0.9] uppercase tracking-tighter mix-blend-overlay">
-                    GUSTAVO</h1>
-                <p class="font-inter text-xs sm:text-lg md:text-xl tracking-[2px] sm:tracking-[4px] text-white/90 mt-4 uppercase drop-shadow-md whitespace-nowrap">Full Stack Developer</p>
-                <div class="mt-2 flex gap-2">
-                    <span
-                        class="px-2 py-1 bg-white/10 rounded text-[10px] uppercase tracking-widest border border-white/20">Lv.
-                        21</span>
-                    <span
-                        class="px-2 py-1 bg-white/10 rounded text-[10px] uppercase tracking-widest border border-white/20">Cuiabá-MT</span>
-                </div>
-            </div>
-
-            <div id="source-v3-dock" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[95vw]">
-                <div
-                    class="dock-container flex items-end gap-3 p-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl">
-
-                    <div onclick="openV3App('certificados')"
-                        class="dock-item group relative w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex justify-center items-center text-white text-2xl border border-white/20 cursor-pointer shadow-lg">
-                        <i class="fas fa-certificate"></i>
-                        <span
-                            class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Certificados</span>
-                    </div>
-
-                    <div onclick="openV3App('projetos')"
-                        class="dock-item group relative w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex justify-center items-center text-white text-2xl border border-white/20 cursor-pointer shadow-lg">
-                        <i class="fas fa-code"></i>
-                        <span
-                            class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Projetos</span>
-                    </div>
-
-                    <div onclick="openV3App('curriculo')"
-                        class="dock-item group relative w-12 h-12 bg-white/10 rounded-xl flex justify-center items-center text-white/90 text-2xl border border-white/5 cursor-pointer shadow-lg">
-                        <i class="far fa-file-pdf"></i>
-                        <span
-                            class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Currículo</span>
-                    </div>
-
-                    <div class="w-[1px] h-8 bg-white/20 mx-1 self-center"></div>
-
-                    <div onclick="openV3App('sobre')"
-                        class="dock-item group relative w-12 h-12 bg-white/10 rounded-xl flex justify-center items-center text-white/90 text-2xl border border-white/5 cursor-pointer shadow-lg">
-                        <i class="far fa-user"></i>
-                        <span
-                            class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Sobre
-                            Mim</span>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <div id="source-v1-header" class="hidden"></div>
-        <div id="source-v2-header" class="hidden"></div>
-
         <section id="page-chaos"
             class="page-section hidden-page h-full w-full overflow-y-auto flex flex-col p-8 gap-8 items-center justify-start">
         </section>
@@ -140,12 +129,7 @@
 
     </main>
 
-    <script>
-        // Se já completou o processo de acesso e está no dashboard, não deixa voltar
-        if (sessionStorage.getItem('dashboardLocked') === 'true' && sessionStorage.getItem('acessoPermitido') === 'true') {
-            window.location.href = "dashboard.html";
-        }
-    </script>
+    <script src="js/ui.js"></script>
     <script src="js/script.js"></script>
 </body>
 

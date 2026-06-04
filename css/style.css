@@ -230,7 +230,7 @@
 
 @media (max-width: 768px) {
     .dock-item {
-        width: 10rem;
+        width: 3rem;
         height: 3rem;
         font-size: 1.25rem;
     }
