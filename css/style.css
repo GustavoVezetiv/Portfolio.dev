@@ -1,12 +1,9 @@
 /* ARQUIVO: style.css */
 
 /* --- FONTES --- */
-.font-alfa { font-family: 'Alfa Slab One', cursive; }
-.font-roboto { font-family: 'Roboto', sans-serif; }
 .font-montserrat { font-family: 'Montserrat', sans-serif; }
 .font-inter { font-family: 'Inter', sans-serif; }
-.font-mono { font-family: 'Fira Code', monospace; } 
-.font-pixel { font-family: 'Press Start 2P', cursive; } 
+.font-mono { font-family: 'Fira Code', monospace; }
 .text-main { color: #0c0c0c; }
 
 /* --- UTILITÁRIOS GERAIS --- */
@@ -14,115 +11,25 @@
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .hidden-page { display: none !important; }
 
-/* --- BACKGROUND ANIMADO (Morphing Gradient leve) --- */
-@property --mesh-cyan {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #22d3ee;
-}
-
-@property --mesh-blue {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #3b82f6;
-}
-
-@property --mesh-indigo {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #6366f1;
-}
-
-@property --mesh-violet {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #8b5cf6;
-}
-
-@property --mesh-pink {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #ec4899;
-}
-
-@property --mesh-emerald {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #10b981;
-}
-
-@property --mesh-amber {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #f59e0b;
-}
-
+/* --- BACKGROUND (Mesh Gradient estático) --- */
+/* Estático de propósito: animar color-mix em 8 camadas full-screen causava
+   repaint contínuo e travava a renderização. O visual permanece premium. */
 .animated-bg {
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    --mesh-cyan: #22d3ee;
-    --mesh-blue: #3b82f6;
-    --mesh-indigo: #6366f1;
-    --mesh-violet: #8b5cf6;
-    --mesh-pink: #ec4899;
-    --mesh-emerald: #10b981;
-    --mesh-amber: #f59e0b;
     background-color: #08111f;
     background-image:
-        radial-gradient(105% 80% at 8% 18%, color-mix(in srgb, var(--mesh-cyan) 46%, transparent) 0%, transparent 58%),
-        radial-gradient(95% 82% at 92% 20%, color-mix(in srgb, var(--mesh-violet) 44%, transparent) 0%, transparent 56%),
-        radial-gradient(95% 90% at 12% 88%, color-mix(in srgb, var(--mesh-blue) 42%, transparent) 0%, transparent 60%),
-        radial-gradient(86% 78% at 88% 86%, color-mix(in srgb, var(--mesh-pink) 34%, transparent) 0%, transparent 58%),
-        linear-gradient(125deg, transparent 5%, color-mix(in srgb, var(--mesh-emerald) 20%, transparent) 28%, transparent 54%),
-        linear-gradient(245deg, transparent 12%, color-mix(in srgb, var(--mesh-amber) 15%, transparent) 35%, transparent 62%),
-        linear-gradient(135deg, #050814 0%, color-mix(in srgb, var(--mesh-indigo) 24%, #07111f) 45%, #050814 100%),
+        radial-gradient(105% 80% at 8% 18%, rgba(34, 211, 238, 0.46) 0%, transparent 58%),
+        radial-gradient(95% 82% at 92% 20%, rgba(139, 92, 246, 0.44) 0%, transparent 56%),
+        radial-gradient(95% 90% at 12% 88%, rgba(59, 130, 246, 0.42) 0%, transparent 60%),
+        radial-gradient(86% 78% at 88% 86%, rgba(236, 72, 153, 0.34) 0%, transparent 58%),
+        linear-gradient(135deg, #050814 0%, rgba(99, 102, 241, 0.24) 45%, #050814 100%),
         radial-gradient(125% 120% at 50% 50%, transparent 36%, rgba(0, 0, 0, 0.78) 100%);
     background-repeat: no-repeat;
-    background-size: 180% 180%, 170% 170%, 160% 160%, 165% 165%, 190% 190%, 180% 180%, 155% 155%, 100% 100%;
-    background-position: 6% 36%, 92% 28%, 18% 76%, 86% 78%, 28% 42%, 74% 58%, 50% 50%, 50% 50%;
-    transform: translateZ(0);
-    animation: gradientMorph 20s ease-in-out infinite alternate;
-}
-
-@keyframes gradientMorph {
-    0% {
-        --mesh-cyan: #22d3ee;
-        --mesh-blue: #3b82f6;
-        --mesh-indigo: #6366f1;
-        --mesh-violet: #8b5cf6;
-        --mesh-pink: #ec4899;
-        --mesh-emerald: #10b981;
-        --mesh-amber: #f59e0b;
-        background-position: 6% 36%, 92% 28%, 18% 76%, 86% 78%, 28% 42%, 74% 58%, 50% 50%, 50% 50%;
-    }
-    50% {
-        --mesh-cyan: #06b6d4;
-        --mesh-blue: #2563eb;
-        --mesh-indigo: #7c3aed;
-        --mesh-violet: #a855f7;
-        --mesh-pink: #f472b6;
-        --mesh-emerald: #22c55e;
-        --mesh-amber: #facc15;
-        background-position: 32% 22%, 72% 36%, 38% 84%, 68% 72%, 42% 28%, 58% 66%, 56% 44%, 50% 50%;
-    }
-    100% {
-        --mesh-cyan: #38bdf8;
-        --mesh-blue: #4f46e5;
-        --mesh-indigo: #6d28d9;
-        --mesh-violet: #c084fc;
-        --mesh-pink: #db2777;
-        --mesh-emerald: #14b8a6;
-        --mesh-amber: #fb923c;
-        background-position: 20% 74%, 82% 16%, 64% 70%, 22% 62%, 76% 34%, 36% 76%, 44% 56%, 50% 50%;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .animated-bg {
-        animation: none;
-    }
+    background-size: 180% 180%, 170% 170%, 160% 160%, 165% 165%, 155% 155%, 100% 100%;
+    background-position: 6% 36%, 92% 28%, 18% 76%, 86% 78%, 50% 50%, 50% 50%;
 }
 
 /* --- DRAG MARQUEE (Certificados) --- */
