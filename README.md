@@ -5,44 +5,76 @@
 
 > "A interface gráfica falhou... Role um D20 para tentar recuperar o sistema."
 
-Este é um projeto de **Portfólio Pessoal Interativo (SPA)** construído com **JavaScript Vanilla Moderno (ES Modules)**. O conceito foge do tradicional "rolar para baixo", transformando a navegação em uma experiência de RPG onde a sorte (simulada) define qual versão do site o usuário verá.
+Portfólio pessoal interativo de **Gustavo Vezetiv**, construído com **HTML, CSS e JavaScript Vanilla** (sem frameworks). A navegação é uma experiência de RPG: a sorte (simulada por um D20) define qual versão da interface o visitante encontra.
 
 ---
 
-## ✨ Funcionalidades
+## ✨ Conceito
 
-### 1. Sistema de Sorte (D20 Mechanic)
-Uma mecânica de dados controla a experiência do usuário.
-- **Safe Mode:** Uma interface propositalmente "quebrada" e antiga (estilo anos 90) que serve como tela inicial.
-- **Chaos Mode (Falha):** Se o dado rolar baixo, o site entra em colapso visual com efeitos de Glitch e Cyberpunk.
-- **Perfect Form (Crítico/20):** O sucesso crítico carrega a interface real, inspirada em sistemas operacionais modernos (MacOS/Linux).
+1. **Safe Mode** — tela inicial propositalmente "antiga" (estilo anos 90) com os dados em texto puro (também serve de fallback para SEO e quem está sem JS).
+2. **Chaos Mode** — em rolagens baixas, o site entra em colapso visual (glitch/cyberpunk) e convida a rolar de novo.
+3. **Perfect Form** — em rolagens altas (≥15), carrega o `dashboard.html`: uma interface "OS-like" com dock e janelas modais (apps).
 
-### 2. Interface "OS-Like" (Perfect Form)
-- **Dock Dinâmica:** Barra de tarefas animada com efeito de magnificação (hover).
-- **Janelas Modais:** Apps como "Projetos", "Certificados" e "Sobre Mim" abrem em janelas flutuantes.
-- **Drag & Drop:** Carrossel de certificados arrastável com física de movimento.
+---
 
-### 3. Arquitetura Modular
-O projeto não utiliza frameworks pesados (React/Vue), mas utiliza a arquitetura de **ES Modules** nativa do JavaScript para organização profissional:
-- Separação clara entre **Dados** (`database.js`), **Lógica** (`modules/`) e **Renderização**.
+## 🧱 Arquitetura
+
+Sem build, sem framework. JavaScript clássico com **separação entre dados, UI e controle**, e **fonte única de verdade** em `js/data/`.
+
+```text
+/
+├── index.html            # Entrada: D20, Safe Mode e Chaos Mode
+├── dashboard.html        # Perfect Form: shell OS-like (hero + dock + janela modal)
+├── projetos.html         # Páginas "espelho" indexáveis (SEO + acesso direto),
+├── servicos.html         #   reaproveitam os render*() de js/apps.js
+├── sobre.html            #   (mesma fonte de dados, zero duplicação)
+├── contato.html
+├── robots.txt
+├── sitemap.xml
+├── css/
+│   └── style.css         # Identidade visual, animações, background morphing
+└── js/
+    ├── script.js         # Lógica do D20 / Chaos (index)
+    ├── ui.js             # Utilitários compartilhados (confetti, carrossel)
+    ├── apps.js           # Registry de apps + render*() do dashboard
+    ├── pages.js          # Monta as páginas espelho a partir dos render*()
+    └── data/             # FONTE ÚNICA DE VERDADE
+        ├── perfil.js
+        ├── projetos.js
+        ├── certificados.js
+        ├── servicos.js
+        └── dossie.js
+```
+
+### Como os apps funcionam
+Cada app é uma entrada no registry `APPS` em `js/apps.js`:
+```js
+APPS = { projetos: { title, render }, ... }
+```
+`loadApp(id)` chama `render()` (que monta o HTML a partir de `js/data/*`) e injeta na janela modal. Para **adicionar um app**: crie o `render`, registre em `APPS` e adicione um item na dock do `dashboard.html`.
+
+### Como editar o conteúdo
+Edite apenas os arquivos em **`js/data/`** — os apps e as páginas espelho se atualizam sozinhos.
+- Projetos: preencha `repo`/`demo` em `projetos.js` (botões aparecem automaticamente).
+- WhatsApp: preencha `whatsapp` em `perfil.js` (botão some se vazio).
 
 ---
 
 ## 🛠 Tech Stack
 
-* **Core:** ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-* **Estilização:** ![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white) (Via CDN para desenvolvimento ágil)
-* **Ícones:** FontAwesome 6.
-* **Fontes:** Google Fonts (Montserrat, Inter, Fira Code, Press Start 2P).
+* **Core:** HTML5, CSS3, JavaScript (ES) — sem framework, sem build.
+* **Estilização:** TailwindCSS (via CDN) + `css/style.css`.
+* **Ícones:** FontAwesome 6 · **Fontes:** Google Fonts (Montserrat, Inter, Fira Code, Press Start 2P).
 
 ---
 
-## 📂 Estrutura do Projeto
+## ▶ Rodando localmente
 
-```text
-/
-├── index.html            # Ponto de entrada (esqueleto)
-├── css/
-│   └── style.css         # Estilização global e animações
-└── js/
-    └── script.js           # Orquestrador principal
+Por usar `fetch`/scripts relativos, sirva via HTTP (não abra com `file://`):
+
+```bash
+python -m http.server 4599
+# acesse http://localhost:4599
+```
+
+> SEO: as URLs canônicas/sitemap usam `https://vezetiv.dev`. Ajuste se o domínio mudar.
