@@ -35,6 +35,8 @@ function initConfetti() {
 
 // --- Carrossel arrastável (Certificados) ---
 // Detecta arrasto horizontal vs scroll vertical para não travar o toque no mobile.
+// Os listeners globais (move/up) só existem enquanto há arrasto ativo — são
+// adicionados no "down" e removidos no "up", evitando acúmulo a cada abertura.
 function createDraggableMarquee(container, initialSpeed) {
     if (!container) return;
     const content = container.querySelector('.marquee-content');
@@ -52,66 +54,62 @@ function createDraggableMarquee(container, initialSpeed) {
     let isHorizontalDrag = false;
 
     function animate() {
-        if (!document.body.contains(container)) return; // Para se o elemento sumir
+        if (!document.body.contains(container)) return; // Para (e libera) quando o elemento sai do DOM
         if (!isDragging) xPos += initialSpeed;
-
         if (Math.abs(xPos) >= content.scrollWidth / 2) xPos = 0;
-
         content.style.transform = `translate3d(${xPos}px, 0, 0)`;
         requestAnimationFrame(animate);
     }
 
-    // Mouse
-    container.addEventListener('mousedown', e => {
-        isDragging = true;
-        startX = e.clientX;
+    // --- Mouse ---
+    function onMouseMove(e) {
+        const delta = e.clientX - lastX;
+        xPos += delta * 1.5;
         lastX = e.clientX;
-        container.style.cursor = 'grabbing';
-    });
-    window.addEventListener('mousemove', e => {
-        if (isDragging) {
-            const delta = e.clientX - lastX;
-            xPos += delta * 1.5;
-            lastX = e.clientX;
-        }
-    });
-    window.addEventListener('mouseup', () => {
+    }
+    function onMouseUp() {
         isDragging = false;
         container.style.cursor = 'grab';
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+    }
+    container.addEventListener('mousedown', e => {
+        isDragging = true;
+        lastX = e.clientX;
+        container.style.cursor = 'grabbing';
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
     });
 
-    // Touch (mobile) - detecta direção do movimento
+    // --- Touch (mobile) ---
+    function onTouchMove(e) {
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        if (Math.abs(currentX - startX) > Math.abs(currentY - startY) && Math.abs(currentX - startX) > 5) {
+            isHorizontalDrag = true;
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        if (isHorizontalDrag) {
+            xPos += (currentX - lastX) * 1.5;
+            lastX = currentX;
+        }
+    }
+    function onTouchEnd() {
+        isDragging = false;
+        isHorizontalDrag = false;
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('touchend', onTouchEnd);
+    }
     container.addEventListener('touchstart', e => {
         isDragging = true;
         isHorizontalDrag = false;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         lastX = e.touches[0].clientX;
+        window.addEventListener('touchmove', onTouchMove, { passive: false });
+        window.addEventListener('touchend', onTouchEnd);
     }, { passive: true });
-
-    window.addEventListener('touchmove', e => {
-        if (!isDragging) return;
-        const currentX = e.touches[0].clientX;
-        const currentY = e.touches[0].clientY;
-        const diffX = Math.abs(currentX - startX);
-        const diffY = Math.abs(currentY - startY);
-
-        if (diffX > diffY && diffX > 5) {
-            isHorizontalDrag = true;
-            e.preventDefault();
-            e.stopPropagation();
-        }
-        if (isHorizontalDrag) {
-            const delta = currentX - lastX;
-            xPos += delta * 1.5;
-            lastX = currentX;
-        }
-    }, { passive: false });
-
-    window.addEventListener('touchend', () => {
-        isDragging = false;
-        isHorizontalDrag = false;
-    });
 
     requestAnimationFrame(animate);
 }

@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-vezetiv",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfólio gamificado (RPG Edition) — HTML/CSS/JS vanilla.",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i src/tailwind-input.css -o css/tailwind.css --minify",
+    "watch:css": "tailwindcss -c tailwind.config.js -i src/tailwind-input.css -o css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

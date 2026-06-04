@@ -62,19 +62,33 @@ Edite apenas os arquivos em **`js/data/`** — os apps e as páginas espelho se 
 
 ## 🛠 Tech Stack
 
-* **Core:** HTML5, CSS3, JavaScript (ES) — sem framework, sem build.
-* **Estilização:** TailwindCSS (via CDN) + `css/style.css`.
-* **Ícones:** FontAwesome 6 · **Fontes:** Google Fonts (Montserrat, Inter, Fira Code, Press Start 2P).
+* **Core:** HTML5, CSS3, JavaScript (ES) — sem framework.
+* **Estilização:** TailwindCSS **compilado para CSS estático** (`css/tailwind.css`) + `css/style.css`.
+* **Ícones:** FontAwesome 6 · **Fontes:** Google Fonts (Alfa Slab One, Montserrat, Inter, Fira Code).
+
+> ⚡ **Performance:** o Tailwind é pré-compilado (não usamos o CDN JIT em runtime),
+> o fundo é um mesh gradient estático e o carrossel não acumula listeners.
 
 ---
 
 ## ▶ Rodando localmente
 
-Por usar `fetch`/scripts relativos, sirva via HTTP (não abra com `file://`):
+Por usar scripts relativos, sirva via HTTP (não abra com `file://`):
 
 ```bash
 python -m http.server 4599
 # acesse http://localhost:4599
+```
+
+### Recompilar o CSS (somente se você alterar classes Tailwind)
+
+As classes vivem em `*.html` e nos templates de `js/**`. Após editá-las, rode:
+
+```bash
+npm install        # primeira vez (instala o tailwindcss)
+npm run build:css  # gera css/tailwind.css minificado
+# ou, para desenvolver com rebuild automático:
+npm run watch:css
 ```
 
 > SEO: as URLs canônicas/sitemap usam `https://vezetiv.dev`. Ajuste se o domínio mudar.
