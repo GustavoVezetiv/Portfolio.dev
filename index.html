@@ -5,132 +5,1153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ===== SEO ===== -->
-    <title>Gustavo Vezetiv — Full Stack Developer (Python, Django, React)</title>
-    <meta name="description" content="Portfólio de Gustavo Vezetiv, desenvolvedor Full Stack em Cuiabá-MT. Python, Django, React, Docker, automações com IA e dados/BI. Disponível para oportunidades CLT e freelance.">
+    <!-- ===================== SEO ===================== -->
+    <title>Gustavo Vezetiv — Desenvolvedor Full Stack | Python, Django e Dados</title>
+    <meta name="description" content="Portfólio de Gustavo Vezetiv, desenvolvedor Full Stack em Cuiabá-MT. Especialista em Python, Django, automações, dados (Power BI, SQL) e Docker. Veja projetos, certificações e currículo.">
+    <meta name="keywords" content="Gustavo Vezetiv, desenvolvedor full stack, Python, Django, Docker, Power BI, análise de dados, automação, Cuiabá, TADS, IFMT, portfólio">
     <meta name="author" content="Gustavo Vezetiv">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://vezetiv.dev/">
+    <meta name="theme-color" content="#08111f">
+    <link rel="canonical" href="https://vezetiv.is-a.dev/">
 
-    <!-- Open Graph -->
+    <!-- Open Graph (LinkedIn, WhatsApp, Facebook) -->
     <meta property="og:type" content="website">
-    <meta property="og:locale" content="pt_BR">
     <meta property="og:site_name" content="Gustavo Vezetiv">
-    <meta property="og:title" content="Gustavo Vezetiv — Full Stack Developer">
-    <meta property="og:description" content="Python, Django, React, Docker, automações com IA e dados/BI. Disponível para oportunidades CLT e freelance.">
-    <meta property="og:url" content="https://vezetiv.dev/">
-    <!-- TODO: trocar por uma imagem PNG/JPG 1200x630 para melhor suporte nas redes -->
-    <meta property="og:image" content="https://vezetiv.dev/img/Group%20266.svg">
+    <meta property="og:title" content="Gustavo Vezetiv — Desenvolvedor Full Stack">
+    <meta property="og:description" content="Desenvolvedor Full Stack em Cuiabá-MT. Python, Django, automações, dados e Docker. Veja projetos, certificações e currículo.">
+    <meta property="og:url" content="https://vezetiv.is-a.dev/">
+    <meta property="og:image" content="https://vezetiv.is-a.dev/img/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Gustavo Vezetiv — Full Stack Developer">
+    <meta property="og:locale" content="pt_BR">
 
-    <!-- Twitter -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Gustavo Vezetiv — Full Stack Developer">
-    <meta name="twitter:description" content="Python, Django, React, Docker, automações com IA e dados/BI. Disponível para oportunidades CLT e freelance.">
-    <meta name="twitter:image" content="https://vezetiv.dev/img/Group%20266.svg">
+    <meta name="twitter:title" content="Gustavo Vezetiv — Desenvolvedor Full Stack">
+    <meta name="twitter:description" content="Python, Django, automações, dados e Docker. Projetos, certificações e currículo.">
+    <meta name="twitter:image" content="https://vezetiv.is-a.dev/img/og-image.png">
 
-    <!-- JSON-LD: Person -->
+    <!-- Dados estruturados (Google Rich Results) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Gustavo Vezetiv",
-      "url": "https://vezetiv.dev/",
-      "jobTitle": "Full Stack Developer",
+      "url": "https://vezetiv.is-a.dev/",
+      "image": "https://vezetiv.is-a.dev/img/og-image.png",
+      "jobTitle": "Desenvolvedor Full Stack",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cuiabá",
+        "addressRegion": "MT",
+        "addressCountry": "BR"
+      },
       "email": "mailto:gustavovezetiv8@gmail.com",
-      "address": { "@type": "PostalAddress", "addressLocality": "Cuiabá", "addressRegion": "MT", "addressCountry": "BR" },
-      "knowsAbout": ["Python", "Django", "React", "React Native", "Docker", "PostgreSQL", "Power BI", "Machine Learning", "Automação com IA"],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "IFMT - Instituto Federal de Mato Grosso"
+      },
+      "knowsAbout": ["Python", "Django", "JavaScript", "Docker", "Power BI", "SQL", "Análise de Dados", "Automação", "Cibersegurança"],
       "sameAs": [
-        "https://github.com/gustavovezetiv",
         "https://linkedin.com/in/gustavovezetiv",
+        "https://github.com/gustavovezetiv",
         "https://instagram.com/gustavovezetiv"
       ]
     }
     </script>
+    <!-- =============================================== -->
 
-    <link rel="stylesheet" href="css/tailwind.css">
+    <style>
+        html:not(.app-ready) body {
+            opacity: 0;
+        }
+
+        body {
+            transition: opacity 0.2s ease;
+        }
+    </style>
+    <noscript>
+        <style>
+            /* Sem JavaScript o conteúdo permanece visível (acessibilidade e SEO) */
+            body { opacity: 1 !important; }
+        </style>
+    </noscript>
+    <script>
+        window.addEventListener('load', () => {
+            document.documentElement.classList.add('app-ready');
+        });
+        setTimeout(() => {
+            document.documentElement.classList.add('app-ready');
+        }, 1200);
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Montserrat:wght@400;700;800;900&family=Inter:wght@300;400;600&family=Fira+Code:wght@400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Roboto:wght@300;400;700&family=Montserrat:wght@400;700;900&family=Inter:wght@300;400;600&family=Fira+Code:wght@400;600&family=Press+Start+2P&display=swap"
         rel="stylesheet">
 
-    <link rel="icon" href="img/Group 266.svg">
+    <link rel="icon" type="image/svg+xml" href="img/Group 266.svg">
+    <link rel="alternate icon" href="img/Group-266.ico">
+    <link rel="apple-touch-icon" href="img/Group-266.ico">
 
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="bg-[#0b1020] h-screen w-full overflow-hidden text-white select-none">
+<body class="bg-[#6C8491] h-screen w-full overflow-hidden text-white select-none">
 
-    <div id="ugly-overlay">
-        <h1>Gustavo Vezetiv - Portfólio </h1>
-        <p>Bem-vindo ao sistema. A interface gráfica não foi carregada para economizar recursos.</p>
-        <p><strong>Status:</strong> Aguardando input do usuário.</p>
-        <hr style="margin: 20px 0; border: 1px solid #ccc;">
-        <h2>Dados do Desenvolvedor:</h2>
-        <ul>
-            <li>Nome: Gustavo Vezetiv</li>
-            <li>Classe: Full Stack</li>
-            <li>Localização: Cuiabá, MT</li>
-            <li>Stack: React, Python, Docker, PostgreSQL</li>
-        </ul>
-        <p>Para inicializar a interface gráfica avançada, é necessário realizar um teste de habilidade.</p>
-        <p>Por favor, utilize o <strong>Artefato D20</strong> localizado no canto inferior direito da sua tela.</p>
-        <p>Você precisará de sorte para ver a verdadeira interface.</p>
-        <hr style="margin: 20px 0; border: 1px solid #ccc;">
-        <h2>Páginas (modo texto):</h2>
-        <ul>
-            <li><a href="projetos.html">Projetos</a></li>
-            <li><a href="servicos.html">Serviços</a></li>
-            <li><a href="sobre.html">Sobre mim</a></li>
-            <li><a href="contato.html">Contato</a></li>
-        </ul>
-    </div>
+    <!-- Fundo animado leve com mesh gradient -->
+    <div class="animated-bg"></div>
 
-    <div id="destiny-dice-container" onclick="rollDestiny()">
-        <div class="dice-tooltip">Rolar para Iniciar</div>
-        <div
-            class="relative flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-800 rounded-full shadow-2xl border-4 border-white/20">
-            <i id="d20-icon" class="fas fa-dice-d20 text-4xl text-white"></i>
-            <span id="d20-result" class="absolute text-white font-bold text-xl opacity-0 transition-opacity"></span>
-        </div>
-    </div>
+    <main class="w-full h-full relative z-10">
 
-    <div id="crit-overlay" class="hidden critical-overlay">
-        <div class="flex flex-col items-center">
-            <div class="crit-text">NATURAL LUCK!</div>
-            <p class="text-white text-xl mt-4 font-mono">LOADING PERFECT INTERFACE...</p>
-        </div>
-        <canvas id="confetti-canvas" class="absolute inset-0 pointer-events-none"></canvas>
-    </div>
+        <section class="page-section h-full w-full flex flex-col items-center justify-center font-inter bg-transparent relative">
 
-    <main id="app-root" class="hidden w-full h-full relative">
+            <div id="v3-hero"
+                class="flex-1 flex flex-col justify-center items-center mb-24 animate-fadeIn transition-all duration-500 relative w-full">
 
-        <div class="animated-bg"></div>
+                <h1
+                    class="font-montserrat font-black text-main text-[clamp(3rem,10vw,8rem)] leading-[0.9] uppercase tracking-tighter">
+                    GUSTAVO</h1>
+                <p class="font-inter text-xs sm:text-lg md:text-xl tracking-[2px] sm:tracking-[4px] text-white/90 mt-4 uppercase drop-shadow-md whitespace-nowrap">Full Stack Developer</p>
+                <div class="mt-2 flex gap-2">
+                    <span
+                        class="px-2 py-1 bg-white/10 rounded text-[10px] uppercase tracking-widest border border-white/20">Lv.
+                        21</span>
+                    <span
+                        class="px-2 py-1 bg-white/10 rounded text-[10px] uppercase tracking-widest border border-white/20">Cuiabá-MT</span>
+                </div>
 
-        <section id="page-chaos"
-            class="page-section hidden-page h-full w-full overflow-y-auto flex flex-col p-8 gap-8 items-center justify-start">
+                <!-- Redes Sociais abaixo do nome -->
+                <div class="flex gap-3 mt-6">
+                    <a href="javascript:void(0)" onclick="confirmRedirect('https://linkedin.com/in/gustavovezetiv')"
+                        class="group relative w-10 h-10 bg-white/10 hover:bg-blue-600/30 rounded-lg flex justify-center items-center text-white/70 hover:text-white text-lg border border-white/10 cursor-pointer transition-all">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">LinkedIn</span>
+                    </a>
+
+                    <a href="javascript:void(0)" onclick="confirmRedirect('https://instagram.com/gustavovezetiv')"
+                        class="group relative w-10 h-10 bg-white/10 hover:bg-pink-600/30 rounded-lg flex justify-center items-center text-white/70 hover:text-white text-lg border border-white/10 cursor-pointer transition-all">
+                        <i class="fab fa-instagram"></i>
+                        <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Instagram</span>
+                    </a>
+
+                    <a href="javascript:void(0)" onclick="confirmRedirect('https://github.com/gustavovezetiv')"
+                        class="group relative w-10 h-10 bg-white/10 hover:bg-gray-700/30 rounded-lg flex justify-center items-center text-white/70 hover:text-white text-lg border border-white/10 cursor-pointer transition-all">
+                        <i class="fab fa-github"></i>
+                        <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">GitHub</span>
+                    </a>
+                </div>
+            </div>
+
+            <div id="v3-app-window" class="hidden absolute inset-0 z-40 flex items-center justify-center p-2 sm:p-4 md:p-10 backdrop-blur-md bg-black/40 app-window pointer-events-none" onclick="handleBackdropClick(event)">
+                <div id="v3-app-content"
+                    class="w-full h-full sm:max-h-[75vh] md:h-full max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl bg-[#0f1014] rounded-3xl border border-white/10 shadow-2xl overflow-hidden relative flex flex-col" onclick="event.stopPropagation()">
+                    <div
+                        class="h-12 bg-white/5 border-b border-white/5 flex items-center px-4 justify-between shrink-0">
+                        <div class="flex gap-2">
+                            <div onclick="goBack()"
+                                class="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 cursor-pointer transition-colors"></div>
+                            <div onclick="closeApp()"
+                                class="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 cursor-pointer transition-colors"></div>
+                            <div onclick="closeApp()"
+                                class="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 cursor-pointer transition-colors"></div>
+                        </div>
+                        <span id="v3-app-title" class="text-xs font-bold text-white/50 uppercase tracking-widest">Perfect Interface</span>
+                        <div class="w-10"></div>
+                    </div>
+                    <div id="v3-app-body" class="flex-1 overflow-y-auto overflow-x-hidden p-6 relative">
+                        <!-- Conteúdo será preenchido aqui -->
+                    </div>
+                    <div class="modal-exit-hint px-4 py-2 text-center text-[10px] uppercase tracking-[0.18em] shrink-0">
+                        Clique em qualquer lugar fora para sair
+                    </div>
+                </div>
+            </div>
+
+            <div id="source-dock" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[95vw] mb-2">
+                <div
+                    class="dock-container flex items-end gap-3 p-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl">
+
+                    <div onclick="loadApp('certificados')"
+                        class="dock-item group relative w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex justify-center items-center text-white text-2xl border border-white/20 cursor-pointer shadow-lg">
+                        <i class="fas fa-certificate"></i>
+                        <span
+                            class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Certificados</span>
+                    </div>
+
+                    <div onclick="loadApp('projetos')"
+                        class="dock-item group relative w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex justify-center items-center text-white text-2xl border border-white/20 cursor-pointer shadow-lg">
+                        <i class="fas fa-code"></i>
+                        <span
+                            class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Projetos</span>
+                    </div>
+
+                    <div onclick="loadApp('curriculo')"
+                        class="dock-item group relative w-12 h-12 bg-white/10 rounded-xl flex justify-center items-center text-white/90 text-2xl border border-white/5 cursor-pointer shadow-lg">
+                        <i class="far fa-file-pdf"></i>
+                        <span
+                            class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Currículo</span>
+                    </div>
+
+                    <div onclick="loadApp('dossie')"
+                        class="dock-item group relative w-12 h-12 bg-white/10 rounded-xl flex justify-center items-center text-white/90 text-2xl border border-white/5 cursor-pointer shadow-lg">
+                        <i class="fas fa-scroll"></i>
+                        <span
+                            class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Dossiê</span>
+                    </div>
+
+                    <div class="w-[1px] h-8 bg-white/20 mx-1 self-center"></div>
+
+                    <div onclick="loadApp('sobre')"
+                        class="dock-item group relative w-12 h-12 bg-white/10 rounded-xl flex justify-center items-center text-white/90 text-2xl border border-white/5 cursor-pointer shadow-lg">
+                        <i class="far fa-user"></i>
+                        <span
+                            class="absolute -top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Sobre
+                            Mim</span>
+                    </div>
+
+                </div>
+            </div>
         </section>
 
-        <div id="nav-pill" class="hidden fixed top-8 right-8 left-auto bg-black/30 backdrop-blur-md px-6 py-3 
-                rounded-full flex items-center gap-4 text-white shadow-xl z-[10000] 
-                border border-white/10 pointer-events-auto">
-
-            <button onclick="resetDice()" class="hover:text-cyan-400 text-xs mr-2 font-bold uppercase tracking-wider 
-                    flex gap-2 items-center" title="Reroll">
-                <i class="fas fa-dice"></i> Role Novamente
-            </button>
-
-            <span id="version-label" class="font-inter font-bold text-sm min-w-[120px] text-center">
-                Chaos
-            </span>
+        <!-- Modal de Detalhes de Certificação -->
+        <div id="cert-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4 backdrop-blur-sm bg-black/60 pointer-events-none" onclick="closeCertModal(event)">
+            <div class="bg-[#0f1014] rounded-2xl border border-white/10 max-w-md w-full p-6 relative pointer-events-auto" onclick="event.stopPropagation()">
+                <button onclick="closeCertModal()" class="absolute top-3 right-3 text-white/60 hover:text-white text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div id="cert-modal-content" class="space-y-4">
+                    <!-- Conteúdo será preenchido dinamicamente -->
+                </div>
+                <p class="modal-exit-hint mt-5 pt-4 text-center text-[10px] uppercase tracking-[0.18em]">
+                    Clique em qualquer lugar fora para sair
+                </p>
+            </div>
         </div>
 
+<!--        --- TEMPLATE CARROCEL CERTIFICADOS DE CURSOS  --- -->
+<div id="template-certificados" class="hidden pb-32">
+    <div class="text-center mb-10 mt-10">
+        <h2 class="font-montserrat text-3xl font-extrabold text-white">Certificações & Habilidades</h2>
+        <p class="text-white/50 text-sm mt-2">Tecnologia, Dados, Segurança e Gestão</p>
+    </div>
+
+    <div class="mb-8">
+        <h3 class="text-white font-montserrat font-bold text-sm mb-4 pl-4 border-l-4 border-blue-500 ml-2 uppercase">Dev & Arquitetura</h3>
+        <div class="marquee-container w-full" id="marquee-cert-1">
+            <div class="marquee-content">
+                
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Clean Code & SOLID')">
+                    <div class="h-[60%] w-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center"><i class="fa-solid fa-broom text-4xl text-white"></i></div>
+                    <div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Clean Code & SOLID</h3><p class="text-gray-400 text-[10px] mt-1">Boas Práticas</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Estruturas de Dados')">
+                    <div class="h-[60%] w-full bg-gradient-to-br from-indigo-700 to-purple-800 flex items-center justify-center"><i class="fa-solid fa-sitemap text-4xl text-white"></i></div>
+                    <div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Estruturas de Dados</h3><p class="text-gray-400 text-[10px] mt-1">Fundamentos</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('React / React Native')">
+                    <div class="h-[60%] w-full bg-gradient-to-br from-cyan-600 to-blue-700 flex items-center justify-center"><i class="fa-brands fa-react text-4xl text-cyan-300"></i></div>
+                    <div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">React / React Native</h3><p class="text-gray-400 text-[10px] mt-1">Web & Mobile</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Docker Avançado')">
+                    <div class="h-[60%] w-full bg-gradient-to-br from-sky-600 to-blue-800 flex items-center justify-center"><i class="fa-brands fa-docker text-4xl text-sky-300"></i></div>
+                    <div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Docker Avançado</h3><p class="text-gray-400 text-[10px] mt-1">Contêineres</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Arquitetura de Software')">
+                    <div class="h-[60%] w-full bg-gradient-to-br from-indigo-600 to-violet-800 flex items-center justify-center"><i class="fa-solid fa-diagram-project text-4xl text-indigo-300"></i></div>
+                    <div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Arquitetura de Software</h3><p class="text-gray-400 text-[10px] mt-1">MVC, REST</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Testes com Pytest')">
+                    <div class="h-[60%] w-full bg-gradient-to-br from-cyan-700 to-teal-900 flex items-center justify-center"><i class="fa-solid fa-vial text-4xl text-white"></i></div>
+                    <div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Testes com Pytest</h3><p class="text-gray-400 text-[10px] mt-1">Unitário & TDD</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Python P/ Dados')">
+                    <div class="h-[60%] w-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center"><i class="fa-brands fa-python text-4xl text-white"></i></div>
+                    <div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Python P/ Dados</h3><p class="text-gray-400 text-[10px] mt-1">Data Science Academy</p></div>
+                </div>
+                
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Web com Django')">
+                    <div class="h-[60%] w-full bg-gradient-to-br from-green-600 to-emerald-900 flex items-center justify-center"><i class="fas fa-server text-4xl text-white"></i></div>
+                    <div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Web com Django</h3><p class="text-gray-400 text-[10px] mt-1">Udemy / Prático</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('APIs RESTful')">
+                    <div class="h-[60%] w-full bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center"><i class="fas fa-cloud text-4xl text-white"></i></div>
+                    <div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">APIs RESTful</h3><p class="text-gray-400 text-[10px] mt-1">Django Framework</p></div>
+                </div>
+                
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('SQL & PostgreSQL')"><div class="h-[60%] w-full bg-gradient-to-br from-purple-700 to-indigo-800 flex items-center justify-center"><i class="fa-solid fa-database text-4xl text-purple-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">SQL & PostgreSQL</h3><p class="text-gray-400 text-[10px] mt-1">Consultas Avançadas</p></div>
+                </div>
+                
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Machine Learning')"><div class="h-[60%] w-full bg-gradient-to-br from-fuchsia-700 to-pink-800 flex items-center justify-center"><i class="fa-solid fa-brain text-4xl text-fuchsia-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Machine Learning</h3><p class="text-gray-400 text-[10px] mt-1">Modelos & Métricas</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Prompt Engineering')"><div class="h-[60%] w-full bg-gradient-to-br from-pink-600 to-rose-800 flex items-center justify-center"><i class="fa-solid fa-wand-magic-sparkles text-4xl text-pink-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Prompt Engineering</h3><p class="text-gray-400 text-[10px] mt-1">IA Generativa</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Power BI Avançado')"><div class="h-[60%] w-full bg-gradient-to-br from-yellow-600 to-amber-800 flex items-center justify-center"><i class="fa-solid fa-chart-column text-4xl text-yellow-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Power BI Avançado</h3><p class="text-gray-400 text-[10px] mt-1">DAX & ETL</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('BigQuery (Google)')"><div class="h-[60%] w-full bg-gradient-to-br from-red-600 to-rose-800 flex items-center justify-center"><i class="fa-brands fa-google text-4xl text-red-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">BigQuery (Google)</h3><p class="text-gray-400 text-[10px] mt-1">Cloud Analytics</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Data Warehouse')"><div class="h-[60%] w-full bg-gradient-to-br from-orange-600 to-amber-800 flex items-center justify-center"><i class="fa-solid fa-cubes text-4xl text-orange-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Data Warehouse</h3><p class="text-gray-400 text-[10px] mt-1">Modelagem ETL</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Power BI P/ Análise')"><div class="h-[60%] w-full bg-gradient-to-br from-lime-600 to-green-800 flex items-center justify-center"><i class="fas fa-chart-line text-4xl text-lime-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Power BI P/ Análise</h3><p class="text-gray-400 text-[10px] mt-1">Fundação Bradesco</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Modelagem de Dados')"><div class="h-[60%] w-full bg-gradient-to-br from-teal-600 to-emerald-800 flex items-center justify-center"><i class="fas fa-diagram-project text-4xl text-teal-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Modelagem de Dados</h3><p class="text-gray-400 text-[10px] mt-1">Fundação Bradesco</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Imersão em IA')"><div class="h-[60%] w-full bg-gradient-to-br from-violet-600 to-purple-800 flex items-center justify-center"><i class="fas fa-brain text-4xl text-violet-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Imersão em IA</h3><p class="text-gray-400 text-[10px] mt-1">Alura / Ebac</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('IA & Cultura Digital')"><div class="h-[60%] w-full bg-gradient-to-br from-cyan-600 to-teal-800 flex items-center justify-center"><i class="fas fa-microchip text-4xl text-cyan-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">IA & Cultura Digital</h3><p class="text-gray-400 text-[10px] mt-1">Fundação Bradesco</p></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-8">
+        <h3 class="text-white font-montserrat font-bold text-sm mb-4 pl-4 border-l-4 border-red-500 ml-2 uppercase">Segurança & Infra</h3>
+        <div class="marquee-container w-full" id="marquee-cert-2">
+            <div class="marquee-content">
+                
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Cibersegurança')"><div class="h-[60%] w-full bg-gradient-to-br from-red-700 to-rose-900 flex items-center justify-center"><i class="fa-solid fa-shield-halved text-4xl text-red-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Cibersegurança</h3><p class="text-gray-400 text-[10px] mt-1">Ataques & Prevenção</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Fundamentos de Redes')"><div class="h-[60%] w-full bg-gradient-to-br from-amber-600 to-yellow-800 flex items-center justify-center"><i class="fa-solid fa-network-wired text-4xl text-amber-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Fundamentos de Redes</h3><p class="text-gray-400 text-[10px] mt-1">TCP/IP, VLANs</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Firewalls & VPN')"><div class="h-[60%] w-full bg-gradient-to-br from-emerald-600 to-green-800 flex items-center justify-center"><i class="fa-solid fa-shield text-4xl text-emerald-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Firewalls & VPN</h3><p class="text-gray-400 text-[10px] mt-1">PfSense, Mikrotik</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('LGPD')"><div class="h-[60%] w-full bg-gradient-to-br from-yellow-600 to-amber-800 flex items-center justify-center"><i class="fa-solid fa-scale-balanced text-4xl text-yellow-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">LGPD</h3><p class="text-gray-400 text-[10px] mt-1">Conformidade</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Hardening Linux')"><div class="h-[60%] w-full bg-gradient-to-br from-gray-600 to-slate-800 flex items-center justify-center"><i class="fa-brands fa-linux text-4xl text-gray-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Hardening Linux</h3><p class="text-gray-400 text-[10px] mt-1">Segurança OS</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Cloud Fundamentals')"><div class="h-[60%] w-full bg-gradient-to-br from-blue-600 to-sky-800 flex items-center justify-center"><i class="fa-solid fa-cloud-arrow-up text-4xl text-blue-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Cloud Fundamentals</h3><p class="text-gray-400 text-[10px] mt-1">Azure / AWS</p></div>
+                </div>
+                
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Segurança TI')"><div class="h-[60%] w-full bg-gradient-to-br from-orange-600 to-amber-800 flex items-center justify-center"><i class="fas fa-lock text-4xl text-orange-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Segurança TI</h3>
+                        <p class="text-gray-400 text-[10px] mt-1">Fundação Bradesco</p>
+                    </div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Segurança Dados')"><div class="h-[60%] w-full bg-gradient-to-br from-pink-600 to-rose-800 flex items-center justify-center"><i class="fas fa-user-shield text-4xl text-pink-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Segurança Dados</h3><p class="text-gray-400 text-[10px] mt-1">Fundação Bradesco</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Automação IA')"><div class="h-[60%] w-full bg-gradient-to-br from-teal-600 to-emerald-800 flex items-center justify-center"><i class="fas fa-robot text-4xl text-teal-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Automação IA</h3><p class="text-gray-400 text-[10px] mt-1">Docker + N8N</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Dynamics 365')"><div class="h-[60%] w-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center"><i class="fa-brands fa-microsoft text-4xl text-blue-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Dynamics 365</h3><p class="text-gray-400 text-[10px] mt-1">Microsoft / DSA</p></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-12">
+        <h3 class="text-white font-montserrat font-bold text-sm mb-4 pl-4 border-l-4 border-green-500 ml-2 uppercase">Produtividade & Office</h3>
+        <div class="marquee-container w-full" id="marquee-cert-4">
+            <div class="marquee-content pb-32">
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Excel Avançado')"><div class="h-[60%] w-full bg-gradient-to-br from-green-600 to-emerald-800 flex items-center justify-center"><i class="fa-solid fa-file-excel text-4xl text-green-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Excel Avançado</h3><p class="text-gray-400 text-[10px] mt-1">Fórmulas & Dashboards</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('PowerPoint Pro')"><div class="h-[60%] w-full bg-gradient-to-br from-cyan-700 to-teal-900 flex items-center justify-center"><i class="fa-solid fa-person-chalkboard  text-4xl text-white"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">PowerPoint Pro</h3><p class="text-gray-400 text-[10px] mt-1">Storytelling & Design</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Gestão de Projetos')"><div class="h-[60%] w-full bg-gradient-to-br from-purple-600 to-violet-800 flex items-center justify-center"><i class="fa-solid fa-diagram-project text-4xl text-purple-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Gestão de Projetos</h3><p class="text-gray-400 text-[10px] mt-1">PMBOK / Cronogramas</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Liderança')"><div class="h-[60%] w-full bg-gradient-to-br from-amber-600 to-yellow-800 flex items-center justify-center"><i class="fa-solid fa-user-tie text-4xl text-amber-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Liderança</h3><p class="text-gray-400 text-[10px] mt-1">Gestão de Equipes</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Gestão de Tempo')"><div class="h-[60%] w-full bg-gradient-to-br from-emerald-600 to-green-800 flex items-center justify-center"><i class="fa-solid fa-stopwatch text-4xl text-emerald-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Gestão de Tempo</h3><p class="text-gray-400 text-[10px] mt-1">Produtividade / GTD</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Comunicação Profissional')"><div class="h-[60%] w-full bg-gradient-to-br from-cyan-600 to-blue-800 flex items-center justify-center"><i class="fa-solid fa-comments text-4xl text-cyan-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Comunicação Profissional</h3><p class="text-gray-400 text-[10px] mt-1">Clareza & Objetividade</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Excel Intermediário')"><div class="h-[60%] w-full bg-gradient-to-br from-green-600 to-emerald-800 flex items-center justify-center"><i class="fas fa-file-excel text-4xl text-green-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Excel Intermediário</h3><p class="text-gray-400 text-[10px] mt-1">Fundação Bradesco</p></div>
+                </div>
+                
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Word Intermediário')"><div class="h-[60%] w-full bg-gradient-to-br from-blue-600 to-indigo-800 flex items-center justify-center"><i class="fas fa-file-word text-4xl text-blue-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Word Intermediário</h3><p class="text-gray-400 text-[10px] mt-1">Fundação Bradesco</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Cultura Digital')"><div class="h-[60%] w-full bg-gradient-to-br from-yellow-600 to-amber-800 flex items-center justify-center"><i class="fas fa-lightbulb text-4xl text-yellow-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Cultura Digital</h3><p class="text-gray-400 text-[10px] mt-1">Fundação Bradesco</p></div>
+                </div>
+
+                <div class="w-32 sm:w-40 h-40 sm:h-56 bg-[#1a1b1f] rounded-xl overflow-hidden flex-shrink-0 border border-white/5 flex flex-col hover:scale-105 transition-transform cursor-pointer" onclick="openCertModal('Conceitos Aviação')"><div class="h-[60%] w-full bg-gradient-to-br from-indigo-600 to-violet-800 flex items-center justify-center"><i class="fas fa-plane text-4xl text-indigo-300"></i></div><div class="h-[40%] p-3 flex flex-col justify-center"><h3 class="text-white text-xs font-bold">Conceitos Aviação</h3><p class="text-gray-400 text-[10px] mt-1">SEST</p></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--         --- TEMPLATE DE PROJETOS FEITOS --- -->
+        <div id="template-projetos" class="hidden">
+            <div class="pt-10 px-4">
+                <div class="flex justify-between items-end mb-8 border-b border-white/10 pb-4">
+                    <div>
+                        <h2 class="font-montserrat text-4xl font-black text-white mb-1 tracking-tighter">PROJETOS</h2>
+                        <p class="text-white/50 text-xs font-inter tracking-widest uppercase">Code • Deploy • Innovation</p>
+                    </div>
+                    <div class="flex gap-2"><span class="px-3 py-1 rounded-full bg-white/5 text-[10px] text-white/60 border border-white/10">Full Stack</span></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-20">
+                    
+                    <div class="relative bg-[#141414]/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1 group overflow-hidden">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-white/5 rounded-lg"><i class="fas fa-city text-2xl text-blue-500"></i></div>
+                            <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span><span class="text-[10px] uppercase text-white/60 font-bold">Dev</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-montserrat font-bold text-white mb-2">Real Estate Manager</h3>
+                        <p class="text-sm text-white/60 mb-6">Sistema completo de gestão de imóveis, contratos e agendamentos.</p>
+                        <div class="flex gap-3 text-white/40"><i class="fab fa-python" title="Python"></i><i class="fas fa-database" title="PostgreSQL"></i><i class="fab fa-docker" title="Docker"></i></div>
+                    </div>
+
+                    <div class="relative bg-[#141414]/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 group overflow-hidden">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-white/5 rounded-lg"><i class="fas fa-mobile-alt text-2xl text-cyan-500"></i></div>
+                            <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/5">
+                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span><span class="text-[10px] uppercase text-white/60 font-bold">APK</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-montserrat font-bold text-white mb-2">Links App Mobile</h3>
+                        <p class="text-sm text-white/60 mb-6">App para gestão de links e QR Codes com categorização inteligente.</p>
+                        <div class="flex gap-3 text-white/40"><i class="fab fa-react" title="React Native"></i><i class="fab fa-js" title="TypeScript"></i></div>
+                    </div>
+
+                    <div class="relative bg-[#141414]/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-pink-500/50 transition-all duration-300 hover:-translate-y-1 group overflow-hidden">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-white/5 rounded-lg"><i class="fas fa-robot text-2xl text-pink-500"></i></div>
+                            <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span><span class="text-[10px] uppercase text-white/60 font-bold">Online</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-montserrat font-bold text-white mb-2">Automated AI Poster</h3>
+                        <p class="text-sm text-white/60 mb-6">Bot que analisa trends e cria posts no LinkedIn usando N8N e IA.</p>
+                        <div class="flex gap-3 text-white/40"><i class="fas fa-project-diagram" title="N8N"></i><i class="fab fa-docker" title="Docker"></i><i class="fab fa-python" title="Python"></i></div>
+                    </div>
+
+                    <div class="relative bg-[#141414]/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1 group overflow-hidden">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-white/5 rounded-lg"><i class="fas fa-book text-2xl text-purple-500"></i></div>
+                            <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/5">
+                                <span class="w-2 h-2 rounded-full bg-gray-500"></span><span class="text-[10px] uppercase text-white/60 font-bold">Archived</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-montserrat font-bold text-white mb-2">Library Manager</h3>
+                        <p class="text-sm text-white/60 mb-6">Sistema clássico de gestão de acervo e empréstimos.</p>
+                        <div class="flex gap-3 text-white/40"><i class="fab fa-php" title="PHP"></i><i class="fas fa-database" title="MySQL"></i></div>
+                    </div>
+
+                    <div class="relative bg-[#141414]/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-green-500/50 transition-all duration-300 hover:-translate-y-1 group overflow-hidden">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-white/5 rounded-lg"><i class="fas fa-car text-2xl text-green-500"></i></div>
+                            <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/5">
+                                <span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span><span class="text-[10px] uppercase text-white/60 font-bold">Refactor</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-montserrat font-bold text-white mb-2">Driving School System</h3>
+                        <p class="text-sm text-white/60 mb-6">Sistema com controle de permissões (RBAC) para Instrutores, Alunos e Gerentes.</p>
+                        <div class="flex gap-3 text-white/40"><i class="fab fa-python" title="Django"></i><i class="fas fa-users-gear" title="Gestão de Usuários"></i><i class="fas fa-database" title="SQL"></i></div>
+                    </div>
+
+                    <div class="relative bg-[#141414]/60 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1 group overflow-hidden">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="p-3 bg-white/5 rounded-lg"><i class="fas fa-brain text-2xl text-purple-500"></i></div>
+                            <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-white/5">
+                                <span class="w-2 h-2 rounded-full bg-gray-500"></span><span class="text-[10px] uppercase text-white/60 font-bold">Study</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-montserrat font-bold text-white mb-2">ML Data Classifier</h3>
+                        <p class="text-sm text-white/60 mb-6">Modelo supervisionado com Scikit-learn para classificação e análise preditiva de notas falsas.</p>
+                        <div class="flex gap-3 text-white/40"><i class="fab fa-python" title="Python"></i><i class="fas fa-chart-line" title="Scikit-Learn"></i><i class="fas fa-microchip" title="IA"></i></div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+        
+        <div id="template-sobre" class="hidden">
+            <div class="flex flex-col items-center justify-center p-10 text-center max-w-3xl mx-auto mt-10">
+                <div
+                    class="w-32 h-32 bg-gray-700 rounded-full mb-6 border-4 border-white/10 flex items-center justify-center text-4xl">
+                    <i class="fas fa-user-astronaut"></i>
+                </div>
+                <h2 class="text-3xl font-bold mb-4 font-montserrat"> Gustavo Vezetiv</h2>
+                
+                <!-- Resumo (sempre visível) -->
+                    <p class="text-white/70 leading-relaxed font-inter space-y-3 mb-2">
+                        Sou estudante de TADS no IFMT (6º período), com um pé e um dedo em cada parte da tecnologia. 
+                        Aventureiro, animado, desbravador da natureza e sempre procurando entender como as coisas funcionam.
+                    </p>
+
+                    <!-- Conteúdo completo (colapsado por padrão) -->
+                    <div id="bio-expanded-content" class="hidden text-white/70 leading-relaxed font-inter space-y-3 mb-2">
+                        
+                        <p>Ao longo das minhas experiências, aprendi a ter paciência, lidar com pessoas diferentes e perceber o quanto os detalhes fazem diferença. Trabalho bastante com Suporte, Documentação, Python, Docker, automações, Power BI e outras ferramentas que deixam tudo mais organizado e claro no dia a dia.</p>
+                        
+                        <p>Gosto de ajudar, colaborar e ouvir músicas no meio disso tudo. Valorizo ambientes onde existe respeito, espaço para crescer e incentivo à criatividade.</p>
+                        
+                        <p>A vida é uma eterna evolução, uma troca onde cada um contribui com o que sabe e faz de melhor naquele momento. Procuro hoje ser a minha melhor versão, e espero que possa contribuir para você ser a sua!</p>
+
+                    </div>
+
+
+                <!-- Botão Ler Mais/Menos -->
+                <button id="bio-toggle-btn" onclick="toggleBioExpand()" class="px-4 py-2 text-sm font-bold text-cyan-400 hover:text-cyan-300 transition-all border border-cyan-400/50 rounded-lg mb-4 hover:border-cyan-300 flex items-center gap-2 hover:shadow-lg hover:shadow-cyan-500/20">
+                    <span id="bio-toggle-text">Ler mais</span>
+                    <i id="bio-toggle-icon" class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                </button>
+
+                <div class="grid grid-cols-2 gap-4 mt-8 w-full pb-32">
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                        <h3 class="font-bold text-cyan-400">Skills</h3>
+                        <p class="text-sm text-white/60">React, Python, Django, SQL, Docker, Git, HTML, CSS, JS e Figma
+                        </p>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                        <h3 class="font-bold text-purple-400">Hobbies</h3>
+                        <p class="text-sm text-white/60">D&D, Smart Home, Games, Musica, Animações, QA, Trilhas e
+                            Exploração</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="template-curriculo" class="hidden">
+            <div class="flex flex-col items-center justify-center h-full p-6">
+                <i class="far fa-file-pdf text-6xl text-red-500 mb-4"></i>
+                <h2 class="text-2xl font-bold mb-2">Visualizador de PDF</h2>
+                <p class="text-white/50 mb-6">Clique aqui para visualizar em PDF o currículo.</p>
+                <p class="text-white/50 mb-6 text-center">
+                    <a href="mailto:gustavovezetiv8@gmail.com?subject=Oportunidade%20de%20Trabalho&body=Ol%C3%A1%20Gustavo%2C%0A%0AGostaria%20de%20conversar%20sobre%20uma%20oportunidade..." 
+                       class="text-cyan-400 hover:text-cyan-300 transition-colors underline">
+                        gustavovezetiv8@gmail.com
+                    </a>
+                </p>
+
+                <a href="arc/Curriculo_Gustavo_Vezetiv_Python_Dados_Integracoes.pdf" download="Curriculo_Gustavo_Vezetiv_Python_Dados_Integracoes.pdf" target="_blank"
+                    class="px-6 py-2 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform cursor-pointer mb-8">
+                    Baixar PDF
+                </a>
+
+                <!-- Preview do PDF -->
+                <div class="w-full max-w-2xl border border-white/20 rounded-lg overflow-hidden bg-white/5">
+                    <div class="bg-white/10 px-4 py-2 border-b border-white/20">
+                        <p class="text-sm text-white/60">Prévia do Currículo</p>
+                    </div>
+                    <object data="arc/Curriculo_Gustavo_Vezetiv_Python_Dados_Integracoes.pdf" type="application/pdf" class="w-full h-96 bg-white">
+                        <div class="bg-[#0f1014] p-6 text-center">
+                            <p class="text-white/60 text-sm mb-4">A prévia do PDF não abriu neste navegador.</p>
+                            <a href="arc/Curriculo_Gustavo_Vezetiv_Python_Dados_Integracoes.pdf" target="_blank"
+                               class="text-cyan-300 underline">Abrir currículo em nova aba</a>
+                        </div>
+                    </object>
+                </div>
+            </div>
+        </div>
+
+        <div id="template-dossie" class="hidden">
+            <div class="pt-10 px-4 pb-24">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 border-b border-white/10 pb-4">
+                    <div>
+                        <h2 class="font-montserrat text-4xl font-black text-white mb-1 tracking-tighter">DOSSIÊ</h2>
+                        <p class="text-white/50 text-xs font-inter tracking-widest uppercase">Recomendações • Bastidores • Confiança</p>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-400/10 text-[10px] text-cyan-200 border border-cyan-400/20 uppercase tracking-widest">
+                        <i class="fas fa-scroll"></i>
+                        <span>Arquivo Vezetiv</span>
+                    </div>
+                </div>
+
+                <div id="dossie-recommendations" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Conteúdo renderizado pelo array recomendacoes -->
+                </div>
+            </div>
+        </div>
 
     </main>
 
-    <script src="js/ui.js"></script>
-    <script src="js/script.js"></script>
-</body>
+    <script>
 
+        let currentOpenApp = null;
+
+        // ===== DOSSIÊ / RECOMENDAÇÕES =====
+        // Para adicionar uma recomendação, duplique um objeto abaixo e preencha:
+        // { nome: 'Nome da pessoa', contexto: 'Cargo / empresa / relação', texto: 'Texto da recomendação', icon: 'fa-handshake' }
+        const recomendacoes = [];
+
+        // ===== BANCO DE DADOS DE CERTIFICAÇÕES =====
+        const certificacoes = {
+            'Clean Code & SOLID': {
+                icon: '<i class="fa-solid fa-code text-4xl text-white"></i>',
+                descricao: 'Domínio de princípios de código limpo e arquitetura SOLID. Essencial para criar código manutenível, escalável e seguindo as melhores práticas de engenharia de software.'
+            },
+            'Estruturas de Dados': {
+                icon: '<i class="fa-solid fa-sitemap text-4xl text-white"></i>',
+                descricao: 'Conhecimento profundo sobre estruturas de dados como arrays, listas, árvores, grafos e hash tables. Fundamental para otimizar algoritmos e melhorar performance.'
+            },
+            'React / React Native': {
+                icon: '<i class="fa-brands fa-react text-4xl text-white"></i>',
+                descricao: 'Desenvolvimento de aplicações web com React e mobile com React Native. Criação de componentes reutilizáveis, gerenciamento de estado e hooks.'
+            },
+            'Docker Avançado': {
+                icon: '<i class="fa-brands fa-docker text-4xl text-white"></i>',
+                descricao: 'Containerização de aplicações, orquestração com Docker Compose, otimização de imagens e implementação de boas práticas em ambientes de produção.'
+            },
+            'Arquitetura de Software': {
+                icon: '<i class="fa-solid fa-diagram-project text-4xl text-white"></i>',
+                descricao: 'Design de arquiteturas escaláveis. Domínio de padrões como MVC, REST, microserviços e orientação a domínio (DDD).'
+            },
+            'Testes com Pytest': {
+                icon: '<i class="fa-solid fa-vial text-4xl text-white"></i>',
+                descricao: 'Testes unitários e de integração com Pytest. Implementação de Test-Driven Development (TDD) e cobertura de código para garantir qualidade.'
+            },
+            'Python P/ Dados': {
+                icon: '<i class="fa-brands fa-python text-4xl text-white"></i>',
+                descricao: 'Python para análise de dados com bibliotecas como Pandas, NumPy e Matplotlib. Manipulação e visualização de dados para insights.'
+            },
+            'Web com Django': {
+                icon: '<i class="fas fa-server text-4xl text-white"></i>',
+                descricao: 'Desenvolvimento web com Django. ORM, autenticação, APIs, middleware e boas práticas de desenvolvimento web em Python.'
+            },
+            'APIs RESTful': {
+                icon: '<i class="fas fa-cloud text-4xl text-white"></i>',
+                descricao: 'Design e implementação de APIs RESTful com Django. HTTP methods, status codes, autenticação e documentação com Swagger/OpenAPI.'
+            },
+            'Scrum SFC™': {
+                icon: '<i class="fas fa-people-group text-4xl text-white"></i>',
+                descricao: 'Certificação Scrum Foundation Certified. Metodologia ágil, sprints, planning, retrospectivas e gestão eficiente de projetos.'
+            },
+            'SQL & PostgreSQL': {
+                icon: '<i class="fa-solid fa-database text-4xl text-white"></i>',
+                descricao: 'Consultas SQL avançadas, otimização de índices e performance. PostgreSQL com triggers, stored procedures e advanced features.'
+            },
+            'Machine Learning': {
+                icon: '<i class="fa-solid fa-robot text-4xl text-white"></i>',
+                descricao: 'Desenvolvimento de modelos de machine learning com Scikit-learn. Classificação, regressão, clustering e validação de modelos.'
+            },
+            'Prompt Engineering': {
+                icon: '<i class="fa-solid fa-wand-magic-sparkles text-4xl text-white"></i>',
+                descricao: 'Técnicas avançadas para otimizar prompts com IA generativa. Maximizar resultados com ChatGPT, Claude e outros modelos de IA.'
+            },
+            'Power BI Avançado': {
+                icon: '<i class="fa-solid fa-chart-column text-4xl text-white"></i>',
+                descricao: 'Dashboard avançado com Power BI. DAX, modelagem de dados, relações complexas e otimização de performance em relatórios.'
+            },
+            'BigQuery (Google)': {
+                icon: '<i class="fa-solid fa-cloud text-4xl text-white"></i>',
+                descricao: 'Data warehouse em cloud com Google BigQuery. Processamento em larga escala, SQL otimizado e análise de big data.'
+            },
+            'Data Warehouse': {
+                icon: '<i class="fa-solid fa-warehouse text-4xl text-white"></i>',
+                descricao: 'Modelagem e implementação de data warehouses. Star schema, fact tables, dimension tables e processos ETL.'
+            },
+            'Power BI P/ Análise': {
+                icon: '<i class="fas fa-chart-line text-4xl text-white"></i>',
+                descricao: 'Análise de dados com Power BI. Visualizações interativas, insights de negócio e tomada de decisão baseada em dados.'
+            },
+            'Modelagem de Dados': {
+                icon: '<i class="fa-solid fa-diagram-project text-4xl text-white"></i>',
+                descricao: 'Design de banco de dados relacional. Normalização, relacionamentos, integridade referencial e otimização de esquema.'
+            },
+            'Imersão em IA': {
+                icon: '<i class="fas fa-brain text-4xl text-white"></i>',
+                descricao: 'Imersão completa em Inteligência Artificial. Fundamentos, aplicações práticas e tendências em IA generativa.'
+            },
+            'IA & Cultura Digital': {
+                icon: '<i class="fas fa-microchip text-4xl text-white"></i>',
+                descricao: 'Impacto da IA na transformação digital. Mudanças culturais, gestão de mudanças e adoção de tecnologias emergentes.'
+            },
+            'Cibersegurança': {
+                icon: '<i class="fa-solid fa-shield-halved text-4xl text-white"></i>',
+                descricao: 'Princípios de segurança da informação. Prevenção de ataques, criptografia, autenticação e gestão de vulnerabilidades.'
+            },
+            'Fundamentos de Redes': {
+                icon: '<i class="fa-solid fa-network-wired text-4xl text-white"></i>',
+                descricao: 'TCP/IP, OSI model, VLANs e roteamento. Configuração de redes e troubleshooting de conectividade.'
+            },
+            'Firewalls & VPN': {
+                icon: '<i class="fa-solid fa-shield text-4xl text-white"></i>',
+                descricao: 'Configuração de firewalls com PfSense e Mikrotik. VPN, regras de firewall e políticas de segurança de rede.'
+            },
+            'LGPD': {
+                icon: '<i class="fa-solid fa-scale-balanced text-4xl text-white"></i>',
+                descricao: 'Lei Geral de Proteção de Dados Pessoais. Conformidade, privacidade de dados e responsabilidades legais.'
+            },
+            'Hardening Linux': {
+                icon: '<i class="fa-brands fa-linux text-4xl text-white"></i>',
+                descricao: 'Segurança avançada em Linux. Permissões, firewall, SELinux, hardening e mitigação de vulnerabilidades.'
+            },
+            'Cloud Fundamentals': {
+                icon: '<i class="fa-solid fa-cloud text-4xl text-white"></i>',
+                descricao: 'Fundamentos de cloud computing. AWS, Azure e Google Cloud. IaaS, PaaS, SaaS e arquitetura em nuvem.'
+            },
+            'Segurança TI': {
+                icon: '<i class="fas fa-lock text-4xl text-white"></i>',
+                descricao: 'Segurança em Tecnologia da Informação. Gestão de riscos, compliance e boas práticas de segurança corporativa.'
+            },
+            'Segurança Dados': {
+                icon: '<i class="fa-solid fa-lock text-4xl text-white"></i>',
+                descricao: 'Proteção de dados pessoais e sensíveis. Criptografia, backup, disaster recovery e conformidade com regulações.'
+            },
+            'Automação IA': {
+                icon: '<i class="fa-solid fa-gears text-4xl text-white"></i>',
+                descricao: 'Automação com IA usando Docker e N8N. Workflows automatizados e integração de serviços para otimizar processos.'
+            },
+            'Dynamics 365': {
+                icon: '<i class="fa-brands fa-microsoft text-4xl text-white"></i>',
+                descricao: 'Microsoft Dynamics 365. CRM, ERP e automação de processos de negócio com a plataforma Microsoft.'
+            },
+            'Excel Avançado': {
+                icon: '<i class="fa-solid fa-file-excel text-4xl text-white"></i>',
+                descricao: 'Fórmulas avançadas, tabelas dinâmicas e dashboards. Análise de dados e automatização com Excel.'
+            },
+            'PowerPoint Pro': {
+                icon: '<i class="fa-solid fa-file-powerpoint text-4xl text-white"></i>',
+                descricao: 'Apresentações impactantes com PowerPoint. Storytelling visual e design profissional para comunicação eficaz.'
+            },
+            'Gestão de Projetos': {
+                icon: '<i class="fa-solid fa-diagram-project text-4xl text-white"></i>',
+                descricao: 'PMBOK e metodologias de gestão de projetos. Planejamento, execução, monitoramento e encerramento de projetos.'
+            },
+            'Liderança': {
+                icon: '<i class="fa-solid fa-users text-4xl text-white"></i>',
+                descricao: 'Desenvolvimento de competências de liderança. Gestão de equipes, comunicação e influência positiva.'
+            },
+            'Gestão de Tempo': {
+                icon: '<i class="fa-solid fa-clock text-4xl text-white"></i>',
+                descricao: 'Produtividade e Getting Things Done (GTD). Técnicas de gestão de tempo para máxima eficiência.'
+            },
+            'Comunicação Profissional': {
+                icon: '<i class="fa-solid fa-comments text-4xl text-white"></i>',
+                descricao: 'Comunicação clara e objetiva. Escrita profissional, apresentações e comunicação interpessoal efetiva.'
+            },
+            'Excel Intermediário': {
+                icon: '<i class="fas fa-file-excel text-4xl text-white"></i>',
+                descricao: 'Domínio intermediário de Excel. Funções avançadas, análise de dados e visualizações básicas.'
+            },
+            'Word Intermediário': {
+                icon: '<i class="fas fa-file-word text-4xl text-white"></i>',
+                descricao: 'Edição profissional de documentos com Word. Formatação avançada, templates e criação de documentos estruturados.'
+            },
+            'Cultura Digital': {
+                icon: '<i class="fa-solid fa-globe text-4xl text-white"></i>',
+                descricao: 'Transformação digital e cultura organizacional. Adoção de novas tecnologias e mentalidade inovadora.'
+            },
+            'Conceitos Aviação': {
+                icon: '<i class="fas fa-plane text-4xl text-white"></i>',
+                descricao: 'Fundamentos da aviação civil. Conhecimento técnico de aeronaves, procedimentos e regulamentações aéreas.'
+            }
+        };
+
+        const certGradients = {
+            'Clean Code & SOLID': ['from-slate-700','to-slate-900'],
+            'Estruturas de Dados': ['from-indigo-700','to-purple-800'],
+            'React / React Native': ['from-cyan-700','to-teal-900'],
+            'Docker Avançado': ['from-cyan-700','to-teal-900'],
+            'Arquitetura de Software': ['from-cyan-700','to-teal-900'],
+            'Testes com Pytest': ['from-cyan-700','to-teal-900'],
+            'Python P/ Dados': ['from-blue-600','to-indigo-800'],
+            'Web com Django': ['from-green-600','to-emerald-900'],
+            'APIs RESTful': ['from-gray-700','to-gray-900'],
+            'SQL & PostgreSQL': ['from-cyan-700','to-teal-900'],
+            'Machine Learning': ['from-purple-700','to-indigo-800'],
+            'Prompt Engineering': ['from-pink-600','to-rose-800'],
+            'Power BI Avançado': ['from-yellow-500','to-amber-700'],
+            'BigQuery (Google)': ['from-blue-600','to-sky-800'],
+            'Data Warehouse': ['from-orange-600','to-red-700'],
+            'Power BI P/ Análise': ['from-amber-600','to-yellow-700'],
+            'Modelagem de Dados': ['from-teal-600','to-emerald-800'],
+            'Imersão em IA': ['from-fuchsia-700','to-purple-800'],
+            'IA & Cultura Digital': ['from-slate-600','to-slate-800'],
+            'Cibersegurança': ['from-red-700','to-rose-900'],
+            'Fundamentos de Redes': ['from-cyan-700','to-sky-900'],
+            'Firewalls & VPN': ['from-orange-700','to-red-800'],
+            'LGPD': ['from-emerald-700','to-green-900'],
+            'Hardening Linux': ['from-green-700','to-emerald-900'],
+            'Cloud Fundamentals': ['from-sky-600','to-blue-900'],
+            'Segurança TI': ['from-red-600','to-rose-800'],
+            'Segurança Dados': ['from-red-700','to-rose-900'],
+            'Automação IA': ['from-fuchsia-600','to-purple-800'],
+            'Dynamics 365': ['from-blue-700','to-indigo-900'],
+            'Excel Avançado': ['from-green-600','to-emerald-800'],
+            'PowerPoint Pro': ['from-orange-600','to-amber-800'],
+            'Gestão de Projetos': ['from-indigo-600','to-violet-800'],
+            'Liderança': ['from-teal-700','to-emerald-900'],
+            'Gestão de Tempo': ['from-slate-700','to-gray-900'],
+            'Comunicação Profissional': ['from-blue-600','to-indigo-800'],
+            'Excel Intermediário': ['from-green-600','to-emerald-800'],
+            'Word Intermediário': ['from-blue-700','to-indigo-900'],
+            'Cultura Digital': ['from-cyan-600','to-teal-800']
+        };
+
+        function openCertModal(titulo) {
+            const cert = certificacoes[titulo];
+            if (!cert) return;
+
+            const modal = document.getElementById('cert-modal');
+            const content = document.getElementById('cert-modal-content');
+
+            const [fromCls, toCls] = certGradients[titulo] || ['from-cyan-700','to-teal-900'];
+            content.innerHTML = `
+                <div class="flex justify-center mb-4">
+                    <div class="w-20 h-20 bg-gradient-to-br ${fromCls} ${toCls} rounded-xl flex items-center justify-center">
+                        ${cert.icon}
+                    </div>
+                </div>
+                <h2 class="text-2xl font-bold text-white text-center mb-4">${titulo}</h2>
+                <p class="text-white/70 leading-relaxed text-center">${cert.descricao}</p>
+            `;
+
+            modal.classList.remove('hidden');
+            modal.style.pointerEvents = 'auto';
+        }
+
+        function closeCertModal(event) {
+            if (event && event.target.id !== 'cert-modal') return;
+            const modal = document.getElementById('cert-modal');
+            modal.classList.add('hidden');
+            modal.style.pointerEvents = 'none';
+        }
+
+        // Fechar modal ao pressionar ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeCertModal({ target: { id: 'cert-modal' } });
+            }
+        });
+
+        function openSocialLink(url, socialName) {
+            const confirmed = confirm(`Você está indo para ${socialName}, tem certeza que deseja ir?`);
+            if (confirmed) {
+                window.open(url, '_blank');
+            }
+        }
+
+        function loadApp(appId) {
+            console.log('loadApp chamado com:', appId);
+            const windowEl = document.getElementById('v3-app-window');
+            const bodyEl = document.getElementById('v3-app-body');
+            const titleEl = document.getElementById('v3-app-title');
+            const heroEl = document.getElementById('v3-hero');
+
+            if (!windowEl || !bodyEl) {
+                console.error('Elementos não encontrados');
+                return;
+            }
+
+            if (!windowEl.classList.contains('hidden') && currentOpenApp === appId) {
+                closeApp();
+                return;
+            }
+            currentOpenApp = appId;
+
+            heroEl.style.opacity = '0';
+            heroEl.style.transform = 'scale(0.9)';
+
+            const templateId = `template-${appId}`;
+            const templateElement = document.getElementById(templateId);
+
+            console.log('Procurando template:', templateId, 'Encontrado:', !!templateElement);
+
+            if (templateElement) {
+                bodyEl.innerHTML = "";
+                const clonedTemplate = templateElement.cloneNode(true);
+                clonedTemplate.classList.remove('hidden');
+                bodyEl.appendChild(clonedTemplate);
+
+                let title = "App";
+                if (appId === 'projetos') title = "Projetos.exe";
+                if (appId === 'certificados') title = "Certificados.app";
+                if (appId === 'sobre') title = "Bio.txt";
+                if (appId === 'curriculo') title = "Curriculo.pdf";
+                if (appId === 'dossie') title = "Dossie.log";
+                titleEl.innerText = title;
+
+                windowEl.classList.remove('hidden');
+                windowEl.style.pointerEvents = 'auto';
+
+                if (appId === 'certificados') {
+                    setTimeout(() => {
+                        const marquees = bodyEl.querySelectorAll('.marquee-container');
+                        marquees.forEach(marquee => createDraggableMarquee(marquee, -0.5));
+                    }, 100);
+                }
+
+                if (appId === 'dossie') {
+                    renderDossie(bodyEl);
+                }
+            } else {
+                console.error('Template não encontrado:', templateId);
+            }
+        }
+
+        function renderDossie(root = document) {
+            const container = root.querySelector('#dossie-recommendations');
+            if (!container) return;
+
+            if (!recomendacoes.length) {
+                container.innerHTML = `
+                    <div class="md:col-span-2 border border-dashed border-white/15 rounded-2xl p-8 text-center bg-white/[0.03]">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-cyan-500/30 to-purple-500/30 border border-white/10 flex items-center justify-center text-2xl text-cyan-200">
+                            <i class="fas fa-scroll"></i>
+                        </div>
+                        <h3 class="font-montserrat text-xl font-bold text-white mb-2">Recomendações em preparação</h3>
+                        <p class="text-white/55 max-w-xl mx-auto text-sm leading-relaxed">
+                            Este espaço vai reunir relatos de pessoas que trabalharam, estudaram ou construíram algo comigo.
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = recomendacoes.map((recomendacao) => `
+                <article class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 hover:border-cyan-400/30 transition-colors">
+                    <div class="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-cyan-400/10"></div>
+                    <div class="relative flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/30 to-purple-500/30 border border-white/10 flex items-center justify-center text-xl text-cyan-200 shrink-0">
+                            <i class="fas ${recomendacao.icon || 'fa-quote-left'}"></i>
+                        </div>
+                        <div>
+                            <p class="text-white/80 text-sm leading-relaxed mb-4">"${recomendacao.texto}"</p>
+                            <h3 class="font-montserrat text-white font-bold text-sm">${recomendacao.nome || 'Recomendação profissional'}</h3>
+                            <p class="text-white/45 text-xs mt-1">${recomendacao.contexto || 'Experiência compartilhada'}</p>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function closeApp() {
+            const windowEl = document.getElementById('v3-app-window');
+            const heroEl = document.getElementById('v3-hero');
+            if (windowEl) {
+                windowEl.classList.add('hidden');
+                windowEl.style.pointerEvents = 'none';
+            }
+            if (heroEl) {
+                heroEl.style.opacity = '1';
+                heroEl.style.transform = 'scale(1)';
+            }
+            currentOpenApp = null;
+        }
+
+        function handleBackdropClick(event) {
+            // Fecha a modal se clicar fora (no backdrop)
+            if (event.target.id === 'v3-app-window') {
+                closeApp();
+            }
+        }
+
+        function goBack() {
+            // Apenas fecha a aba aberta
+            closeApp();
+        }
+
+        function createDraggableMarquee(container, initialSpeed) {
+            if (!container) return;
+            const content = container.querySelector('.marquee-content');
+            if (!content) return;
+
+            const items = Array.from(content.children);
+            if (items.length === 0) return;
+            items.forEach(child => content.appendChild(child.cloneNode(true)));
+
+            let xPos = 0;
+            let isDragging = false;
+            let startX = 0;
+            let startY = 0;
+            let lastX = 0;
+            let isHorizontalDrag = false;
+
+            function animate() {
+                if (!document.body.contains(container)) return;
+                if (!isDragging) xPos += initialSpeed;
+
+                if (Math.abs(xPos) >= content.scrollWidth / 2) xPos = 0;
+
+                content.style.transform = `translate3d(${xPos}px, 0, 0)`;
+                requestAnimationFrame(animate);
+            }
+
+            // Mouse events
+            container.addEventListener('mousedown', e => {
+                isDragging = true;
+                isHorizontalDrag = false;
+                startX = e.clientX;
+                lastX = e.clientX;
+                container.style.cursor = 'grabbing';
+            });
+            window.addEventListener('mousemove', e => {
+                if (isDragging) {
+                    const delta = e.clientX - lastX;
+                    xPos += delta * 1.5;
+                    lastX = e.clientX;
+                }
+            });
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+                container.style.cursor = 'grab';
+                isHorizontalDrag = false;
+            });
+
+            // Touch events (mobile) - Detecta direção do movimento
+            container.addEventListener('touchstart', e => {
+                isDragging = true;
+                isHorizontalDrag = false;
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                lastX = e.touches[0].clientX;
+            }, { passive: true });
+            
+            window.addEventListener('touchmove', e => {
+                if(isDragging) {
+                    const currentX = e.touches[0].clientX;
+                    const currentY = e.touches[0].clientY;
+                    const diffX = Math.abs(currentX - startX);
+                    const diffY = Math.abs(currentY - startY);
+                    
+                    // Detecta se é movimento horizontal (para carrossel) ou vertical (para scroll)
+                    if (diffX > diffY && diffX > 5) {
+                        isHorizontalDrag = true;
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    
+                    if (isHorizontalDrag) {
+                        const delta = currentX - lastX;
+                        xPos += delta * 1.5;
+                        lastX = currentX;
+                    }
+                }
+            }, { passive: false });
+            
+            window.addEventListener('touchend', () => {
+                isDragging = false;
+                isHorizontalDrag = false;
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        function toggleBioExpand() {
+            const expandedContent = document.getElementById('bio-expanded-content');
+            const toggleText = document.getElementById('bio-toggle-text');
+            const toggleIcon = document.getElementById('bio-toggle-icon');
+
+            if (expandedContent.classList.contains('hidden')) {
+                expandedContent.classList.remove('hidden');
+                toggleText.textContent = 'Ler menos';
+                toggleIcon.classList.remove('fa-chevron-down');
+                toggleIcon.classList.add('fa-chevron-up');
+            } else {
+                expandedContent.classList.add('hidden');
+                toggleText.textContent = 'Ler mais';
+                toggleIcon.classList.remove('fa-chevron-up');
+                toggleIcon.classList.add('fa-chevron-down');
+            }
+        }
+
+        // Adicionar onclick aos cards de certificação dinamicamente
+        function addCertCardListeners(container = document) {
+            const cards = container.querySelectorAll('.w-40.h-56[style*="cursor: pointer"], .w-40.h-56:not([onclick])');
+            cards.forEach(card => {
+                const titulo = card.querySelector('h3')?.textContent.trim();
+                if (titulo && certificacoes[titulo]) {
+                    // Adiciona onclick para desktop
+                    if (!card.hasAttribute('onclick')) {
+                        card.setAttribute('onclick', `openCertModal('${titulo}')`);
+                        card.style.cursor = 'pointer';
+                    }
+                    
+                    // Variáveis para rastrear movimento
+                    let touchStartX = 0;
+                    let touchStartY = 0;
+                    let hasMoved = false;
+                    
+                    // Detecta início do toque
+                    card.addEventListener('touchstart', function(e) {
+                        touchStartX = e.touches[0].clientX;
+                        touchStartY = e.touches[0].clientY;
+                        hasMoved = false;
+                        this.style.transition = 'none';
+                    }, { passive: true });
+
+                    // Detecta movimento durante o toque
+                    card.addEventListener('touchmove', function(e) {
+                        const touchCurrentX = e.touches[0].clientX;
+                        const touchCurrentY = e.touches[0].clientY;
+                        
+                        const moveX = Math.abs(touchCurrentX - touchStartX);
+                        const moveY = Math.abs(touchCurrentY - touchStartY);
+                        
+                        // Se moveu mais de 10px, considera como movimento (não tap)
+                        if (moveX > 10 || moveY > 10) {
+                            hasMoved = true;
+                        }
+                    }, { passive: true });
+
+                    // Abre modal apenas se não houve movimento
+                    card.addEventListener('touchend', function(e) {
+                        this.style.transition = 'all 0.3s ease';
+                        
+                        if (!hasMoved) {
+                            e.preventDefault();
+                            openCertModal(titulo);
+                        }
+                    }, { passive: false });
+                }
+            });
+        }
+
+        function confirmRedirect(url) {
+            if (confirm('Deseja realmente visitar este link?')) {
+                window.open(url, '_blank');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            addCertCardListeners(document);
+        });
+
+        // Quando o template for clonado e exibido, adiciona interatividade aos cards
+        const originalLoadApp = loadApp;
+        loadApp = function(appId) {
+            originalLoadApp.call(this, appId);
+            
+            if (appId === 'certificados') {
+                setTimeout(() => {
+                    const appBody = document.getElementById('v3-app-body');
+                    if (appBody) {
+                        addCertCardListeners(appBody);
+                    }
+                }, 100);
+            }
+        };
+</script>
+</body>
 </html>
