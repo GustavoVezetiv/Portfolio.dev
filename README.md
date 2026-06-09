@@ -1,48 +1,89 @@
-# 🎲 Portfólio Gamificado (RPG Edition)
+# 🖥️ Portfólio Gustavo Vezetiv — Interface "OS-Like"
 
 ![Project Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-orange)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
-> "A interface gráfica falhou... Role um D20 para tentar recuperar o sistema."
+> Portfólio pessoal interativo inspirado em sistemas operacionais modernos (macOS/Linux): uma **dock** com apps que abrem em **janelas modais** sobre um fundo glassmorphism com mesh-gradient animado.
 
-Este é um projeto de **Portfólio Pessoal Interativo (SPA)** construído com **JavaScript Vanilla Moderno (ES Modules)**. O conceito foge do tradicional "rolar para baixo", transformando a navegação em uma experiência de RPG onde a sorte (simulada) define qual versão do site o usuário verá.
+🔗 **Online:** [vezetiv.is-a.dev](https://vezetiv.is-a.dev)
 
 ---
 
-## ✨ Funcionalidades
+## ✨ Conceito
 
-### 1. Sistema de Sorte (D20 Mechanic)
-Uma mecânica de dados controla a experiência do usuário.
-- **Safe Mode:** Uma interface propositalmente "quebrada" e antiga (estilo anos 90) que serve como tela inicial.
-- **Chaos Mode (Falha):** Se o dado rolar baixo, o site entra em colapso visual com efeitos de Glitch e Cyberpunk.
-- **Perfect Form (Crítico/20):** O sucesso crítico carrega a interface real, inspirada em sistemas operacionais modernos (MacOS/Linux).
+A navegação não usa rolagem tradicional. O usuário interage com uma **dock** estilo OS; cada ícone abre um **app** (janela modal flutuante) com um tipo de conteúdo:
 
-### 2. Interface "OS-Like" (Perfect Form)
-- **Dock Dinâmica:** Barra de tarefas animada com efeito de magnificação (hover).
-- **Janelas Modais:** Apps como "Projetos", "Certificados" e "Sobre Mim" abrem em janelas flutuantes.
-- **Drag & Drop:** Carrossel de certificados arrastável com física de movimento.
+| App | Conteúdo |
+|-----|----------|
+| 🏅 Certificados | Carrosséis arrastáveis de certificações por categoria (Dev, Segurança, Office) |
+| 💻 Projetos | Cards dos projetos desenvolvidos |
+| 📄 Currículo | Prévia e download do CV em PDF |
+| 📜 Dossiê | Recomendações e relatos profissionais |
+| 👤 Sobre Mim | Biografia, skills e hobbies |
 
-### 3. Arquitetura Modular
-O projeto não utiliza frameworks pesados (React/Vue), mas utiliza a arquitetura de **ES Modules** nativa do JavaScript para organização profissional:
-- Separação clara entre **Dados** (`database.js`), **Lógica** (`modules/`) e **Renderização**.
+As redes sociais ficam no hero central, abaixo do nome.
 
 ---
 
 ## 🛠 Tech Stack
 
-* **Core:** ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-* **Estilização:** ![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white) (Via CDN para desenvolvimento ágil)
-* **Ícones:** FontAwesome 6.
-* **Fontes:** Google Fonts (Montserrat, Inter, Fira Code, Press Start 2P).
+* **Core:** HTML5 + CSS3 + JavaScript (Vanilla, sem framework)
+* **Estilização:** TailwindCSS (via CDN) + CSS customizado (`css/style.css`)
+* **Ícones:** Font Awesome 6
+* **Fontes:** Google Fonts (Montserrat, Inter, Fira Code, Press Start 2P, Alfa Slab One)
+* **Deploy:** GitHub Pages + domínio `is-a.dev` (`CNAME`)
 
 ---
 
-## 📂 Estrutura do Projeto
+## 📂 Estrutura do projeto
 
 ```text
 /
-├── index.html            # Ponto de entrada (esqueleto)
+├── index.html        # Aplicação principal: hero, dock, janela modal,
+│                     #   templates dos apps, banco de certificações e JS inline
 ├── css/
-│   └── style.css         # Estilização global e animações
-└── js/
-    └── script.js           # Orquestrador principal
+│   └── style.css     # Animações, dock, mesh-gradient, modais
+├── js/
+│   └── script.js     # (placeholder — JS atual está inline no index.html)
+├── img/              # Favicons, logos e imagem Open Graph (og-image.png)
+├── arc/              # Currículos em PDF + backup legado do dashboard
+├── robots.txt        # Diretrizes de indexação
+├── sitemap.xml       # Mapa do site
+└── CNAME             # Domínio personalizado
+```
+
+> **Nota de manutenção:** atualmente o HTML, o CSS inline, o JavaScript e os dados
+> (certificações/projetos) vivem todos dentro de `index.html`. Uma futura refatoração
+> prevista move os dados para `data/*.js` e o JS para módulos em `js/` (ES Modules),
+> eliminando a duplicação atual dos certificados (HTML + objeto JS).
+
+---
+
+## 🚀 Rodando localmente
+
+Por usar `fetch`/PDF e caminhos relativos, sirva via servidor estático:
+
+```bash
+# Python
+python -m http.server 8000
+# ou Node
+npx serve .
+```
+
+Acesse `http://localhost:8000`.
+
+---
+
+## 📈 SEO
+
+A página inclui `title`/`description` descritivos, Open Graph + Twitter Card
+(`img/og-image.png`), `canonical`, dados estruturados JSON-LD (`Person`),
+`robots.txt` e `sitemap.xml`.
+
+---
+
+## 📬 Contato
+
+- **E-mail:** gustavovezetiv8@gmail.com
+- **LinkedIn:** [/in/gustavovezetiv](https://linkedin.com/in/gustavovezetiv)
+- **GitHub:** [@gustavovezetiv](https://github.com/gustavovezetiv)

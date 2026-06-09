@@ -14,207 +14,12 @@
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .hidden-page { display: none !important; }
 
-/* --- BACKGROUND ANIMADO (Morphing Gradient leve) --- */
-@property --mesh-cyan {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #22d3ee;
-}
-
-@property --mesh-blue {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #3b82f6;
-}
-
-@property --mesh-indigo {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #6366f1;
-}
-
-@property --mesh-violet {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #8b5cf6;
-}
-
-@property --mesh-pink {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #ec4899;
-}
-
-@property --mesh-emerald {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #10b981;
-}
-
-@property --mesh-amber {
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #f59e0b;
-}
-
-.animated-bg {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    --mesh-cyan: #22d3ee;
-    --mesh-blue: #3b82f6;
-    --mesh-indigo: #6366f1;
-    --mesh-violet: #8b5cf6;
-    --mesh-pink: #ec4899;
-    --mesh-emerald: #10b981;
-    --mesh-amber: #f59e0b;
-    background-color: #08111f;
-    background-image:
-        radial-gradient(105% 80% at 8% 18%, color-mix(in srgb, var(--mesh-cyan) 46%, transparent) 0%, transparent 58%),
-        radial-gradient(95% 82% at 92% 20%, color-mix(in srgb, var(--mesh-violet) 44%, transparent) 0%, transparent 56%),
-        radial-gradient(95% 90% at 12% 88%, color-mix(in srgb, var(--mesh-blue) 42%, transparent) 0%, transparent 60%),
-        radial-gradient(86% 78% at 88% 86%, color-mix(in srgb, var(--mesh-pink) 34%, transparent) 0%, transparent 58%),
-        linear-gradient(125deg, transparent 5%, color-mix(in srgb, var(--mesh-emerald) 20%, transparent) 28%, transparent 54%),
-        linear-gradient(245deg, transparent 12%, color-mix(in srgb, var(--mesh-amber) 15%, transparent) 35%, transparent 62%),
-        linear-gradient(135deg, #050814 0%, color-mix(in srgb, var(--mesh-indigo) 24%, #07111f) 45%, #050814 100%),
-        radial-gradient(125% 120% at 50% 50%, transparent 36%, rgba(0, 0, 0, 0.78) 100%);
-    background-repeat: no-repeat;
-    background-size: 180% 180%, 170% 170%, 160% 160%, 165% 165%, 190% 190%, 180% 180%, 155% 155%, 100% 100%;
-    background-position: 6% 36%, 92% 28%, 18% 76%, 86% 78%, 28% 42%, 74% 58%, 50% 50%, 50% 50%;
-    transform: translateZ(0);
-    animation: gradientMorph 20s ease-in-out infinite alternate;
-}
-
-@keyframes gradientMorph {
-    0% {
-        --mesh-cyan: #22d3ee;
-        --mesh-blue: #3b82f6;
-        --mesh-indigo: #6366f1;
-        --mesh-violet: #8b5cf6;
-        --mesh-pink: #ec4899;
-        --mesh-emerald: #10b981;
-        --mesh-amber: #f59e0b;
-        background-position: 6% 36%, 92% 28%, 18% 76%, 86% 78%, 28% 42%, 74% 58%, 50% 50%, 50% 50%;
-    }
-    50% {
-        --mesh-cyan: #06b6d4;
-        --mesh-blue: #2563eb;
-        --mesh-indigo: #7c3aed;
-        --mesh-violet: #a855f7;
-        --mesh-pink: #f472b6;
-        --mesh-emerald: #22c55e;
-        --mesh-amber: #facc15;
-        background-position: 32% 22%, 72% 36%, 38% 84%, 68% 72%, 42% 28%, 58% 66%, 56% 44%, 50% 50%;
-    }
-    100% {
-        --mesh-cyan: #38bdf8;
-        --mesh-blue: #4f46e5;
-        --mesh-indigo: #6d28d9;
-        --mesh-violet: #c084fc;
-        --mesh-pink: #db2777;
-        --mesh-emerald: #14b8a6;
-        --mesh-amber: #fb923c;
-        background-position: 20% 74%, 82% 16%, 64% 70%, 22% 62%, 76% 34%, 36% 76%, 44% 56%, 50% 50%;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .animated-bg {
-        animation: none;
-    }
-}
-
 /* --- DRAG MARQUEE (Certificados) --- */
 .marquee-container { overflow: hidden; position: relative; cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; }
 .marquee-container:active { cursor: grabbing; }
 .marquee-content { display: flex; gap: 1rem; width: max-content; will-change: transform; -webkit-user-drag: none; }
 
-/* --- ESTILOS DO DADO (SEMPRE BONITOS) --- */
-#destiny-dice-container {
-    position: fixed;
-    bottom: 30px;
-    right: 30px; 
-    z-index: 9999;
-    filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.5));
-    cursor: pointer;
-    transition: transform 0.3s, opacity 0.5s;
-}
-#destiny-dice-container:hover {
-    transform: scale(1.1) rotate(15deg);
-}
-.rolling {
-    animation: rollDice 0.6s ease-in-out infinite;
-}
-@keyframes rollDice {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(90deg) scale(0.9); }
-    50% { transform: rotate(180deg) scale(1.1); }
-    75% { transform: rotate(270deg) scale(0.9); }
-    100% { transform: rotate(360deg); }
-}
-
-.dice-tooltip {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    background: #1a1b26;
-    color: #a9b1d6;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-family: 'Fira Code', monospace;
-    font-size: 10px;
-    white-space: nowrap;
-    border: 1px solid #7aa2f7;
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-}
-#destiny-dice-container:hover .dice-tooltip { opacity: 1; }
-
-/* --- MODO "FEIO" --- */
-#ugly-overlay {
-    position: fixed;
-    inset: 0;
-    background: white;
-    color: black;
-    font-family: "Times New Roman", Times, serif;
-    z-index: 5000;
-    padding: 2rem;
-    overflow-y: auto;
-    line-height: 1.5;
-    transition: opacity 1s;
-}
-#ugly-overlay h1 { font-size: 2em; font-weight: bold; margin-bottom: 1rem; }
-#ugly-overlay p { margin-bottom: 1rem; }
-#ugly-overlay ul { list-style: disc; padding-left: 2rem; margin-bottom: 1rem; }
-#ugly-overlay a { color: blue; text-decoration: underline; cursor: pointer; }
-
-/* --- CRITICAL HIT --- */
-.critical-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    z-index: 9998;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    animation: fadeOutCrit 2.5s forwards;
-    animation-delay: 1.5s;
-}
-@keyframes fadeOutCrit { to { opacity: 0; visibility: hidden; } }
-
-.crit-text {
-    font-family: 'Alfa Slab One', cursive;
-    font-size: 4rem;
-    color: #fbbf24;
-    text-shadow: 0 0 20px #fbbf24;
-    animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-align: center;
-}
-@keyframes scaleUp { from { transform: scale(0); } to { transform: scale(1); } }
+/* (Removidos) estilos do dado/overlay/critical por desuso */
 
 /* --- V3 SPECIFIC STYLES --- */
 .dock-container {
@@ -226,6 +31,15 @@
 .dock-item:hover {
     transform: translateY(-10px) scale(1.2);
     margin: 0 10px;
+}
+
+.group > span {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.group:hover > span {
+    opacity: 1;
 }
 
 @media (max-width: 768px) {
@@ -256,112 +70,7 @@
     to { transform: scale(1); opacity: 1; }
 }
 
-/* --- ESTILOS "FEIOS" & CAOS (ATUALIZADO) --- */
-
-#page-chaos {
-    background-color: #050505;
-    background-image:
-        radial-gradient(circle at 20% 20%, rgba(239, 68, 68, 0.18), transparent 28%),
-        radial-gradient(circle at 80% 70%, rgba(34, 211, 238, 0.12), transparent 30%),
-        linear-gradient(135deg, rgba(255,255,255,0.035) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.035) 50%, rgba(255,255,255,0.035) 75%, transparent 75%, transparent);
-    background-blend-mode: screen;
-    background-size: auto, auto, 18px 18px;
-    pointer-events: auto;
-    user-select: none;
-    filter: contrast(1.5) brightness(0.8);
-}
-
-#page-chaos button {
-    pointer-events: auto !important;
-    cursor: pointer !important;
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
-}
-
-@keyframes chaos-flicker {
-    0% { opacity: 1; filter: hue-rotate(0deg); }
-    5% { opacity: 0.4; filter: hue-rotate(90deg); transform: skewX(10deg); }
-    10% { opacity: 1; filter: hue-rotate(0deg); transform: skewX(0deg); }
-    100% { opacity: 1; }
-}
-
-/* Classe para aplicar o efeito feio nos elementos */
-.chaos-ugly-effect {
-    /* Força a animação de defeito mesmo com a regra global de no-animation */
-    animation: chaos-flicker 0.2s infinite alternate-reverse !important;
-    border: 2px dashed #ff0000;
-    background-color: rgba(50, 0, 0, 0.8);
-    opacity: 0.8;
-}
-
-.chaos-filter-1 { filter: hue-rotate(90deg) blur(2px); }
-.chaos-filter-2 { filter: invert(1) grayscale(1) contrast(5); }
-.chaos-filter-3 { filter: sepia(1) saturate(10) brightness(0.5); }
-
-.chaos-window {
-    animation: chaosWindowIn 0.35s steps(2, end), chaos-flicker 1.8s infinite alternate;
-}
-
-.chaos-title {
-    text-shadow: 2px 0 rgba(34, 211, 238, 0.65), -2px 0 rgba(236, 72, 153, 0.65);
-}
-
-.chaos-code {
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.45);
-}
-
-.chaos-noise,
-.chaos-scanlines {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-}
-
-.chaos-noise {
-    background-image:
-        radial-gradient(circle, rgba(255,255,255,0.22) 1px, transparent 1px);
-    background-size: 9px 9px;
-    mix-blend-mode: screen;
-    opacity: 0.08;
-    animation: chaosNoise 0.45s steps(2, end) infinite;
-}
-
-.chaos-scanlines {
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.06) 0,
-        rgba(255,255,255,0.06) 1px,
-        transparent 1px,
-        transparent 5px
-    );
-    opacity: 0.25;
-}
-
-.chaos-terminal {
-    background-color: #020807 !important;
-}
-
-.chaos-breach {
-    background-color: #110205 !important;
-}
-
-.chaos-static {
-    background-color: #020812 !important;
-}
-
-.chaos-arcane {
-    background-color: #0c0213 !important;
-}
-
-@keyframes chaosWindowIn {
-    from { transform: translateY(18px) skewX(-4deg); opacity: 0; }
-    to { transform: translateY(0) skewX(0); opacity: 1; }
-}
-
-@keyframes chaosNoise {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(6px, -4px); }
-    100% { transform: translate(-3px, 5px); }
-}
+/* (Removidos) estilos do modo Chaos por desuso */
 
 /* --- BIO EXPAND ANIMATION --- */
 #bio-expanded-content {
@@ -458,4 +167,57 @@
 /* Ícone com rotação */
 #bio-toggle-icon {
     display: inline-block;
+}
+
+/* --- BACKGROUND ANIMADO (Mesh gradient leve) --- */
+.animated-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    --mesh-cyan: #22d3ee;
+    --mesh-blue: #3b82f6;
+    --mesh-indigo: #6366f1;
+    --mesh-violet: #8b5cf6;
+    --mesh-pink: #ec4899;
+    --mesh-emerald: #10b981;
+    --mesh-amber: #f59e0b;
+    background-color: #08111f;
+    background-image:
+        radial-gradient(105% 80% at 8% 18%, color-mix(in srgb, var(--mesh-cyan) 46%, transparent) 0%, transparent 58%),
+        radial-gradient(95% 82% at 92% 20%, color-mix(in srgb, var(--mesh-violet) 44%, transparent) 0%, transparent 56%),
+        radial-gradient(95% 90% at 12% 88%, color-mix(in srgb, var(--mesh-blue) 42%, transparent) 0%, transparent 60%),
+        radial-gradient(86% 78% at 88% 86%, color-mix(in srgb, var(--mesh-pink) 34%, transparent) 0%, transparent 58%),
+        linear-gradient(125deg, transparent 5%, color-mix(in srgb, var(--mesh-emerald) 20%, transparent) 28%, transparent 54%),
+        linear-gradient(245deg, transparent 12%, color-mix(in srgb, var(--mesh-amber) 15%, transparent) 35%, transparent 62%),
+        linear-gradient(135deg, #050814 0%, color-mix(in srgb, var(--mesh-indigo) 24%, #07111f) 45%, #050814 100%),
+        radial-gradient(125% 120% at 50% 50%, transparent 36%, rgba(0, 0, 0, 0.78) 100%);
+    background-repeat: no-repeat;
+    background-size: 180% 180%, 170% 170%, 160% 160%, 165% 165%, 190% 190%, 180% 180%, 155% 155%, 100% 100%;
+    background-position: 6% 36%, 92% 28%, 18% 76%, 86% 78%, 28% 42%, 74% 58%, 50% 50%, 50% 50%;
+    transform: translateZ(0);
+    animation: gradientMorph 20s ease-in-out infinite alternate;
+}
+
+@keyframes gradientMorph {
+    0% {
+        background-position: 6% 36%, 92% 28%, 18% 76%, 86% 78%, 28% 42%, 74% 58%, 50% 50%, 50% 50%;
+    }
+    50% {
+        background-position: 18% 28%, 82% 34%, 10% 86%, 92% 70%, 34% 54%, 68% 48%, 52% 48%, 50% 50%;
+    }
+    100% {
+        background-position: 12% 44%, 96% 18%, 22% 68%, 76% 88%, 20% 36%, 82% 62%, 48% 52%, 50% 50%;
+    }
+}
+
+.modal-exit-hint {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.42);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animated-bg {
+        animation: none;
+    }
 }
