@@ -5,7 +5,7 @@
 
 > Portfólio pessoal interativo inspirado em sistemas operacionais modernos (macOS/Linux): uma **dock** com apps que abrem em **janelas modais** sobre um fundo glassmorphism com mesh-gradient animado.
 
-🔗 **Online:** [vezetiv.is-a.dev](https://vezetiv.is-a.dev)
+🔗 **Online:** [vezetiv.dev](https://vezetiv.dev)
 
 ---
 
@@ -85,5 +85,5 @@ A página inclui `title`/`description` descritivos, Open Graph + Twitter Card
 ## 📬 Contato
 
 - **E-mail:** gustavovezetiv8@gmail.com
-- **LinkedIn:** [/in/gustavovezetiv](https://linkedin.com/in/gustavovezetiv)
+- **LinkedIn:** [/in/gustavo-vezetiv-08416126b](https://www.linkedin.com/in/gustavo-vezetiv-08416126b/)
 - **GitHub:** [@gustavovezetiv](https://github.com/gustavovezetiv)

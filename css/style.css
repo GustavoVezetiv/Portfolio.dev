@@ -15,7 +15,7 @@
 .hidden-page { display: none !important; }
 
 /* --- DRAG MARQUEE (Certificados) --- */
-.marquee-container { overflow: hidden; position: relative; cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; }
+.marquee-container { overflow: hidden; position: relative; cursor: grab; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
 .marquee-container:active { cursor: grabbing; }
 .marquee-content { display: flex; gap: 1rem; width: max-content; will-change: transform; -webkit-user-drag: none; }
 
