@@ -29,7 +29,7 @@ window.PERFIL = {
     // Redes sociais (ordem = ordem de exibição)
     sociais: [
         { nome: 'LinkedIn', icon: 'fa-brands fa-linkedin-in', url: 'https://www.linkedin.com/in/gustavo-vezetiv-08416126b/', hover: 'hover:bg-blue-600/30' },
-        { nome: 'Instagram', icon: 'fa-brands fa-instagram', url: 'https://www.instagram.com/vezeti_v/', hover: 'hover:bg-pink-600/30' },
+        { nome: 'Instagram', icon: 'fa-brands fa-instagram', url: 'https://www.instagram.com/vezetiv.dev', hover: 'hover:bg-pink-600/30' },
         { nome: 'GitHub', icon: 'fa-brands fa-github', url: 'https://github.com/gustavovezetiv', hover: 'hover:bg-gray-700/30' }
     ]
 };
