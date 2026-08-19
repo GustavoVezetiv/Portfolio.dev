@@ -26,11 +26,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Gerar index.html
+      - name: Organizar paginas e gerar index.html
         run: python scripts/sync_pages_indexes.py
 
-      - name: Salvar indexes gerados
+      - name: Salvar paginas organizadas
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: sync pages index files"
-          file_pattern: "pages/**/*.html"
+          commit_message: "chore: organize and sync pages"
+          file_pattern: "pages/*.html pages/**/*.html"
