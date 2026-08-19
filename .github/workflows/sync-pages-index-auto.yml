@@ -1,0 +1,36 @@
+name: Auto index pages
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "pages/**"
+      - "scripts/sync_pages_indexes.py"
+      - ".github/workflows/sync-pages-index-auto.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Organizar paginas e gerar index.html
+        run: python scripts/sync_pages_indexes.py
+
+      - name: Salvar paginas organizadas
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: organize and sync pages"
+          file_pattern: "pages/*.html pages/**/*.html"
