@@ -1,0 +1,1674 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Gerador de Provas — Informática Básica | IFMT</title>
+<style>
+:root{
+  --bg:#f4f6f8; --panel:#fff; --ink:#19202a; --muted:#667085;
+  --line:#d0d5dd; --ifgreen:#2f8f46; --ifred:#d64032; --soft:#eef6f0;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select,textarea{font:inherit}
+.app{display:grid;grid-template-columns:340px 1fr;min-height:100vh}
+.sidebar{background:#17212b;color:white;padding:20px;position:sticky;top:0;height:100vh;overflow:auto}
+.sidebar h1{font-size:20px;margin:0 0 6px}
+.sidebar .sub{font-size:12px;color:#c6d0dc;margin-bottom:20px}
+.section{border-top:1px solid #344150;padding-top:16px;margin-top:16px}
+.label{font-size:12px;font-weight:700;margin:10px 0 6px;display:block}
+.sidebar input,.sidebar select,.sidebar textarea{
+  width:100%;border:1px solid #536170;background:#202c38;color:white;border-radius:8px;padding:9px
+}
+.sidebar textarea{min-height:110px;resize:vertical}
+.inline{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.inline3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.btn{width:100%;border:0;border-radius:9px;padding:10px 12px;font-weight:700;cursor:pointer;margin-top:8px}
+.btn.primary{background:var(--ifgreen);color:white}
+.btn.light{background:#e9eef3;color:#17212b}
+.btn.danger{background:#732b2b;color:white}
+.hint{font-size:11px;color:#b8c3cf;line-height:1.4;margin-top:6px}
+.main{padding:24px;overflow:auto}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.toolbar button{border:1px solid var(--line);background:white;border-radius:8px;padding:8px 12px;cursor:pointer}
+.status{background:white;border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:18px}
+.status strong{color:var(--ifgreen)}
+.empty{background:white;border:1px dashed var(--line);border-radius:14px;padding:40px;text-align:center;color:var(--muted)}
+.exam{
+  width:210mm; min-height:297mm; margin:0 auto 18px; background:white;
+  padding:12mm 13mm 14mm; box-shadow:0 2px 12px rgba(0,0,0,.08);
+  position:relative;
+}
+.header{display:grid;grid-template-columns:38mm 1fr 38mm;gap:8px;align-items:center;border-bottom:1.5px solid #111;padding-bottom:7px}
+.brand-fallback{display:flex;align-items:center;gap:8px}
+.brand-icon{display:grid;grid-template-columns:repeat(3,7px);grid-auto-rows:7px;gap:2px}
+.brand-icon i{display:block;background:var(--ifgreen);border-radius:1px}
+.brand-icon i.red{background:var(--ifred)}
+.brand-word{font-size:22px;font-weight:800}
+.logo{max-width:36mm;max-height:22mm;object-fit:contain}
+.inst{text-align:center;font-size:9.5pt;line-height:1.25}
+.inst b{display:block;font-size:10.2pt}
+.meta{text-align:right;font-size:8.5pt;line-height:1.4}
+.exam-title{text-align:center;font-weight:800;font-size:13pt;margin:9px 0 8px;text-transform:uppercase}
+.info-row{display:flex;gap:12px;font-size:9pt;margin-bottom:7px}
+.info-row span{flex:1}
+.name-label{font-size:8.5pt;font-weight:700;margin:5px 0 3px}
+.name-boxes{display:flex;flex-wrap:wrap;gap:2px;margin-bottom:8px}
+.name-box{width:6.5mm;height:6.5mm;border:1px solid #111}
+.instructions{font-size:8.7pt;background:#f5f5f5;border:1px solid #bbb;padding:6px 8px;margin:7px 0 9px;line-height:1.35}
+.answer-card{border-collapse:collapse;width:100%;font-size:8pt;margin:7px 0 12px}
+.answer-card th,.answer-card td{border:1px solid #999;padding:3px;text-align:center}
+.answer-card th{background:#f0f0f0}
+.bubble{display:inline-block;width:4.2mm;height:4.2mm;border:1px solid #333;border-radius:50%;vertical-align:middle;margin:0 1px}
+.questions{font-size:9.5pt;line-height:1.35}
+.q{margin:0 0 9px;break-inside:avoid;page-break-inside:avoid}
+.q .stem{font-weight:600;margin-bottom:4px}
+.q .opt{margin:2px 0;padding-left:7mm;text-indent:-5mm}
+.q .tag{font-size:7.6pt;color:#666;font-weight:400}
+.tier{margin-top:6px;padding-left:7px;border-left:2px solid #bbb}
+.conf-line{font-size:8.5pt;margin-top:5px;color:#333}
+.footer{position:absolute;bottom:7mm;left:13mm;right:13mm;display:flex;justify-content:space-between;font-size:7.5pt;color:#666}
+.admin-table{width:100%;border-collapse:collapse;background:white}
+.admin-table td,.admin-table th{border:1px solid var(--line);padding:7px;font-size:12px}
+.admin-table th{background:#edf2f7}
+.small{font-size:11px;color:var(--muted)}
+@media (max-width:1000px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:relative;height:auto}
+  .exam{width:100%;min-height:auto}
+}
+@page{size:A4;margin:0}
+@media print{
+  body{background:white}
+  .sidebar,.toolbar,.status,.empty,.screen-only{display:none!important}
+  .main{padding:0}
+  .exam{box-shadow:none;margin:0;width:210mm;min-height:297mm;page-break-after:always;break-after:page}
+  .exam:last-child{page-break-after:auto}
+}
+
+/* Impressão: somente gabarito objetivo, sem colunas vazias de confiança. */
+.answer-card th,.answer-card td{padding:2px;font-size:7.8pt}
+.q .stem{font-weight:600}
+@media print {
+  .footer{display:none!important}
+  .exam{height:auto;min-height:0;break-after:page;page-break-after:always}
+  .exam:last-child{break-after:auto;page-break-after:auto}
+  .q{break-inside:avoid-page;page-break-inside:avoid}
+}
+.student-name{font-size:9pt;margin:8px 0 9px;white-space:nowrap}
+.compact-card{width:100%;max-width:179mm}
+.compact-card td,.compact-card th{padding:1.4px 4px;height:4.3mm}
+.compact-card .bubble{width:3.7mm;height:3.7mm}
+.compact-card td:first-child{width:15mm}
+@media print{.compact-card td,.compact-card th{padding:1px 3px}}
+
+/* Identificação manuscrita legível, 24 células por linha em A4. */
+.name-identification{margin:5px 0 6px}
+.name-label{font-size:7.7pt;font-weight:500;line-height:1.3;margin:0 0 4px}
+.name-boxes{display:grid;grid-template-columns:repeat(24, 6.35mm);gap:0.65mm 0.6mm;width:max-content;max-width:100%;margin:0}
+.name-box{display:block;width:6.35mm;height:6.6mm;border:0.7pt solid #111;background:#fff}
+@media print{
+  .name-identification{margin:3px 0 4px;break-inside:avoid}
+  .name-label{font-size:7.4pt;margin:0 0 2px}
+  .name-boxes{gap:0.4mm 0.55mm}
+  .name-box{height:6mm}
+}
+@media print {
+  .exam{padding:10mm 12mm 10mm}
+  .header{padding-bottom:4px}
+  .exam-title{margin:5px 0 4px}
+  .student-name{margin:4px 0 5px}
+  .instructions{font-size:8.2pt;line-height:1.26;margin:4px 0 5px;padding:4px 6px}
+  .compact-card{margin:3px 0 6px}
+  .compact-card td,.compact-card th{height:4mm}
+  .questions{font-size:9pt;line-height:1.24}
+  .q{margin:0 0 5px}
+  .q .stem{margin-bottom:2px}
+  .q .opt{margin:1px 0;padding-left:5.5mm;text-indent:-4.5mm}
+  .tier{margin-top:3px;padding-left:5px}
+}
+
+/* Interface administrativa limpa. O papel impresso mantém a diagramação institucional. */
+:root{--bg:#f7f8fa;--ink:#18252b;--muted:#66727b;--line:#dce3e7;--ifgreen:#276e49;--soft:#edf5ef}
+body{font-family:Arial,"Segoe UI",sans-serif}
+.app-top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 25px;background:#fff;border-bottom:1px solid var(--line)}
+.app-title{font-size:17px;font-weight:700;letter-spacing:-.35px}
+.app-subtitle{font-size:12px;color:var(--muted);margin-top:3px}
+.app-tabs{display:flex;gap:3px;background:#edf0f2;padding:4px;border-radius:9px}
+.app-tabs button{border:0;border-radius:7px;padding:9px 16px;background:transparent;font-size:13px;font-weight:700;color:#52616a;cursor:pointer}
+.app-tabs button.active{background:white;color:#185b3a;box-shadow:0 1px 4px #00000013}
+.app{grid-template-columns:300px minmax(0,1fr)}
+.sidebar{background:#fff;color:var(--ink);border-right:1px solid var(--line);padding:19px;position:sticky}
+.sidebar h1{display:none}
+.sidebar .sub{font-size:12px;color:#65717b;margin:0 0 14px}
+.section{border-color:#e3e7eb;margin-top:14px;padding-top:14px}
+.sidebar .hint{color:#697882;line-height:1.43;font-size:11px}
+.sidebar input,.sidebar select,.sidebar textarea{border:1px solid #cbd5dc;background:#fff;color:#18252b;border-radius:6px;padding:9px}
+.sidebar .label{font-size:12px;color:#26333a}
+.btn{border-radius:6px;font-weight:600;font-size:12.5px;padding:10px}
+.btn.primary{background:#286b47;color:white}
+.btn.light{background:#eef2f4;color:#253039}
+.btn.danger{background:#fff0f0;color:#a43232;border:1px solid #e9c4c4}
+.main{padding:24px}
+.status,.empty{border-radius:8px;box-shadow:none}
+.toolbar button{border-radius:6px;font-size:12.5px}
+body.correction-mode .app{display:block}
+body.correction-mode .sidebar{display:none}
+#correctionView{display:none}
+body.correction-mode #generatorView{display:none}
+body.correction-mode #correctionView{display:block}
+.correction-shell{max-width:1080px;margin:0 auto;padding:4px 0 36px}
+.correction-title{font-size:23px;letter-spacing:-.55px;margin:0 0 5px}
+.correction-sub{color:#627079;font-size:13px;line-height:1.55;margin:0 0 18px}
+.correction-panel{background:white;border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:15px}
+.correction-panel h3{font-size:15px;margin:0 0 13px}
+.grade-fields{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:12px}
+.grade-fields label{font-size:12px;color:#3a4a54;font-weight:700;display:block;margin-bottom:6px}
+.grade-fields input,.grade-fields select,.grade-quick textarea{width:100%;min-width:0;background:white;border:1px solid #cbd5da;border-radius:7px;padding:10px;color:#202b31;font:inherit;font-size:13px}
+.grade-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.grade-toolbar button,.grade-row button,.grade-history button,.grade-quick button{cursor:pointer;font:inherit}
+.grade-toolbar button,.grade-quick button,.grade-history button{background:white;border:1px solid #cbd5da;border-radius:7px;padding:9px 12px;font-size:12.5px;font-weight:600;color:#293940}
+.grade-toolbar .emphasis{background:#286b47;color:white;border-color:#286b47}
+.grade-toolbar button:disabled{opacity:.5;cursor:not-allowed}
+.grade-note{font-size:12px;color:#66727b;line-height:1.5;margin:8px 0 0}
+.grade-row-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px}
+.grade-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #edf0f1;border-radius:8px;min-width:0}
+.grade-item .part{flex:0 0 88px;font-size:12px;font-weight:700;color:#34444c}
+.grade-row{display:flex;gap:5px;flex:1;justify-content:center;flex-wrap:nowrap}
+.grade-row button{width:38px;height:35px;background:#fff;border:1px solid #d1dae0;border-radius:6px;font-size:13px;color:#29353b}
+.grade-row button.selected{background:#245f3f;color:white;border-color:#245f3f}
+.grade-row button.blank{color:#87949c}
+.grade-row button:focus-visible,.grade-toolbar button:focus-visible{outline:2px solid #286b47;outline-offset:2px}
+.grade-feedback{flex:0 0 94px;min-width:94px;text-align:right;color:#859098;font-size:11px}
+.grade-feedback.hit{color:#237443}
+.grade-feedback.miss{color:#ac4a3f}
+.grade-result{display:flex;align-items:center;gap:30px;flex-wrap:wrap;background:#f0f6f2;border:1px solid #d9e8de;border-radius:9px;padding:15px;margin-top:14px}
+.grade-result .score{font-weight:800;font-size:31px;color:#245f3f;font-variant-numeric:tabular-nums}
+.grade-result .metrics{font-size:12px;line-height:1.6;color:#465c4c}
+.grade-quick{display:flex;align-items:flex-end;gap:9px;margin-top:15px}
+.grade-quick > div{flex:1}
+.grade-quick label{font-size:12px;color:#3d5059;display:block;margin-bottom:5px}
+.grade-quick textarea{resize:vertical;min-height:46px}
+.grade-quick button{white-space:nowrap}
+.grade-history{width:100%;border-collapse:collapse;font-size:12px}
+.grade-history th,.grade-history td{padding:9px 8px;border-bottom:1px solid #eef0f1;text-align:left}
+.grade-history th{font-size:11px;color:#5b6770;background:#f6f8f9}
+.grade-history .empty-history{color:#75838b;text-align:center;padding:16px}
+.grade-history .numeric{font-variant-numeric:tabular-nums;font-weight:700}
+@media(max-width:850px){.grade-fields{grid-template-columns:1fr}.grade-row-grid{grid-template-columns:1fr}.app-top{padding:12px 14px;flex-wrap:wrap}.main{padding:13px}.correction-panel{padding:12px}.grade-item .part{flex-basis:75px}.grade-row button{width:35px}}
+@media print{.app-top,#correctionView{display:none!important}#generatorView{display:block!important}body.correction-mode .sidebar{display:none!important}.app{display:block!important}}
+
+
+/* Correção rápida: identificação por versão + transcrição direta do cartão. */
+.correction-shell{max-width:1020px}
+.correction-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.correction-heading .correction-sub{margin:0}
+.correction-legend{font-size:11px;color:#53655e;border:1px solid #d9e6de;background:#f5f9f6;border-radius:999px;padding:8px 12px;white-space:nowrap}
+.grade-dashboard{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 14px}
+.grade-summary{border:1px solid #e0e7e2;background:white;border-radius:10px;padding:15px}
+.grade-summary .grade-summary-label{font-weight:700;font-size:13px;color:#2b4536}
+.grade-summary strong{font-size:24px;font-weight:800;display:block;margin:7px 0 1px;color:#205a3a;font-variant-numeric:tabular-nums}
+.grade-summary .grade-summary-sub{font-size:11px;color:#78847e}
+.grade-progress-track{height:5px;margin-top:11px;border-radius:5px;background:#e8ede9;overflow:hidden}
+.grade-progress-fill{height:100%;background:#38865c;border-radius:5px}
+.quick-grade-top{display:grid;grid-template-columns:180px 1fr;gap:12px}
+.quick-grade-top label,.sequence-label label{font-size:12px;font-weight:700;color:#34453b;display:block;margin-bottom:7px}
+.quick-grade-top input,#gradeQuick{border:1px solid #ccd7d0;background:white;border-radius:8px;color:#162920;font-size:15px;padding:12px;width:100%;outline:none}
+.quick-grade-top input:focus,#gradeQuick:focus{border-color:#357e55;box-shadow:0 0 0 3px #38865c1c}
+#gradeCode{font-weight:800;letter-spacing:1px;text-transform:uppercase}
+#gradeQuick{margin:0;min-height:70px;font-family:ui-monospace,Consolas,monospace;font-weight:600;font-size:21px;letter-spacing:1.5px;resize:vertical;line-height:1.5}
+.sequence-label{display:flex;align-items:center;justify-content:space-between;margin:17px 0 7px}
+.sequence-label label{margin:0}
+#gradeQuickCounter{color:#6d7971;font-size:12px;font-variant-numeric:tabular-nums}
+.optional-label{font-weight:400;color:#8c9790}
+.entry-panel .grade-result{margin-top:14px;background:#f6faf7}
+.compact-actions{margin-top:14px}
+.compact-actions button{min-width:140px}
+.grade-pending{font-size:12px;color:#586b5f;line-height:1.5;margin:-1px 0 12px}
+.grade-pending b{color:#34443a}
+.grade-history button{border:0;background:transparent;color:#246743;font-weight:700;cursor:pointer}
+.optional-panel{padding:0!important}
+.optional-panel summary{font-weight:700;font-size:12px;cursor:pointer;padding:15px 18px;color:#55665a}
+.optional-panel > :not(summary){margin-left:17px;margin-right:17px}
+.optional-panel .grade-row-grid{margin-bottom:15px}
+.optional-panel .grade-toolbar{margin-bottom:14px}
+@media(max-width:700px){.grade-dashboard{grid-template-columns:1fr}.quick-grade-top{grid-template-columns:1fr}.correction-heading{align-items:flex-start;flex-direction:column}.correction-legend{display:none}}
+
+</style>
+</head>
+<body>
+<header class="app-top screen-only">
+  <div><div class="app-title">IFMT <span style="color:#779189">/</span> Provas de Informática Básica</div><div class="app-subtitle">Gerador e correção • Centro de Referência de Jaciara</div></div>
+  <nav class="app-tabs" aria-label="Funcionalidades">
+    <button id="tabGenerate" type="button" class="active" aria-selected="true">Gerar provas</button>
+    <button id="tabCorrect" type="button" aria-selected="false">Corrigir provas</button>
+  </nav>
+</header>
+<div class="app">
+  <aside class="sidebar">
+    <h1>Gerador de Provas</h1>
+    <div class="sub">Informática Básica • IFMT São Vicente / CR Jaciara</div>
+
+    <div class="section">
+      <label class="label">Turma</label>
+      <select id="classSelect"></select>
+      <label class="label">Nome da turma</label>
+      <input id="className"/>
+      <label class="label">Alunos que ainda farão a avaliação</label>
+      <textarea id="students" placeholder="Um aluno por linha"></textarea>
+      <div class="hint">A lista é auxiliar; revise quem realmente fará a prova. A quantidade de versões é configurada separadamente.</div>
+      <button class="btn light" id="saveClass">Salvar turma</button>
+    </div>
+
+    <div class="section">
+      <label class="label">Tipo da avaliação</label>
+      <select id="examType">
+        <option value="recuperacao">Recuperação</option>
+        <option value="pf">PF / prova normal</option>
+        <option value="atividade">Atividade avaliativa</option>
+      </select>
+
+      <label class="label">Mecânicas / quantidade de blocos</label>
+      <div class="inline3">
+        <div><span class="hint">Normal</span><input id="nNormal" type="number" min="0" value="0"/></div>
+        <div><span class="hint">Confiança</span><input id="nConfidence" type="number" min="0" value="0"/></div>
+        <div><span class="hint">2 camadas</span><input id="nTwoTier" type="number" min="0" value="12"/></div>
+      </div>
+      <div class="hint">Configuração recomendada: 0 normais, 0 confiança, 12 de duas camadas = 24 respostas e nota máxima 10. Para 1º A, 1º B e 1º C, cada turma tem um banco próprio de 12 situações distintas.</div>
+
+      <label class="label">Quantidade de versões</label>
+      <div class="hint">Sugestão: A = 17, B = 16, C = 4. A lista inicial do 1º C contém 6 nomes: confira os estudantes antes de imprimir.</div>
+      <div class="inline">
+        <input id="versions" type="number" min="1" value="17"/>
+        <button class="btn light" id="useStudentCount">Usar nº de alunos</button>
+      </div>
+
+      <label class="label">Seed</label>
+      <input id="seed" value="IFMT-TMA-2026-3B"/>
+    </div>
+
+    <div class="section">
+      <label class="label">Professor</label>
+      <input id="teacher" value="Gustavo Vezetiv de Almeida"/>
+      <label class="label">Título</label>
+      <input id="title" value="Recuperação — 3º Bimestre"/>
+      <label class="label">Logo institucional</label>
+      <input id="logoFile" type="file" accept="image/png,image/jpeg,image/svg+xml"/>
+      <div class="hint">Use a logomarca oficial em PNG/SVG. Se não carregar, o cabeçalho usa um identificador textual simples.</div>
+    </div>
+
+    <div class="section">
+      <button class="btn primary" id="generate">Gerar provas</button>
+      <button class="btn light" id="printBtn">Imprimir / Salvar PDF</button>
+      <button class="btn light" id="downloadKey">Baixar gabarito CSV</button>
+      <button class="btn light" id="exportConfig">Exportar configuração</button>
+      <label class="btn light" style="display:block;text-align:center">Importar configuração
+        <input id="importConfig" type="file" accept="application/json" style="display:none"/>
+      </label>
+      <button class="btn danger" id="clearGenerated">Limpar provas geradas</button>
+    </div>
+  </aside>
+
+  <main class="main">
+  <div id="generatorView">
+    <div class="toolbar">
+      <button onclick="window.print()">Imprimir</button>
+      <button id="showKey">Mostrar/ocultar gabarito na tela</button>
+    </div>
+    <div class="status" id="status">
+      <strong>Pronto.</strong> Configure a turma e clique em “Gerar provas”.
+    </div>
+    <div id="output"><div class="empty">As provas aparecerão aqui.</div></div>
+    <div id="keyArea" class="screen-only" style="display:none;margin-top:24px"></div>
+  </div>
+  <div id="correctionView" class="screen-only">
+    <div class="correction-shell">
+      <div class="correction-heading"><div><h2 class="correction-title">Correção rápida</h2><p class="correction-sub">Digite o código impresso na prova e as 24 respostas. A nota é calculada e salva automaticamente neste navegador.</p></div><div class="correction-legend">24 respostas · 10 pontos</div></div>
+      <div class="grade-dashboard" id="gradeDashboard" aria-live="polite"></div>
+      <div class="correction-panel entry-panel">
+        <div class="quick-grade-top">
+          <div><label for="gradeCode">Código da prova</label><input id="gradeCode" type="text" maxlength="5" placeholder="A-02" autocomplete="off" spellcheck="false" aria-label="Versão da prova, exemplo A-02"></div>
+          <div><label for="gradeStudent">Aluno <span class="optional-label">(opcional)</span></label><input id="gradeStudent" type="text" list="gradeStudents" placeholder="Identifique quem entregou" autocomplete="off"><datalist id="gradeStudents"></datalist></div>
+        </div>
+        <select id="gradeClass" hidden aria-label="Turma"></select><select id="gradeVersion" hidden aria-label="Versão"></select>
+        <div class="sequence-label"><label for="gradeQuick">Respostas do cartão, na ordem</label><span id="gradeQuickCounter">0 de 24</span></div>
+        <textarea id="gradeQuick" rows="2" placeholder="Ex.: ABCD ABCD ABCD ABCD ABCD ABCD" spellcheck="false" autocomplete="off"></textarea>
+        <p class="grade-note">Digite A, B, C ou D para cada resposta, começando em 1A, 1B, 2A, 2B... até 12B. Use <b>-</b> para resposta em branco. Espaços são ignorados.</p>
+        <p class="grade-note" id="gradeKeyNotice" aria-live="polite">Informe a versão para localizar o gabarito.</p>
+        <div id="gradeScore" class="grade-result"><div class="score">—</div><div class="metrics">A nota aparece quando você digitar as respostas.</div></div>
+        <div class="grade-toolbar compact-actions">
+          <button id="gradeSave" class="emphasis" type="button">Salvar / atualizar</button>
+          <button id="gradeReset" type="button">Próxima prova</button>
+        </div>
+      </div>
+      <div class="correction-panel"><h3>Controle das provas</h3><div id="gradePending" class="grade-pending"></div><div style="overflow:auto"><table class="grade-history"><thead><tr><th>Turma</th><th>Aluno</th><th>Versão</th><th>Acertos</th><th>Nota</th><th>Situação</th><th></th></tr></thead><tbody id="gradeHistory"><tr><td colspan="7" class="empty-history">Nenhuma correção salva.</td></tr></tbody></table></div></div>
+      <details class="correction-panel optional-panel"><summary>Conferir ou ajustar alternativas individualmente</summary><div id="gradeAnswers" class="grade-row-grid"><p class="grade-note">Informe uma versão para conferir o gabarito.</p></div><button type="button" id="gradeApplyQuick" hidden>Aplicar sequência</button></details>
+      <details class="correction-panel optional-panel"><summary>Gabaritos, exportação e backup</summary>
+        <p class="grade-note">Se você imprimiu as provas por outro arquivo HTML, importe o CSV do gabarito gerado naquele arquivo. Nunca substitua o gabarito após iniciar a correção.</p>
+        <div class="grade-toolbar">
+          <button id="gradeImportKey" type="button">Importar gabarito CSV</button><input id="gradeImportKeyFile" type="file" accept=".csv,text/csv" hidden>
+          <button id="gradeExportResults" type="button">Exportar notas CSV</button><button id="gradeExportBackup" type="button">Backup JSON</button><button id="gradeImportBackup" type="button">Restaurar backup</button><input id="gradeImportBackupFile" type="file" accept=".json,application/json" hidden>
+        </div>
+        <p class="grade-note">A correção fica no armazenamento local deste navegador e pode ser perdida se os dados forem limpos. Faça backup ao final.</p>
+      </details>
+    </div>
+  </div>
+  </main>
+</div>
+
+<script>
+const DEFAULT_CLASSES = {"Turma 1": {"nome": "1º A", "alunos": ["Aghatta Vitoria Santos De Lima", "Ariadne da Silva Rodrigues", "Bianca Sobrinho Xavier", "Danilo Alves Ferreira Nunes", "Diego Gonçalves Hungria", "Emanuelly de Souza Nogueira", "Gabriel Barbosa Dos Santos", "Gabriela de Lima Campos", "Joabe Souza Silveira", "Maria Fernanda Da Silva Pereira", "Maria Klara De Moraes Souza", "Matheus Eduardo Barbosa da Silva", "Melissa Castelli dos Santos", "Miguel Freitas Silveira", "Rhuan Elizeu Pedroso Dutra", "Tainara De Oliveira Klima", "Vanderlei Antonio Martins Soares"]}, "Turma 2": {"nome": "1º B", "alunos": ["Alexandre da Silva Rodrigues", "Bárbara Lauany Silvino Souza", "Bryan de Andrade Dourado", "Carinna Vitória Lopes", "Carlos Eduardo Medeiros Mendes", "Emanuelly Marcelina Galindo", "Eyshilla Michely Lemes Oliveira", "Giovanna de Morais da Silva", "João Rafael Correa da Silva", "Maria Julia Bueno Da Silva", "Maria Luiza Barth Dos Santos", "Mario Vinicius Martinhago dos Santos", "Miguel Vieira Porto Faria", "Pedro Dos Santos Alves", "Thalyta De Jesus Borba", "Wender Natan dos Santos Alves"]}, "Turma 3": {"nome": "1º C", "alunos": ["Ana Beatriz Fonseca Boff", "Caio Miguel de Olivieri Rodrigues Rocha", "Cindy Beatriz Martins Dos Santos", "Francisco Sachi da Silva", "Gabriel Mota Costa", "Lukas Davy De Oliveira Niza"]}, "Turma 4": {"nome": "Turma D", "alunos": []}, "Turma 5": {"nome": "Turma E", "alunos": []}, "Turma 6": {"nome": "Turma F", "alunos": []}};
+
+const STORE_KEY = 'ifmt_exam_generator_v1';
+const state = {
+  classes: JSON.parse(JSON.stringify(DEFAULT_CLASSES)),
+  logoData: '',
+  generated: [],
+  answerKey: [],
+  keysByClass: {},
+  gradeRecords: {}
+};
+
+function loadState(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if(saved?.classes) state.classes = saved.classes;
+    if(saved?.logoData) state.logoData = saved.logoData;
+    if(saved?.keysByClass) state.keysByClass = saved.keysByClass;
+    if(saved?.gradeRecords) state.gradeRecords = saved.gradeRecords;
+  }catch(e){}
+}
+function saveState(){
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify({classes:state.classes,logoData:state.logoData,keysByClass:state.keysByClass,gradeRecords:state.gradeRecords}));
+  } catch(e) { alert('Não foi possível gravar os dados neste navegador. Exporte um backup JSON antes de fechar esta página.'); }
+
+}
+function $(id){return document.getElementById(id)}
+function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+
+function xmur3(str){
+  let h=1779033703^str.length;
+  for(let i=0;i<str.length;i++) h=Math.imul(h^str.charCodeAt(i),3432918353),h=h<<13|h>>>19;
+  return function(){h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);return (h^h>>>16)>>>0}
+}
+function mulberry32(a){return function(){let t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+function seeded(seed){
+  const f=xmur3(seed); return mulberry32(f());
+}
+function pick(rng, arr){return arr[Math.floor(rng()*arr.length)]}
+function shuffle(rng, arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  return a;
+}
+function makeOptions(rng, correct, wrongs){
+  const opts=shuffle(rng,[correct,...wrongs]);
+  return {opts, correctIndex:opts.indexOf(correct)};
+}
+const letters=['A','B','C','D'];
+
+const folders=['Projeto Ambiental','Atividade 03','Mundo_TMA','Documentos','Relatório Final','Trabalho de Informática'];
+const files=['relatorio.docx','atividade.docx','pesquisa.txt','trabalho_final.docx','resumo.docx'];
+const renamed=['Relatorio_Final.docx','Atividade_03.docx','Pesquisa_Grupo.docx','Trabalho_Final.docx'];
+
+const singleTemplates = [
+  (rng)=>{const f=pick(rng,files),p=pick(rng,folders),n=pick(rng,renamed).replace(/\.docx$/i, f.endsWith('.txt')?'.txt':'.docx'); const o=makeOptions(rng,
+    `Mover ${f} para a pasta ${p} e depois renomeá-lo para ${n}.`,
+    [`Renomear a pasta ${p} para ${n}.`,`Excluir ${f} e criar outro arquivo vazio chamado ${n}.`,`Criar um atalho de ${f} e deixar o original em Downloads.`]);
+    return {cat:'Arquivos e pastas',stem:`Você recebeu o arquivo ${f} em Downloads. Ele precisa ficar dentro de "${p}" com o nome "${n}". Qual procedimento atende ao pedido?`,...o};},
+  (rng)=>{const p=pick(rng,folders); const o=makeOptions(rng,'Criar primeiro a pasta principal e depois a subpasta dentro dela.',
+    ['Criar duas pastas separadas no mesmo nível.','Criar apenas a subpasta e renomeá-la depois.','Salvar um arquivo com o nome da subpasta.']);
+    return {cat:'Arquivos e pastas',stem:`O enunciado pede uma pasta "${p}" e, dentro dela, uma subpasta "Documentos". O que deve ser feito?`,...o};},
+  (rng)=>{const o=makeOptions(rng,'Mover altera a localização do item; copiar mantém o original e cria outra cópia.',
+    ['Mover e copiar sempre produzem exatamente o mesmo resultado.','Copiar apaga o original após a operação.','Mover cria obrigatoriamente duas cópias do item.']);
+    return {cat:'Arquivos e pastas',stem:'Qual alternativa descreve corretamente a diferença entre copiar e mover um arquivo?',...o};},
+  (rng)=>{const o=makeOptions(rng,'O arquivo pode estar salvo em outro local; é preciso verificar o caminho onde foi gravado.',
+    ['O computador apagou o arquivo automaticamente.','Todo arquivo salvo aparece obrigatoriamente na Área de Trabalho.','O nome do arquivo muda sozinho sempre que ele é salvo.']);
+    return {cat:'Arquivos e pastas',stem:'Um aluno salvou um documento, fechou o editor e depois não o encontrou na Área de Trabalho. Qual é a explicação mais adequada?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Salvar Como permite escolher outro nome e/ou outro local, preservando a possibilidade de manter o original.',
+    ['Salvar Como serve apenas para imprimir o documento.','Salvar Como apaga obrigatoriamente o arquivo anterior.','Salvar Como funciona somente quando não existe nenhum arquivo aberto.']);
+    return {cat:'Editor de texto',stem:'Para criar uma nova versão de um documento com outro nome sem depender de substituir o arquivo atual, qual recurso é o mais adequado?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Selecionar somente o título e aplicar o alinhamento centralizado.',
+    ['Centralizar o documento inteiro.','Pressionar Enter várias vezes antes do título.','Aplicar negrito no corpo inteiro do texto.']);
+    return {cat:'Editor de texto',stem:'O enunciado pede apenas o TÍTULO centralizado e o restante do texto alinhado normalmente. O que fazer?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Selecionar apenas os termos solicitados e aplicar negrito.',
+    ['Aplicar negrito em todo o documento.','Aumentar o zoom da página.','Trocar o nome do arquivo.']);
+    return {cat:'Editor de texto',stem:'O professor pediu que somente três palavras específicas fiquem em negrito. Qual procedimento atende corretamente?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Lista numerada, porque existe uma sequência de etapas.',
+    ['Lista com marcadores, pois a ordem nunca importa.','Texto corrido sem separação.','Tabela obrigatoriamente.']);
+    return {cat:'Editor de texto',stem:'Você precisa apresentar os passos 1, 2, 3 e 4 de um procedimento na ordem correta. Qual recurso é o mais apropriado?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Desfazer reverte a última ação; refazer reaplica uma ação que foi desfeita.',
+    ['Desfazer salva o arquivo e refazer fecha o editor.','Desfazer e refazer são comandos de impressão.','Refazer apaga permanentemente o documento.']);
+    return {cat:'Editor de texto',stem:'Qual afirmação sobre Desfazer e Refazer está correta?',...o};},
+  (rng)=>{const o=makeOptions(rng,'O conteúdo pode ser perdido se as alterações ainda não tiverem sido salvas.',
+    ['Nada acontece porque todo programa salva automaticamente.','O arquivo vira obrigatoriamente um PDF.','O documento é enviado automaticamente para a nuvem.']);
+    return {cat:'Editor de texto',stem:'Um documento foi alterado e o programa foi fechado sem salvar. Qual risco existe?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Upload envia um arquivo do dispositivo para um serviço; download traz um arquivo do serviço para o dispositivo.',
+    ['Upload e download significam excluir arquivos.','Download envia arquivo para a nuvem e upload imprime.','Os dois termos significam apenas renomear arquivos.']);
+    return {cat:'Internet e arquivos',stem:'Qual alternativa diferencia corretamente upload e download?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Navegador é o programa usado para acessar páginas; buscador é um serviço de pesquisa na Web.',
+    ['Navegador e buscador são exatamente a mesma coisa.','Buscador é uma peça física do computador.','Navegador é usado somente para criar pastas.']);
+    return {cat:'Internet',stem:'Qual alternativa diferencia corretamente navegador e mecanismo de busca?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Usar termos específicos relacionados ao que se deseja encontrar e conferir as fontes.',
+    ['Pesquisar apenas uma palavra muito genérica e abrir o primeiro resultado.','Ignorar a origem das informações se o texto parecer convincente.','Copiar a primeira resposta encontrada sem leitura.']);
+    return {cat:'Pesquisa',stem:'Qual estratégia tende a produzir uma pesquisa melhor na Internet?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Apresentar ideias principais de forma resumida e legível, apoiando a fala.',
+    ['Copiar todo o texto do documento para cada slide.','Usar o menor tamanho de fonte possível para caber tudo.','Substituir a apresentação oral por parágrafos longos nos slides.']);
+    return {cat:'Slides',stem:'Qual característica costuma tornar um slide mais adequado para apresentação?',...o};},
+  (rng)=>{const o=makeOptions(rng,'O documento pode detalhar o conteúdo; o slide deve sintetizar e apoiar a apresentação.',
+    ['Documento e slide devem sempre conter exatamente o mesmo texto.','Slides não podem ter títulos.','Documentos não podem ter listas.']);
+    return {cat:'Slides',stem:'Qual relação entre documento e apresentação de slides é mais adequada?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Sistema operacional gerencia o computador; aplicativos executam tarefas específicas para o usuário.',
+    ['Sistema operacional é somente um arquivo de texto.','Aplicativo é sempre uma peça física.','Sistema operacional serve apenas para acessar redes sociais.']);
+    return {cat:'Software',stem:'Qual alternativa diferencia melhor sistema operacional e aplicativo?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Hardware corresponde aos componentes físicos; software corresponde a programas e instruções.',
+    ['Hardware é qualquer site da Internet.','Software corresponde somente ao teclado e ao mouse.','Hardware e software são sinônimos.']);
+    return {cat:'Hardware e software',stem:'Qual afirmação está correta?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Verificar o nome, a extensão e o local do arquivo antes de entregar.',
+    ['Entregar qualquer arquivo da pasta e confiar que o professor descobrirá.','Renomear depois do envio sem conferir.','Abrir vários arquivos e enviar todos, mesmo sem saber qual é o correto.']);
+    return {cat:'Entrega',stem:'Antes de enviar uma atividade, qual procedimento reduz o risco de entregar o arquivo errado?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Seguir a estrutura pedida ajuda a localizar, conferir e entregar os arquivos corretamente.',
+    ['Pastas e nomes não têm qualquer função prática.','Quanto mais arquivos soltos na Área de Trabalho, melhor.','Organizar significa apenas mudar a cor do papel de parede.']);
+    return {cat:'Organização digital',stem:'Por que o professor pode exigir pasta, subpasta e nome de arquivo específicos?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Uma extensão como .docx ajuda o sistema a identificar o tipo/formato do arquivo.',
+    ['A extensão indica a nota do aluno.','A extensão informa quem criou a pasta.','A extensão define a senha do computador.']);
+    return {cat:'Arquivos',stem:'Para que serve, em geral, uma extensão de arquivo como .docx, .pdf ou .png?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Renomear altera o nome do item, mas não muda automaticamente seu conteúdo.',
+    ['Renomear converte qualquer arquivo em outro formato real.','Renomear apaga o conteúdo do arquivo.','Renomear envia automaticamente o arquivo para o professor.']);
+    return {cat:'Arquivos',stem:'O que acontece quando você apenas renomeia um arquivo?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Conferir a pasta de destino e abrir o arquivo enviado para verificar se é o correto.',
+    ['Assumir que qualquer arquivo com nome parecido serve.','Apagar o original antes de conferir a cópia.','Trocar a extensão manualmente para esconder o erro.']);
+    return {cat:'Entrega',stem:'Depois de mover ou copiar um arquivo para a pasta de entrega, qual é a melhor conferência final?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Ler todo o enunciado antes de iniciar e conferir cada requisito ao finalizar.',
+    ['Começar imediatamente pela primeira palavra sem ler o restante.','Executar apenas a parte que parece mais fácil.','Perguntar qual botão clicar antes de tentar entender a tarefa.']);
+    return {cat:'Execução',stem:'Qual estratégia reduz erros em uma atividade prática com várias instruções?',...o};},
+  (rng)=>{const o=makeOptions(rng,'Uma cópia local pode ser perdida com falha no equipamento; armazenamento em nuvem pode oferecer outra cópia, dependendo da sincronização.',
+    ['Arquivos locais nunca podem ser perdidos.','Nuvem significa que o arquivo não existe fisicamente em nenhum servidor.','Salvar na Área de Trabalho equivale sempre a salvar em nuvem.']);
+    return {cat:'Armazenamento',stem:'Qual afirmação sobre armazenamento local e em nuvem é mais adequada?',...o};},
+];
+
+const CLASS_TWO_TIER_BANK = {
+  "A": [
+    {
+      "id": "A01",
+      "cat": "Estrutura de pastas",
+      "level": "Básica",
+      "stem": "O professor solicitou a pasta Trabalho_1, com a subpasta Textos, contendo o arquivo relato.docx. As duas pastas já existem, mas o arquivo está solto em Trabalho_1.",
+      "a": [
+        "Mover relato.docx para dentro de Textos.",
+        "Renomear Trabalho_1 como Textos.",
+        "Duplicar relato.docx dentro de Trabalho_1.",
+        "Mover Textos para dentro de relato.docx."
+      ],
+      "b": [
+        "O arquivo precisa estar fisicamente dentro da subpasta solicitada.",
+        "Basta que o nome da subpasta apareça no arquivo.",
+        "O nome do arquivo determina automaticamente em qual pasta ele fica.",
+        "Duas pastas no mesmo nível equivalem a uma pasta dentro da outra."
+      ]
+    },
+    {
+      "id": "A02",
+      "cat": "Cópia e original",
+      "level": "Intermediária",
+      "stem": "Ana terminou um documento e quer guardar uma cópia em Copia_Seguranca, sem retirar a versão original de Documentos.",
+      "a": [
+        "Copiar o documento e colar a cópia em Copia_Seguranca.",
+        "Recortar o documento e colá-lo em Copia_Seguranca.",
+        "Excluir o documento após abrir a pasta de destino.",
+        "Criar um atalho no lugar da cópia e apagar o documento."
+      ],
+      "b": [
+        "Copiar mantém o original e cria outra instância no destino.",
+        "Recortar e colar mantém necessariamente duas cópias completas.",
+        "Atalhos armazenam automaticamente o conteúdo independente do original.",
+        "Excluir o original é necessário para fazer uma cópia de segurança."
+      ]
+    },
+    {
+      "id": "A03",
+      "cat": "Downloads",
+      "level": "Básica",
+      "stem": "Você baixou uma imagem para usar num relatório. O navegador informou que o download terminou, mas ela ainda não aparece na pasta do trabalho.",
+      "a": [
+        "Localizar a imagem nos downloads e colocá-la na pasta adequada.",
+        "Baixar novamente até ela aparecer na pasta do projeto sozinha.",
+        "Renomear a pasta do projeto para Downloads.",
+        "Enviar o trabalho sem a imagem, mesmo sendo exigida."
+      ],
+      "b": [
+        "O local de download e a pasta de trabalho podem ser diferentes.",
+        "Todo download vai diretamente para o documento que está aberto.",
+        "A pasta Downloads sempre é apagada após o navegador fechar.",
+        "Um arquivo só existe se aparecer na Área de Trabalho."
+      ]
+    },
+    {
+      "id": "A04",
+      "cat": "Formato de arquivo",
+      "level": "Intermediária",
+      "stem": "Uma atividade exige um PDF, mas Pedro tem somente o documento editável trabalho.docx. Ele muda o nome para trabalho.pdf, e o arquivo deixa de abrir normalmente.",
+      "a": [
+        "Abrir o documento original e usar Exportar/Salvar como PDF.",
+        "Continuar alterando letras do nome até o arquivo abrir.",
+        "Compactar o DOCX e trocar .zip por .pdf.",
+        "Duplicar o arquivo e substituir somente a extensão por .pdf."
+      ],
+      "b": [
+        "Trocar a extensão não converte o conteúdo do arquivo para outro formato.",
+        "A extensão escrita no nome muda por si só o conteúdo interno.",
+        "PDF é apenas um nome diferente para documentos DOCX.",
+        "Compactação sempre converte documentos em PDF."
+      ]
+    },
+    {
+      "id": "A05",
+      "cat": "Arquivo ZIP",
+      "level": "Intermediária",
+      "stem": "A entrega pede um único ZIP que contenha uma pasta principal e suas duas subpastas já organizadas.",
+      "a": [
+        "Compactar a pasta principal depois de conferir os arquivos internos.",
+        "Compactar apenas um documento e apagar as subpastas.",
+        "Renomear a pasta principal acrescentando .zip ao nome.",
+        "Enviar somente uma captura de tela da organização."
+      ],
+      "b": [
+        "O ZIP pode reunir os arquivos preservando a estrutura de pastas.",
+        "Compactar apaga a organização de subpastas obrigatoriamente.",
+        "Basta escrever .zip para reunir os arquivos automaticamente.",
+        "Uma imagem da pasta contém os arquivos editáveis originais."
+      ]
+    },
+    {
+      "id": "A06",
+      "cat": "Alinhamento do texto",
+      "level": "Intermediária",
+      "stem": "Um documento precisa ter o título centralizado, enquanto o texto explicativo deve continuar alinhado à esquerda. Após selecionar o documento inteiro, um aluno clicou em Centralizar.",
+      "a": [
+        "Desfazer a alteração e aplicar centralização apenas ao parágrafo do título.",
+        "Manter todo o texto centralizado porque o título está certo.",
+        "Pressionar vários espaços antes do título.",
+        "Aumentar o tamanho da fonte do documento inteiro."
+      ],
+      "b": [
+        "O alinhamento é configurado por parágrafo e deve respeitar cada trecho.",
+        "O alinhamento muda só a primeira palavra, mesmo selecionando o texto todo.",
+        "Inserir espaços é equivalente a aplicar o comando de alinhamento.",
+        "Aumentar a fonte altera automaticamente o alinhamento do título."
+      ]
+    },
+    {
+      "id": "A07",
+      "cat": "Negrito",
+      "level": "Básica",
+      "stem": "Na revisão de um relatório, apenas três palavras técnicas devem ficar destacadas em negrito, e o restante do texto deve continuar normal.",
+      "a": [
+        "Selecionar os termos pedidos e aplicar negrito apenas a eles.",
+        "Selecionar tudo e aplicar negrito.",
+        "Mudar o nome do arquivo para destacar as palavras.",
+        "Aumentar o zoom do editor em toda a página."
+      ],
+      "b": [
+        "Uma formatação seletiva deve atingir apenas o conteúdo solicitado.",
+        "O zoom altera a formatação salva e impressa do texto.",
+        "Negrito aplicado ao documento inteiro afeta somente as palavras importantes.",
+        "O nome do arquivo controla automaticamente o estilo das palavras."
+      ]
+    },
+    {
+      "id": "A08",
+      "cat": "Lista ordenada",
+      "level": "Intermediária",
+      "stem": "O relatório descreve quatro etapas que devem ocorrer numa ordem determinada: coletar, registrar, conferir e entregar.",
+      "a": [
+        "Usar uma lista numerada mantendo a sequência correta.",
+        "Usar marcadores e trocar aleatoriamente a ordem das etapas.",
+        "Escrever as quatro ações em uma única palavra.",
+        "Criar quatro nomes diferentes de arquivo, sem descrever etapas."
+      ],
+      "b": [
+        "A numeração ajuda a representar procedimentos em que a ordem importa.",
+        "Listas numeradas são usadas apenas quando há exatamente dez itens.",
+        "Marcadores reordenam os passos de modo automático.",
+        "A sequência deixa de importar assim que o texto é salvo."
+      ]
+    },
+    {
+      "id": "A09",
+      "cat": "Exportação e entrega",
+      "level": "Intermediária",
+      "stem": "No projeto do grupo, o relatório deve ser enviado em DOCX e os slides em PDF. No computador existem os slides no formato editável.",
+      "a": [
+        "Manter o relatório em DOCX e exportar os slides para PDF.",
+        "Converter o relatório em imagem e enviar só ele.",
+        "Enviar o arquivo editável de slides com nome terminado em .pdf.",
+        "Excluir os slides após criar o DOCX."
+      ],
+      "b": [
+        "A entrega exige respeitar os formatos específicos de cada material.",
+        "Todos os arquivos de um trabalho precisam ter a mesma extensão.",
+        "Acrescentar .pdf ao nome substitui automaticamente a exportação.",
+        "DOCX é formato de apresentação e PDF é sempre editor de texto."
+      ]
+    },
+    {
+      "id": "A10",
+      "cat": "Salvar versões",
+      "level": "Intermediária",
+      "stem": "Marina precisa testar mudanças em um relatório sem perder a versão aprovada pelo grupo. Ela quer guardar os dois arquivos.",
+      "a": [
+        "Usar Salvar como com nome novo para criar outra versão.",
+        "Substituir o arquivo aprovado sem guardar cópia.",
+        "Fechar o programa sem salvar as mudanças.",
+        "Trocar a cor da pasta sem salvar o documento."
+      ],
+      "b": [
+        "Uma versão com outro nome permite manter separadas a antiga e a modificada.",
+        "Salvar como apaga obrigatoriamente o arquivo antigo.",
+        "Fechar sem salvar mantém todas as alterações em qualquer programa.",
+        "A cor de uma pasta equivale a uma cópia de segurança."
+      ]
+    },
+    {
+      "id": "A11",
+      "cat": "Envio no SUAP",
+      "level": "Intermediária",
+      "stem": "O aluno produziu corretamente a atividade, mas há duas versões parecidas: atividade.docx e atividade_corrigida.docx. O professor quer a versão revisada.",
+      "a": [
+        "Abrir a versão corrigida, conferir e anexar essa versão ao envio.",
+        "Enviar a primeira versão sem abrir porque tem nome menor.",
+        "Anexar qualquer arquivo e explicar depois que era outro.",
+        "Renomear a versão antiga como corrigida sem checar o conteúdo."
+      ],
+      "b": [
+        "O nome ajuda na identificação, mas a conferência do conteúdo evita enviar a versão errada.",
+        "Os nomes de arquivo garantem que o conteúdo de duas versões seja idêntico.",
+        "A plataforma reconhece sempre a versão correta mesmo se o aluno anexar a errada.",
+        "Não é necessário verificar o arquivo depois de salvar."
+      ]
+    },
+    {
+      "id": "A12",
+      "cat": "Entrega organizada",
+      "level": "Avançada",
+      "stem": "O grupo criou o relatório em DOCX e slides em PDF, mas ambos estão em Downloads, enquanto a entrega exige as pastas 01_Documento e 02_Apresentacao dentro de Projeto_Final.",
+      "a": [
+        "Criar a estrutura exigida, distribuir os arquivos, conferir e compactar Projeto_Final.",
+        "Compactar Downloads com todos os arquivos pessoais e enviar.",
+        "Criar só 01_Documento e deixar os dois arquivos ali sem conferir.",
+        "Enviar apenas o PDF e dizer que o relatório será enviado depois."
+      ],
+      "b": [
+        "A atividade avalia conteúdo, localização, formato e organização final da entrega.",
+        "A localização interna deixa de importar se o ZIP tiver qualquer nome.",
+        "O computador distribui arquivos automaticamente ao compactar.",
+        "O nome Projeto_Final cria sozinho as pastas e os documentos."
+      ]
+    }
+  ],
+  "B": [
+    {
+      "id": "B01",
+      "cat": "Pastas por tipo",
+      "level": "Intermediária",
+      "stem": "Um grupo tem um texto, um PDF de apresentação e uma imagem de referência. O professor exige Documento, Apresentacao e Imagens como subpastas de Projeto_Grupo5.",
+      "a": [
+        "Criar as três subpastas e colocar cada arquivo na pasta correspondente.",
+        "Criar três arquivos de texto com os nomes das subpastas.",
+        "Deixar tudo fora de Projeto_Grupo5 e enviar só os nomes.",
+        "Mover a pasta principal para dentro da imagem."
+      ],
+      "b": [
+        "Separar arquivos pelo tipo ou finalidade facilita localizar e verificar o material.",
+        "O conteúdo não precisa existir quando os nomes das pastas estão corretos.",
+        "Criar nomes de pasta dentro do texto substitui a estrutura de diretórios.",
+        "Arquivos só podem existir na raiz do computador."
+      ]
+    },
+    {
+      "id": "B02",
+      "cat": "Mover e preservar cópia",
+      "level": "Básica",
+      "stem": "Uma atividade já está salva em Atividades. O aluno quer retirar o arquivo dessa pasta e colocá-lo apenas em Entrega, sem duplicá-lo.",
+      "a": [
+        "Recortar o arquivo em Atividades e colá-lo em Entrega.",
+        "Copiar o arquivo para Entrega e manter a versão em Atividades.",
+        "Criar um atalho em Entrega sem mover o original.",
+        "Compactar a pasta Atividades sem modificar a localização."
+      ],
+      "b": [
+        "Mover transfere a localização do arquivo, em vez de manter duas cópias.",
+        "Copiar elimina automaticamente o arquivo original.",
+        "Um atalho muda a localização do arquivo original.",
+        "A compactação transfere o arquivo para qualquer pasta pedida."
+      ]
+    },
+    {
+      "id": "B03",
+      "cat": "Nomenclatura de arquivos",
+      "level": "Básica",
+      "stem": "Quatro integrantes produziram versões diferentes de um trabalho. Para a entrega, o professor pediu um nome padronizado com projeto, tema e número do grupo.",
+      "a": [
+        "Conferir a versão final e renomeá-la no padrão solicitado.",
+        "Enviar a versão chamada sem_titulo(7).docx sem conferir.",
+        "Dar o mesmo nome a todas as versões para misturá-las.",
+        "Mudar apenas o nome da pasta e deixar o arquivo sem identificação."
+      ],
+      "b": [
+        "Um nome claro facilita identificar a atividade e evita confundir versões.",
+        "O nome correto substitui a necessidade de conteúdo no arquivo.",
+        "A plataforma identifica automaticamente qual versão é final por ordem alfabética.",
+        "Nomes genéricos impedem que dois arquivos sejam confundidos."
+      ]
+    },
+    {
+      "id": "B04",
+      "cat": "Onde foi salvo",
+      "level": "Intermediária",
+      "stem": "O navegador baixou um arquivo e mostrou a opção “Mostrar na pasta”. O estudante pensa que o material sempre será salvo em Documentos.",
+      "a": [
+        "Usar “Mostrar na pasta” para conferir onde o download ficou salvo.",
+        "Procurar apenas em Documentos sem verificar o download.",
+        "Criar um arquivo novo com o mesmo nome e ignorar o baixado.",
+        "Reiniciar o computador para o arquivo se mover automaticamente."
+      ],
+      "b": [
+        "O destino de downloads pode variar conforme navegador e configurações.",
+        "Downloads são obrigatoriamente enviados para Documentos em qualquer computador.",
+        "Reiniciar o Windows altera a pasta de downloads para a Área de Trabalho.",
+        "Quando o navegador fecha, o download passa a existir apenas na nuvem."
+      ]
+    },
+    {
+      "id": "B05",
+      "cat": "Descompactação",
+      "level": "Intermediária",
+      "stem": "O professor disponibilizou Material_Aula.zip com arquivos que precisam ser organizados em subpastas e editados individualmente.",
+      "a": [
+        "Extrair o ZIP para uma pasta e trabalhar nos arquivos extraídos.",
+        "Mudar apenas o nome do ZIP para Material_Aula.docx.",
+        "Enviar o ZIP de volta sem abrir os arquivos.",
+        "Apagar o ZIP antes de confirmar que existe alguma cópia dos arquivos."
+      ],
+      "b": [
+        "Extrair disponibiliza os arquivos como itens normais para abrir e reorganizar.",
+        "Alterar a extensão transforma o ZIP em um documento editável.",
+        "O ZIP precisa ser apagado obrigatoriamente antes de ser aberto.",
+        "Arquivos compactados não podem conter subpastas."
+      ]
+    },
+    {
+      "id": "B06",
+      "cat": "Alinhamentos distintos",
+      "level": "Intermediária",
+      "stem": "Uma página de relatório exige título centralizado e corpo do texto justificado. A aluna formatou o título, mas o texto ficou centralizado também.",
+      "a": [
+        "Selecionar os parágrafos do corpo e aplicar Justificar somente neles.",
+        "Inserir linhas vazias para afastar o texto do título.",
+        "Aplicar Centralizar mais uma vez no texto inteiro.",
+        "Mudar a extensão do documento para .pdf."
+      ],
+      "b": [
+        "Parágrafos diferentes podem ter alinhamentos diferentes no mesmo documento.",
+        "O alinhamento é uma configuração obrigatoriamente igual em todo arquivo.",
+        "Linhas vazias justificam automaticamente qualquer parágrafo.",
+        "Exportar o documento corrige qualquer alinhamento inadequado."
+      ]
+    },
+    {
+      "id": "B07",
+      "cat": "Tamanho da fonte",
+      "level": "Intermediária",
+      "stem": "O enunciado exige título tamanho 16 e corpo tamanho 12. O aluno aplicou tamanho 16 ao documento inteiro.",
+      "a": [
+        "Manter 16 no título e selecionar o corpo para ajustar a fonte para 12.",
+        "Reduzir o zoom da tela até parecer 12.",
+        "Adicionar espaços no começo de cada parágrafo.",
+        "Trocar a fonte do arquivo inteiro para um nome diferente."
+      ],
+      "b": [
+        "O tamanho é uma formatação aplicada ao texto selecionado; zoom não altera a fonte salva.",
+        "O zoom redefine o tamanho real da letra no documento.",
+        "Espaços diminuem automaticamente a fonte em todo parágrafo.",
+        "Escolher qualquer família de fonte substitui o tamanho solicitado."
+      ]
+    },
+    {
+      "id": "B08",
+      "cat": "Tipo de lista",
+      "level": "Intermediária",
+      "stem": "No documento de pesquisa, o grupo quer listar os materiais usados — computador, pasta e navegador — sem indicar uma ordem obrigatória de execução.",
+      "a": [
+        "Usar uma lista com marcadores para apresentar os materiais.",
+        "Criar numeração de passos como se os materiais fossem uma sequência.",
+        "Apagar a separação e juntar os três termos sem pontuação.",
+        "Colocar um material como nome do documento e excluir os outros."
+      ],
+      "b": [
+        "Marcadores organizam itens relacionados quando a sequência não é essencial.",
+        "Números significam sempre quantidade de materiais disponíveis.",
+        "Itens sem ordem só podem aparecer em tabelas.",
+        "Listas com marcadores alteram o conteúdo dos arquivos referidos."
+      ]
+    },
+    {
+      "id": "B09",
+      "cat": "Reabrir documento",
+      "level": "Básica",
+      "stem": "Antes de enviar sua produção, Luísa salvou o documento e fechou o editor. Ela quer ter certeza de que a entrega não será um arquivo vazio.",
+      "a": [
+        "Localizar e reabrir o documento para conferir o conteúdo salvo.",
+        "Confiar apenas na presença do ícone do documento.",
+        "Mudar o nome da pasta sem abrir o arquivo.",
+        "Apagar o documento atual e começar novamente sem verificar."
+      ],
+      "b": [
+        "Reabrir verifica se existe conteúdo salvo no arquivo certo.",
+        "O ícone de documento comprova que todos os parágrafos foram salvos.",
+        "O nome da pasta garante o conteúdo correto independentemente do arquivo.",
+        "O salvamento não precisa ser conferido antes de entregar."
+      ]
+    },
+    {
+      "id": "B10",
+      "cat": "Texto puro e DOCX",
+      "level": "Intermediária",
+      "stem": "Um texto foi escrito num editor simples e salvo como anotacoes.txt. A atividade, porém, exige um documento com título centralizado, negrito e formato DOCX.",
+      "a": [
+        "Abrir o conteúdo em editor que permita formatação e salvar em DOCX.",
+        "Só renomear anotacoes.txt para anotacoes.docx.",
+        "Colocar espaços antes do título no TXT e enviar assim.",
+        "Compactar o TXT para receber automaticamente as formatações."
+      ],
+      "b": [
+        "TXT puro não conserva esses recursos de formatação; DOCX é um formato apropriado.",
+        "A extensão .docx no nome cria estilos sem usar editor compatível.",
+        "ZIP é o formato de edição de texto com negrito.",
+        "Qualquer TXT salva automaticamente alinhamento e tamanho de fonte."
+      ]
+    },
+    {
+      "id": "B11",
+      "cat": "Google Drive e entrega",
+      "level": "Intermediária",
+      "stem": "O grupo escreveu o relatório no Google Documentos, mas o enunciado exige anexar um arquivo DOCX no SUAP, e não somente compartilhar um link.",
+      "a": [
+        "Baixar o documento como DOCX e anexar esse arquivo à atividade.",
+        "Enviar apenas o link de edição sem arquivo anexado.",
+        "Fazer uma captura de tela da página e chamá-la de DOCX.",
+        "Copiar o endereço do navegador como se ele fosse o documento."
+      ],
+      "b": [
+        "Um link abre um recurso on-line; um DOCX baixado é um arquivo que pode ser anexado.",
+        "Compartilhar um link equivale a anexar automaticamente um DOCX ao SUAP.",
+        "Capturas de tela mantêm o documento editável com os mesmos recursos.",
+        "O endereço do navegador é o formato final exigido para qualquer trabalho."
+      ]
+    },
+    {
+      "id": "B12",
+      "cat": "Seleção de versões",
+      "level": "Avançada",
+      "stem": "A pasta Entrega contém relatorio_rascunho.docx, relatorio_revisado.docx e uma apresentação.pdf. O professor exige somente o relatório final revisado e a apresentação na estrutura indicada.",
+      "a": [
+        "Verificar as versões, colocar os dois arquivos finais nas subpastas certas e compactar só a pasta de entrega.",
+        "Incluir o rascunho e todos os backups no ZIP para o professor escolher.",
+        "Renomear o rascunho para revisado sem abrir os arquivos.",
+        "Excluir a apresentação porque já existe um relatório."
+      ],
+      "b": [
+        "Uma entrega organizada reúne os arquivos solicitados, não versões extras sem identificação.",
+        "Múltiplas versões não identificadas facilitam a correção.",
+        "Renomear um rascunho automaticamente incorpora correções feitas depois.",
+        "O relatório substitui a apresentação sempre que ambos tratam do mesmo tema."
+      ]
+    }
+  ],
+  "C": [
+    {
+      "id": "C01",
+      "cat": "Localizar arquivo",
+      "level": "Intermediária",
+      "stem": "O editor mostra relatorio.docx na lista de documentos recentes, mas um aluno não sabe em qual pasta o arquivo realmente foi salvo.",
+      "a": [
+        "Abrir o arquivo e conferir seu local/caminho no computador.",
+        "Assumir que “recente” significa salvo na Área de Trabalho.",
+        "Criar outro relatório sem verificar o original.",
+        "Mudar a extensão para .zip e procurar apenas em Downloads."
+      ],
+      "b": [
+        "Uma lista de recentes mostra acessos; não informa, por si só, a pasta de destino.",
+        "Todos os itens recentes ficam necessariamente em Documentos.",
+        "A lista de recentes altera o local de salvamento.",
+        "Uma extensão .zip indica em qual pasta o arquivo está."
+      ]
+    },
+    {
+      "id": "C02",
+      "cat": "Atalho e arquivo",
+      "level": "Intermediária",
+      "stem": "Um aluno colocou na subpasta Entrega apenas um atalho que aponta para o documento original salvo em outro computador, mas a atividade exige o arquivo DOCX.",
+      "a": [
+        "Copiar ou mover o DOCX real para Entrega, em vez de enviar apenas o atalho.",
+        "Entregar o atalho porque contém todo o texto por definição.",
+        "Renomear o atalho com extensão .docx.",
+        "Criar um segundo atalho para o mesmo arquivo."
+      ],
+      "b": [
+        "Um atalho aponta para outro local e pode deixar de funcionar sem o arquivo original.",
+        "Atalhos são sempre cópias independentes do conteúdo apontado.",
+        "Renomear um atalho converte o destino em outro arquivo real.",
+        "Dois atalhos equivalem a dois documentos editáveis."
+      ]
+    },
+    {
+      "id": "C03",
+      "cat": "Hierarquia de pastas",
+      "level": "Básica",
+      "stem": "No laboratório, a pasta Aula5 contém Documentos e Imagens. Um colega criou outra pasta Imagens fora de Aula5 e disse que a estrutura ficou igual.",
+      "a": [
+        "Manter a pasta Imagens dentro de Aula5, conforme a estrutura pedida.",
+        "Deixar a pasta Imagens fora porque os nomes coincidem.",
+        "Transformar Aula5 em um arquivo chamado Imagens.docx.",
+        "Apagar Documentos para que só exista uma pasta."
+      ],
+      "b": [
+        "O caminho e a hierarquia importam; nomes iguais em lugares diferentes não indicam a mesma pasta.",
+        "Pastas com nomes iguais são automaticamente a mesma pasta.",
+        "Uma pasta só pode conter uma subpasta.",
+        "Arquivos DOCX podem substituir diretórios inteiros."
+      ]
+    },
+    {
+      "id": "C04",
+      "cat": "PDF de apresentação",
+      "level": "Intermediária",
+      "stem": "Os slides do grupo estão prontos num editor de apresentações. O professor solicitou uma versão PDF para a entrega final.",
+      "a": [
+        "Usar a função de exportar/baixar a apresentação em PDF e conferir o resultado.",
+        "Trocar somente a extensão do arquivo de apresentação para .pdf.",
+        "Fazer print da tela inicial e excluir os demais slides.",
+        "Copiar o texto do primeiro slide em um arquivo .txt."
+      ],
+      "b": [
+        "Exportar gera um arquivo no formato solicitado e preserva a sequência de páginas.",
+        "Escrever .pdf no nome converte internamente qualquer apresentação.",
+        "Uma captura da capa inclui automaticamente todos os outros slides.",
+        "TXT mantém as páginas visuais da apresentação."
+      ]
+    },
+    {
+      "id": "C05",
+      "cat": "Extensões e conteúdo",
+      "level": "Intermediária",
+      "stem": "O aluno recebeu figura.png e o professor pediu que a imagem fosse colocada no documento de texto. Ele acredita que mudar figura.png para figura.docx fará a imagem virar um relatório.",
+      "a": [
+        "Inserir a imagem em um documento e salvar esse documento no formato requerido.",
+        "Renomear a imagem para terminar em .docx.",
+        "Trocar .png por .zip e enviar sem abrir.",
+        "Mover a imagem para outra pasta e chamar isso de conversão."
+      ],
+      "b": [
+        "A extensão não substitui o processo de criar e salvar um documento no formato adequado.",
+        "Renomear converte automaticamente pixels em parágrafos editáveis.",
+        "Qualquer imagem pode virar DOCX apenas trocando seu nome.",
+        "Mudar a pasta de uma imagem sempre modifica seu formato."
+      ]
+    },
+    {
+      "id": "C06",
+      "cat": "Selecionar parágrafos",
+      "level": "Intermediária",
+      "stem": "Em um mesmo documento, há um título, um subtítulo e três parágrafos. Só o título deve ficar centralizado, e o subtítulo deve permanecer alinhado à esquerda.",
+      "a": [
+        "Aplicar centralização apenas ao parágrafo do título e conferir o subtítulo.",
+        "Selecionar tudo e centralizar título, subtítulo e parágrafos.",
+        "Acrescentar espaços somente antes do subtítulo.",
+        "Trocar o nome do arquivo antes de ajustar o alinhamento."
+      ],
+      "b": [
+        "É possível aplicar alinhamentos distintos a parágrafos diferentes.",
+        "Todos os parágrafos recebem necessariamente a mesma formatação.",
+        "Espaços são o recurso correto para centralizar parágrafos.",
+        "O nome de um arquivo define automaticamente o alinhamento de títulos."
+      ]
+    },
+    {
+      "id": "C07",
+      "cat": "Correção de lista",
+      "level": "Intermediária",
+      "stem": "Um roteiro contém uma lista de quatro etapas. Depois de inserir uma nova etapa entre a primeira e a segunda, a numeração ficou desorganizada.",
+      "a": [
+        "Usar a ferramenta de lista numerada do editor para manter a sequência.",
+        "Inserir o número no nome do arquivo e não no texto.",
+        "Apagar todas as etapas após a primeira.",
+        "Transformar cada etapa em um arquivo ZIP separado."
+      ],
+      "b": [
+        "A ferramenta de lista gerencia a ordem dos itens quando a estrutura é modificada.",
+        "Listas não permitem inserir passos entre os já existentes.",
+        "A extensão ZIP ajusta a numeração automaticamente.",
+        "Numeração é feita somente com o nome das pastas."
+      ]
+    },
+    {
+      "id": "C08",
+      "cat": "Formatar trechos",
+      "level": "Intermediária",
+      "stem": "Um relatório exige que os termos “temperatura” e “umidade” apareçam em negrito, mas o nome da seção deve continuar sem negrito.",
+      "a": [
+        "Selecionar apenas os dois termos no corpo do texto e aplicar negrito.",
+        "Selecionar todo o documento e aplicar negrito.",
+        "Alterar a orientação da página para destacar os termos.",
+        "Aumentar apenas o zoom da janela do editor."
+      ],
+      "b": [
+        "O negrito pode ser aplicado a trechos específicos sem alterar o restante.",
+        "Aumentar o zoom altera quais palavras ficarão em negrito.",
+        "Mudar a orientação da página destaca palavras automaticamente.",
+        "Selecionar o texto inteiro limita o estilo aos termos solicitados."
+      ]
+    },
+    {
+      "id": "C09",
+      "cat": "Desfazer edição",
+      "level": "Básica",
+      "stem": "Ao formatar o texto, Gabriel apagou sem querer uma frase e percebeu o erro imediatamente, antes de fazer outras alterações.",
+      "a": [
+        "Usar Desfazer para tentar recuperar a última edição.",
+        "Usar Imprimir para restaurar a frase.",
+        "Renomear o arquivo para o nome da frase apagada.",
+        "Compactar a pasta para recuperar automaticamente o texto excluído."
+      ],
+      "b": [
+        "Desfazer reverte a ação recente quando ela ainda está no histórico do editor.",
+        "Imprimir volta o documento para a versão anterior.",
+        "Renomear reproduz automaticamente o conteúdo apagado.",
+        "Compactar restaura edições mesmo quando o documento foi sobrescrito."
+      ]
+    },
+    {
+      "id": "C10",
+      "cat": "Enviar e baixar",
+      "level": "Básica",
+      "stem": "A atividade está pronta no notebook, e a aluna precisa enviá-la ao SUAP. Ela clicou em “Baixar” dentro da plataforma e não encontrou o arquivo entregue.",
+      "a": [
+        "Escolher a opção de envio/anexação e fazer upload do arquivo.",
+        "Clicar novamente em Baixar até a entrega aparecer.",
+        "Criar uma pasta com o nome SUAP no computador e considerar concluído.",
+        "Mover o arquivo para Downloads e encerrar sem acessar a atividade."
+      ],
+      "b": [
+        "Upload envia arquivo do dispositivo à plataforma; download faz o movimento contrário.",
+        "Baixar e enviar são a mesma operação.",
+        "Uma pasta local com nome SUAP confirma entrega ao professor.",
+        "Downloads envia arquivos automaticamente ao diário."
+      ]
+    },
+    {
+      "id": "C11",
+      "cat": "Arquivo versus link",
+      "level": "Intermediária",
+      "stem": "O aluno guardou o relatório no Drive, mas o enunciado pede que seja enviado ao SUAP um documento editável com extensão .docx.",
+      "a": [
+        "Baixar uma cópia em DOCX e anexá-la na tarefa do SUAP.",
+        "Copiar apenas o link da pasta e considerar que o DOCX foi anexado.",
+        "Enviar um PDF de captura da tela do Drive.",
+        "Renomear o endereço da página com extensão .docx."
+      ],
+      "b": [
+        "O link de acesso não é necessariamente o arquivo solicitado para entrega.",
+        "Links da nuvem são arquivos DOCX quando terminam com letras.",
+        "Toda captura de tela é um documento de texto editável.",
+        "Alterar o texto de um endereço transforma o recurso remoto em anexo."
+      ]
+    },
+    {
+      "id": "C12",
+      "cat": "Conferência de ZIP",
+      "level": "Avançada",
+      "stem": "A turma precisa entregar uma pasta ZIP. Antes de enviar, o aluno nota que o relatório está dentro da subpasta dos slides e o PDF está fora de qualquer subpasta.",
+      "a": [
+        "Corrigir a distribuição dos arquivos, compactar novamente e verificar o ZIP.",
+        "Enviar assim mesmo, pois a organização interna não é avaliada.",
+        "Mudar apenas o nome do ZIP sem reorganizar a pasta.",
+        "Apagar o relatório e deixar somente o PDF."
+      ],
+      "b": [
+        "O ZIP preserva a organização existente; compactar não corrige pastas erradas sozinho.",
+        "Compactação identifica e separa automaticamente documentos e slides.",
+        "O nome do ZIP define a localização interna dos arquivos.",
+        "Arquivos não precisam existir quando a pasta tem nome correto."
+      ]
+    }
+  ]
+};
+
+const twoTierTemplates = [
+  (rng)=>{const f=pick(rng,files),p=pick(rng,folders),n=pick(rng,renamed).replace(/\.docx$/i, f.endsWith('.txt')?'.txt':'.docx');
+    const a=makeOptions(rng,`Mover ${f} para "${p}" e renomeá-lo para ${n}.`,
+      [`Copiar ${f} para qualquer pasta e manter o nome.`,`Criar uma pasta chamada ${n} e apagar ${f}.`,`Somente abrir ${f} e fechar novamente.`]);
+    const b=makeOptions(rng,'Porque a tarefa exige simultaneamente local correto e nome correto.',
+      ['Porque renomear sempre muda o conteúdo do arquivo.','Porque mover um arquivo cria duas cópias obrigatoriamente.','Porque qualquer pasta serve desde que o arquivo abra.']);
+    return {cat:'Arquivos e pastas',stem:`O arquivo ${f} precisa ser entregue na pasta "${p}" com o nome "${n}".`,a,b};},
+  (rng)=>{const a=makeOptions(rng,'Selecionar apenas o título e centralizá-lo.',
+      ['Centralizar todo o documento.','Adicionar muitos espaços antes do título.','Mudar somente a cor do texto.']);
+    const b=makeOptions(rng,'Porque alinhamento é uma propriedade aplicada ao trecho/parágrafo selecionado.',
+      ['Porque espaços são sempre a forma correta de alinhar.','Porque centralização altera o nome do arquivo.','Porque título centralizado exige apagar o corpo do texto.']);
+    return {cat:'Editor de texto',stem:'O título deve ficar centralizado, mas o corpo do texto não.',a,b};},
+  (rng)=>{const a=makeOptions(rng,'Usar uma lista numerada.',
+      ['Usar marcadores sem ordem.','Escrever tudo em um único parágrafo.','Transformar cada passo em nome de arquivo.']);
+    const b=makeOptions(rng,'Porque os itens representam uma sequência em que a ordem dos passos é relevante.',
+      ['Porque toda lista deve ser numerada, mesmo sem ordem.','Porque números aumentam automaticamente a nota.','Porque marcadores não existem em editores de texto.']);
+    return {cat:'Editor de texto',stem:'Um procedimento possui quatro etapas que precisam ser realizadas na ordem 1→2→3→4.',a,b};},
+  (rng)=>{const a=makeOptions(rng,'Verificar a pasta/local em que o arquivo foi salvo.',
+      ['Criar outro arquivo imediatamente.','Reiniciar o computador sem conferir nada.','Trocar a extensão do arquivo.']);
+    const b=makeOptions(rng,'Porque salvar não significa necessariamente salvar na Área de Trabalho.',
+      ['Porque todo arquivo é apagado ao fechar.','Porque o nome do arquivo muda aleatoriamente.','Porque arquivos de texto só podem ficar em Downloads.']);
+    return {cat:'Arquivos e pastas',stem:'Após salvar e fechar um documento, ele não aparece na Área de Trabalho.',a,b};},
+  (rng)=>{const a=makeOptions(rng,'Usar Salvar Como e escolher outro nome/local.',
+      ['Excluir o arquivo original antes.','Imprimir e digitalizar novamente.','Trocar o nome da pasta sem salvar.']);
+    const b=makeOptions(rng,'Porque Salvar Como permite criar uma versão em outro nome/local sem depender de sobrescrever o atual.',
+      ['Porque Salvar Como funciona apenas em PDFs.','Porque Salvar Como apaga todo o texto.','Porque o comando serve somente para fechar o programa.']);
+    return {cat:'Editor de texto',stem:'Você quer manter o documento atual e criar outra versão com nome diferente.',a,b};},
+  (rng)=>{const a=makeOptions(rng,'Conferir nome, extensão, conteúdo e pasta antes do envio.',
+      ['Enviar todos os arquivos disponíveis.','Escolher pelo tamanho do arquivo sem abrir.','Mudar qualquer extensão para .docx.']);
+    const b=makeOptions(rng,'Porque arquivos com nomes parecidos podem ser versões diferentes ou pertencer a tarefas diferentes.',
+      ['Porque o professor deve descobrir sozinho qual arquivo vale.','Porque extensão nunca tem relação com o formato.','Porque abrir o arquivo altera automaticamente a nota.']);
+    return {cat:'Entrega',stem:'Existem vários arquivos parecidos na pasta e apenas um deve ser enviado.',a,b};},
+  (rng)=>{const a=makeOptions(rng,'Mover o arquivo para a subpasta indicada.',
+      ['Criar um atalho e deixar o arquivo fora da estrutura.','Renomear a subpasta com o nome do arquivo.','Apagar a pasta principal.']);
+    const b=makeOptions(rng,'Porque a organização solicitada depende da localização real do arquivo na estrutura de pastas.',
+      ['Porque atalho e arquivo são sempre a mesma coisa.','Porque pastas não podem conter arquivos.','Porque mover converte o arquivo em PDF.']);
+    return {cat:'Organização digital',stem:'O enunciado exige que o documento esteja realmente dentro da subpasta "Documentos".',a,b};},
+  (rng)=>{const a=makeOptions(rng,'Fazer upload do arquivo correto para o serviço solicitado.',
+      ['Fazer download do arquivo para Downloads.','Renomear o navegador.','Copiar o endereço do site para um documento.']);
+    const b=makeOptions(rng,'Porque upload é o envio de um arquivo do dispositivo para um serviço/sistema.',
+      ['Porque download e upload são sinônimos.','Porque upload serve somente para imagens.','Porque upload apaga o arquivo local obrigatoriamente.']);
+    return {cat:'Internet e arquivos',stem:'A atividade está pronta no computador e precisa ser enviada para uma plataforma.',a,b};},
+  (rng)=>{const a=makeOptions(rng,'Usar termos específicos e comparar fontes.',
+      ['Pesquisar uma palavra genérica e copiar o primeiro resultado.','Usar apenas títulos chamativos.','Ignorar autor e origem da informação.']);
+    const b=makeOptions(rng,'Porque especificidade e verificação reduzem resultados irrelevantes e informações frágeis.',
+      ['Porque o primeiro resultado é sempre correto.','Porque fontes não importam em trabalhos escolares.','Porque quanto menos leitura, mais confiável é a pesquisa.']);
+    return {cat:'Pesquisa',stem:'Você precisa pesquisar um tema para um trabalho escolar e quer reduzir resultados ruins.',a,b};},
+  (rng)=>{const a=makeOptions(rng,'Resumir as ideias principais em tópicos legíveis.',
+      ['Colar o documento inteiro nos slides.','Usar parágrafos muito longos em fonte pequena.','Remover títulos para ganhar espaço.']);
+    const b=makeOptions(rng,'Porque slides funcionam melhor como apoio visual à apresentação, e não como substituto integral da fala.',
+      ['Porque slides não podem conter texto.','Porque documentos e slides devem ser idênticos.','Porque fonte pequena melhora a compreensão.']);
+    return {cat:'Slides',stem:'Você precisa transformar um documento longo em apresentação para exposição oral.',a,b};},
+  (rng)=>{const a=makeOptions(rng,'Identificar qual ação foi realizada e usar Desfazer quando apropriado.',
+      ['Fechar o computador imediatamente.','Apagar o arquivo inteiro.','Criar uma nova pasta para corrigir o texto.']);
+    const b=makeOptions(rng,'Porque Desfazer pode reverter a última operação sem exigir refazer todo o documento.',
+      ['Porque Desfazer imprime uma cópia de segurança.','Porque o comando muda automaticamente o nome do arquivo.','Porque Desfazer só existe em navegadores.']);
+    return {cat:'Editor de texto',stem:'Você aplicou uma formatação errada na última ação e percebeu imediatamente.',a,b};},
+  (rng)=>{const a=makeOptions(rng,'Ler todas as instruções e conferir os requisitos ao final.',
+      ['Executar somente as partes que parecem fáceis.','Perguntar por cada clique sem ler o enunciado.','Entregar assim que o arquivo abrir.']);
+    const b=makeOptions(rng,'Porque uma atividade pode avaliar tanto a execução quanto o cumprimento correto das instruções e da entrega.',
+      ['Porque o enunciado serve apenas para ocupar espaço.','Porque a nota depende só da velocidade.','Porque organização nunca faz parte da competência digital.']);
+    return {cat:'Execução',stem:'Uma atividade possui vários requisitos de pasta, arquivo, conteúdo, formatação e entrega.',a,b};},
+];
+
+function buildSingle(rng, mechanic, templateIndex){
+  const tpl=singleTemplates[templateIndex];
+  const q=tpl(rng); q.mechanic=mechanic; return q;
+}
+function buildTwoTier(rng,templateIndex){
+  const tpl=twoTierTemplates[templateIndex];
+  const q=tpl(rng); q.mechanic='two'; return q;
+}
+
+function initClasses(){
+  const sel=$('classSelect'); sel.innerHTML='';
+  Object.keys(state.classes).forEach(k=>{
+    const o=document.createElement('option'); o.value=k; o.textContent=state.classes[k].nome || k; sel.appendChild(o);
+  });
+  loadClassEditor();
+}
+function loadClassEditor(){
+  const k=$('classSelect').value; const c=state.classes[k];
+  $('className').value=c.nome||k; $('students').value=(c.alunos||[]).join('\n');
+  $('versions').value=/1[ºo°]?\s*C/i.test(c.nome) ? 4 : Math.max(1,(c.alunos||[]).length||1);
+}
+function saveClassEditor(){
+  const k=$('classSelect').value;
+  state.classes[k].nome=$('className').value.trim()||k;
+  state.classes[k].alunos=$('students').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  saveState(); initClasses(); $('classSelect').value=k; loadClassEditor();
+  updateStatus(`Turma salva: ${state.classes[k].nome} — ${state.classes[k].alunos.length} aluno(s).`);
+}
+function updateStatus(msg){$('status').innerHTML=`<strong>${escapeHtml(msg)}</strong>`}
+
+function makeNameBoxes(){
+  return `<div class="name-identification" aria-label="Preencha seu nome completo, uma letra por quadradinho">
+    <div class="name-label"><b>NOME COMPLETO:</b> ESCREVA EM LETRA DE FORMA, UMA LETRA EM CADA QUADRINHO. DEIXE UM QUADRINHO EM BRANCO ENTRE AS PALAVRAS.</div>
+    <div class="name-boxes">${Array.from({length:48},()=>'<span class="name-box"></span>').join('')}</div>
+  </div>`;
+}
+function headerHtml(meta){
+  const logo=state.logoData?`<img class="logo" src="${state.logoData}">`:
+  `<div class="brand-fallback"><span class="brand-icon">${Array.from({length:9},(_,i)=>`<i class="${i===6?'red':''}"></i>`).join('')}</span><span class="brand-word">IFMT</span></div>`;
+  return `<div class="header">
+    <div>${logo}</div>
+    <div class="inst">
+      <b>INSTITUTO FEDERAL DE MATO GROSSO</b>
+      Campus São Vicente • Centro de Referência de Jaciara<br>
+      Técnico em Meio Ambiente Integrado ao Ensino Médio
+    </div>
+    <div class="meta">
+      <b>${escapeHtml(meta.turma)}</b><br>
+      Versão: <b>${escapeHtml(meta.version)}</b><br>
+      Nota: ______ / 10
+    </div>
+  </div>`;
+}
+function answerCardHtml(items){
+  if(items.length>0 && items.every(it=>it.mechanic==='two')){
+    const rows=items.map((it,i)=>`<tr><td><b>${i+1}</b></td>${letters.map(L=>`<td><span class="bubble"></span></td>`).join('')}${letters.map(L=>`<td><span class="bubble"></span></td>`).join('')}</tr>`);
+    return `<table class="answer-card compact-card"><thead>
+      <tr><th rowspan="2">Questão</th><th colspan="4">PARTE A · decisão</th><th colspan="4">PARTE B · justificativa</th></tr>
+      <tr><th>A</th><th>B</th><th>C</th><th>D</th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+    </thead><tbody>${rows.join('')}</tbody></table>`;
+  }
+  const rows=[];
+  let qn=1;
+  for(const it of items){
+    if(it.mechanic==='two'){
+      rows.push(cardRow(`${qn}A`,false));
+      rows.push(cardRow(`${qn}B`,false));
+    } else {
+      rows.push(cardRow(`${qn}`,it.mechanic==='confidence'));
+    }
+    qn++;
+  }
+  return `<table class="answer-card"><thead><tr><th>Resposta</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+  <tbody>${rows.join('')}</tbody></table>`;
+}
+function cardRow(label,conf){
+  return `<tr><td><b>${label}</b></td>${letters.map(()=>`<td><span class="bubble"></span></td>`).join('')}</tr>`;
+}
+function optionHtml(opts){
+  return opts.map((o,i)=>`<div class="opt"><b>${letters[i]})</b> ${escapeHtml(o)}</div>`).join('');
+}
+function questionHtml(it,number,version){
+  if(it.mechanic==='two'){
+    return `<div class="q">
+      <div class="stem">${number}. ${escapeHtml(it.stem)} <span class="tag">[${escapeHtml(version)}]</span></div>
+      <div class="tier"><b>${number}A.</b> Qual ação/resposta é a mais adequada?${optionHtml(it.a.opts)}</div>
+      <div class="tier"><b>${number}B.</b> Qual justificativa explica melhor a resposta?${optionHtml(it.b.opts)}</div>
+    </div>`;
+  }
+  return `<div class="q">
+    <div class="stem">${number}. ${escapeHtml(it.stem)} ${it.mechanic==='confidence'?'<span class="tag">[marque também sua confiança]</span>':''}</div>
+    ${optionHtml(it.opts)}
+    ${it.mechanic==='confidence'?'<div class="conf-line">Confiança: ○ Tenho certeza &nbsp;&nbsp; ○ Acho que sei &nbsp;&nbsp; ○ Estou em dúvida / chutei</div>':''}
+  </div>`;
+}
+
+function generateForms(){
+  // Persistir a lista sem alterar o número de versões escolhido.
+  const editedKey=$('classSelect').value;
+  state.classes[editedKey].nome=$('className').value.trim()||editedKey;
+  state.classes[editedKey].alunos=$('students').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  saveState();
+  const classKey=$('classSelect').value;
+  const turma=state.classes[classKey].nome;
+  const count=Math.max(1,Math.min(120,parseInt($('versions').value||'1',10)));
+  const nNormal=Math.max(0,parseInt($('nNormal').value||'0',10));
+  const nConfidence=Math.max(0,parseInt($('nConfidence').value||'0',10));
+  const nTwo=Math.max(0,parseInt($('nTwoTier').value||'0',10));
+  const classLetter=/1[ºo°]?\s*([ABC])/i.exec(turma)?.[1]?.toUpperCase();
+  const dedicatedBank=CLASS_TWO_TIER_BANK[classLetter];
+  if(nNormal+nConfidence+nTwo===0){alert('Defina pelo menos um bloco de questão.');return}
+  const availableTwo=dedicatedBank ? dedicatedBank.length : twoTierTemplates.length;
+  if(nNormal+nConfidence>singleTemplates.length || nTwo>availableTwo){
+    alert(`Limite: até ${singleTemplates.length} itens normais/confiança e ${availableTwo} questões de duas camadas sem repetir cenário. Reduza as quantidades.`);return;
+  }
+  const baseSeed=$('seed').value||'IFMT';
+  const title=$('title').value||'Avaliação';
+  const teacher=$('teacher').value||'Professor(a)';
+  const examType=$('examType').value;
+  const out=[]; const keys=[]; const signatures=new Set();
+
+  for(let v=1;v<=count;v++){
+    let attempt=0,items,signature,rng;
+    do{
+      rng=seeded(`${baseSeed}|${turma}|${v}|${attempt}`);
+      items=[];
+      const singles=shuffle(rng,Array.from({length:singleTemplates.length},(_,i)=>i));
+      const twos=shuffle(rng,Array.from({length:availableTwo},(_,i)=>i));
+      for(let i=0;i<nNormal;i++) items.push(buildSingle(rng,'normal',singles[i]));
+      for(let i=0;i<nConfidence;i++) items.push(buildSingle(rng,'confidence',singles[nNormal+i]));
+      for(let i=0;i<nTwo;i++) {
+        if(dedicatedBank) {
+          const source=dedicatedBank[twos[i]];
+          const a=makeOptions(rng,source.a[0],source.a.slice(1));
+          const b=makeOptions(rng,source.b[0],source.b.slice(1));
+          items.push({id:source.id,level:source.level,cat:source.cat,stem:source.stem,a,b,mechanic:'two'});
+        } else items.push(buildTwoTier(rng,twos[i]));
+      }
+      items=shuffle(rng,items);
+      signature=items.map(it=>it.stem).join('|')+'|'+items.map(it=>it.mechanic).join(',');
+      attempt++;
+    }while(signatures.has(signature)&&attempt<30);
+    signatures.add(signature);
+
+    const prefix=classLetter || (turma.match(/[ABCDEF]/i)||['V'])[0].toUpperCase();
+    const version=`${prefix}-${String(v).padStart(2,'0')}`;
+    const scoredResponses=items.reduce((a,it)=>a+(it.mechanic==='two'?2:1),0);
+    const point=(10/scoredResponses).toFixed(4);
+
+    out.push(`<section class="exam">
+      ${headerHtml({turma,version})}
+      <div class="exam-title">${escapeHtml(title)}</div>
+      <div class="info-row"><span><b>Professor:</b> ${escapeHtml(teacher)}</span><span><b>Data:</b> ____/____/______</span></div>
+      ${makeNameBoxes()}
+      <div class="instructions">
+        <b>Instruções:</b> leia cada questão por completo. Marque apenas uma alternativa por resposta.
+        Nas questões em duas camadas, a parte A avalia sua decisão e a parte B avalia sua justificativa.
+        As duas partes devem ser respondidas separadamente no cartão-resposta, usando caneta.
+        A prova vale 10,0 pontos; cada resposta correta vale ${point} ponto(s) antes do arredondamento da nota final.
+      </div>
+      ${answerCardHtml(items)}
+      <div class="questions">${items.map((it,i)=>questionHtml(it,i+1,version)).join('')}</div>
+      <div class="footer"><span>Informática Básica • ${escapeHtml(examType.toUpperCase())}</span><span>${escapeHtml(version)}</span></div>
+    </section>`);
+
+    const keyRows=[];
+    items.forEach((it,i)=>{
+      if(it.mechanic==='two'){
+        keyRows.push({version,q:`${i+1}A`,answer:letters[it.a.correctIndex],cat:it.cat,type:'Duas camadas'});
+        keyRows.push({version,q:`${i+1}B`,answer:letters[it.b.correctIndex],cat:it.cat,type:'Duas camadas'});
+      }else{
+        keyRows.push({version,q:String(i+1),answer:letters[it.correctIndex],cat:it.cat,type:it.mechanic==='confidence'?'Confiança':'Normal'});
+      }
+    });
+    keys.push(...keyRows);
+  }
+  const previous = state.keysByClass[classKey] || [];
+  if(previous.length && JSON.stringify(previous) !== JSON.stringify(keys)) {
+    if(Object.values(state.gradeRecords).some(r => r.classKey === classKey)) {
+      alert('Este gabarito seria diferente do já usado nas correções salvas. Para proteger as notas, não é possível substituí-lo aqui. Salve um backup e use outro navegador/perfil para uma nova avaliação.');
+      return;
+    }
+    if(!confirm('Esta turma já possui gabaritos armazenados. Gerar novamente com outros parâmetros pode invalidar as provas impressas. Deseja substituir os gabaritos desta turma?')) return;
+  }
+  state.keysByClass[classKey] = keys;
+  state.generated=out; state.answerKey=keys;
+  saveState();
+  refreshGradeClassOptions();
+  $('output').innerHTML=out.join('');
+  renderKey();
+  updateStatus(`${count} versão(ões) gerada(s) para ${turma}. ${dedicatedBank?'Banco exclusivo desta turma. ':''}Blocos por prova: ${nNormal+nConfidence+nTwo}; respostas pontuáveis: ${nNormal+nConfidence+2*nTwo}; valor total: 10,0.`);
+}
+function renderKey(){
+  const grouped={};
+  state.answerKey.forEach(r=>(grouped[r.version]??=[]).push(r));
+  const blocks=Object.entries(grouped).map(([v,rows])=>`<h3>${escapeHtml(v)}</h3><table class="admin-table">
+    <thead><tr><th>Questão</th><th>Resposta</th><th>Tipo</th><th>Competência</th></tr></thead>
+    <tbody>${rows.map(r=>`<tr><td>${r.q}</td><td><b>${r.answer}</b></td><td>${escapeHtml(r.type)}</td><td>${escapeHtml(r.cat)}</td></tr>`).join('')}</tbody></table>`).join('');
+  $('keyArea').innerHTML=`<h2>Gabarito</h2>${blocks||'<p>Nenhuma prova gerada.</p>'}`;
+}
+function csvKey(){
+  const rows=[['Versão','Questão','Resposta','Tipo','Competência'],...state.answerKey.map(r=>[r.version,r.q,r.answer,r.type,r.cat])];
+  return rows.map(row=>row.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(';')).join('\n');
+}
+function download(name,text,type='text/plain'){
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type})); a.download=name; a.click(); URL.revokeObjectURL(a.href);
+}
+function exportConfig(){
+  saveClassEditor();
+  const cfg={version:2,classes:state.classes,logoData:state.logoData,keysByClass:state.keysByClass,gradeRecords:state.gradeRecords,settings:{
+    examType:$('examType').value,nNormal:$('nNormal').value,nConfidence:$('nConfidence').value,nTwoTier:$('nTwoTier').value,
+    seed:$('seed').value,teacher:$('teacher').value,title:$('title').value
+  }};
+  download('backup_provas_e_correcoes_ifmt.json',JSON.stringify(cfg,null,2),'application/json');
+}
+function importConfig(file){
+  const reader=new FileReader();
+  reader.onload=()=>{try{
+    const cfg=JSON.parse(reader.result);
+    if(cfg.keysByClass && Object.keys(state.gradeRecords).length &&
+       JSON.stringify(state.keysByClass)!==JSON.stringify(cfg.keysByClass) &&
+       !confirm('O arquivo pode substituir seus gabaritos e correções atuais. Você já fez backup antes de restaurar?')) return;
+    if(cfg.classes) state.classes=cfg.classes;
+    if(cfg.logoData) state.logoData=cfg.logoData;
+    if(cfg.keysByClass) state.keysByClass=cfg.keysByClass;
+    if(cfg.gradeRecords) state.gradeRecords=cfg.gradeRecords;
+    saveState(); initClasses();refreshGradeClassOptions();renderGradeHistory();
+    if(cfg.settings){
+      for(const [k,v] of Object.entries(cfg.settings)){if($(k)) $(k).value=v}
+    }
+    updateStatus('Configuração importada.');
+  }catch(e){alert('Arquivo de configuração inválido.')}};
+  reader.readAsText(file);
+}
+
+loadState(); initClasses();
+$('classSelect').addEventListener('change',loadClassEditor);
+$('saveClass').addEventListener('click',saveClassEditor);
+$('useStudentCount').addEventListener('click',()=>{$('versions').value=Math.max(1,state.classes[$('classSelect').value].alunos.length)});
+$('generate').addEventListener('click',generateForms);
+$('printBtn').addEventListener('click',()=>window.print());
+$('downloadKey').addEventListener('click',()=>download('gabarito_provas.csv',csvKey(),'text/csv;charset=utf-8'));
+$('showKey').addEventListener('click',()=>{$('keyArea').style.display=$('keyArea').style.display==='none'?'block':'none'});
+$('clearGenerated').addEventListener('click',()=>{state.generated=[];state.answerKey=[];$('output').innerHTML='<div class="empty">As provas aparecerão aqui.</div>';$('keyArea').innerHTML='';updateStatus('Provas geradas removidas da tela.');});
+$('exportConfig').addEventListener('click',exportConfig);
+$('importConfig').addEventListener('change',e=>{if(e.target.files[0])importConfig(e.target.files[0])});
+$('logoFile').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f)return;
+  const r=new FileReader(); r.onload=()=>{state.logoData=r.result;saveState();updateStatus('Logo carregada e salva neste navegador.');}; r.readAsDataURL(f);
+});
+
+
+// ---------- CORREÇÃO RÁPIDA POR VERSÃO ----------
+let gradeAnswers = {};
+let gradeEditingKey = '';
+let gradeAutoSaveKey = '';
+function switchTab(tab){
+  document.body.classList.toggle('correction-mode',tab==='correct');
+  $('tabGenerate').classList.toggle('active',tab==='generate');
+  $('tabCorrect').classList.toggle('active',tab==='correct');
+  $('tabGenerate').setAttribute('aria-selected',String(tab==='generate'));
+  $('tabCorrect').setAttribute('aria-selected',String(tab==='correct'));
+  if(tab==='correct'){refreshGradeClassOptions();renderGradeDashboard();}
+}
+function gradeClassKey(){return $('gradeClass').value}
+function gradeVersion(){return $('gradeVersion').value}
+function gradeRows(){return (state.keysByClass[gradeClassKey()]||[]).filter(r=>r.version===gradeVersion())}
+function gradeIdentity(name){return String(name||'').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').toLocaleLowerCase('pt-BR')}
+function gradeRecordId(c,v,n){return `${c}|${v}|${gradeIdentity(n)}`}
+function gradeRecordForCode(c,v){return Object.entries(state.gradeRecords).filter(([,r])=>r.classKey===c && r.version===v).sort((a,b)=>(b[1].savedAt||'').localeCompare(a[1].savedAt||''))[0]||null}
+function allVersionsForClass(k){return [...new Set((state.keysByClass[k]||[]).map(r=>r.version))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}))}
+function validCode(raw){const m=String(raw||'').toUpperCase().trim().match(/^([A-C])\s*[- ]?\s*(\d{1,3})$/);return m?`${m[1]}-${m[2].padStart(2,'0')}`:''}
+function codeToClass(v){const letter=v.charAt(0);return Object.keys(state.classes).find(k=>new RegExp('1[ºo°]?\\s*'+letter,'i').test(state.classes[k].nome))||''}
+function refreshGradeClassOptions(){
+  const sel=$('gradeClass'); const prior=sel.value;
+  sel.innerHTML=Object.entries(state.classes).map(([k,c])=>`<option value="${escapeHtml(k)}">${escapeHtml(c.nome||k)}</option>`).join('');
+  if(state.classes[prior])sel.value=prior;
+  renderGradeDashboard();
+}
+function gradeScoreInfo(rows,answers){
+  const answered=rows.reduce((a,r)=>a+(Object.hasOwn(answers,r.q)?1:0),0);
+  const correct=rows.reduce((a,r)=>a+(answers[r.q]===r.answer?1:0),0);
+  return {answered,correct,total:rows.length,score:rows.length?+(correct*10/rows.length).toFixed(2):null};
+}
+function formatScore(n){return n===null?'—':n.toFixed(2).replace('.',',')}
+function renderGradeDashboard(){
+  const tiles=[];let missing=[];
+  for(const letter of ['A','B','C']){
+    const c=codeToClass(letter+'-01');
+    const versions=c?allVersionsForClass(c):[];
+    const saved=versions.filter(v=>!!gradeRecordForCode(c,v));
+    const rest=versions.filter(v=>!gradeRecordForCode(c,v));
+    tiles.push(`<div class="grade-summary"><div class="grade-summary-label">1º ${letter}</div><strong>${saved.length} / ${versions.length||'—'}</strong><div class="grade-summary-sub">provas corrigidas${versions.length?` · faltam ${rest.length}`:' · importe o gabarito'}</div><div class="grade-progress-track"><div class="grade-progress-fill" style="width:${versions.length?(saved.length/versions.length*100):0}%"></div></div></div>`);
+    if(versions.length)missing.push(`<div><b>1º ${letter} — faltam ${rest.length}:</b> ${rest.length?rest.map(v=>`<button type="button" data-pending="${v}" title="Corrigir ${v}">${v}</button>`).join(' '):'todas as versões cadastradas foram corrigidas.'}</div>`);
+  }
+  $('gradeDashboard').innerHTML=tiles.join('');
+  $('gradePending').innerHTML=missing.join('')||'Ainda não há versões carregadas. Gere suas provas ou importe o CSV do gabarito correspondente às provas impressas.';
+}
+function renderGradeAnswers(){
+  const rows=gradeRows();
+  if(!rows.length){
+    $('gradeAnswers').innerHTML='<p class="grade-note">Nenhum gabarito disponível para este código.</p>';
+    $('gradeScore').innerHTML='<div class="score">—</div><div class="metrics">Informe um código com gabarito carregado.</div>';
+    $('gradeSave').disabled=true;
+    return;
+  }
+  $('gradeSave').disabled=false;
+  $('gradeAnswers').innerHTML=rows.map(r=>{
+    const val=gradeAnswers[r.q],done=Object.hasOwn(gradeAnswers,r.q),ok=val===r.answer;
+    const label=String(r.q).match(/^(\d+)([AB])$/);
+    const part=label?`Questão ${String(+label[1]).padStart(2,'0')} ${label[2]}`:`Questão ${r.q}`;
+    const choices=[...letters,'-'].map(L=>`<button type="button" class="${val===L?'selected ':''}${L==='-'?'blank':''}" data-q="${escapeHtml(r.q)}" data-letter="${L}" aria-pressed="${val===L}">${L==='-'?'—':L}</button>`).join('');
+    const feedback=done?`<span class="${ok?'hit':'miss'}">${ok?'Correta':val==='-'?'Em branco':'Incorreta'} · ${r.answer}</span>`:'Não marcada';
+    return `<div class="grade-item"><span class="part">${escapeHtml(part)}</span><div class="grade-row">${choices}</div><span class="grade-feedback">${feedback}</span></div>`;
+  }).join('');
+  const info=gradeScoreInfo(rows,gradeAnswers);
+  $('gradeScore').innerHTML=`<div class="score">${formatScore(info.score)} <small style="font-size:13px;font-weight:500">/ 10,0</small></div><div class="metrics"><b>${info.correct}</b> de ${info.total} corretas · ${info.answered} informadas<br>${info.answered===info.total?'Todas as respostas informadas.':`Faltam ${info.total-info.answered} respostas para salvar.`}</div>`;
+}
+function gradeSequence(){const rows=gradeRows();return rows.map(r=>gradeAnswers[r.q]??'?').join('')}
+function updateGradeCount(){const s=$('gradeQuick').value.toUpperCase().replace(/[\s,;|.]/g,'');const total=gradeRows().length||24;const invalid=[...s].some(x=>!letters.includes(x)&&x!=='-');$('gradeQuickCounter').textContent=`${s.length} de ${total}${invalid?' · caractere inválido':''}`;}
+function onGradeCodeChange(){
+  const code=validCode($('gradeCode').value),c=code?codeToClass(code):'';
+  gradeAutoSaveKey=''; gradeAnswers={};gradeEditingKey='';$('gradeStudent').value='';$('gradeQuick').value='';
+  if(!code||!c){$('gradeKeyNotice').textContent='Código esperado: A-02, B-05 ou C-01.';$('gradeVersion').innerHTML='';renderGradeAnswers();updateGradeCount();return;}
+  $('gradeClass').value=c;
+  const versions=allVersionsForClass(c);
+  $('gradeVersion').innerHTML=versions.map(v=>`<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
+  $('gradeStudents').innerHTML=(state.classes[c]?.alunos||[]).map(n=>`<option value="${escapeHtml(n)}"></option>`).join('');
+  if(!versions.includes(code)){$('gradeKeyNotice').textContent=`Não encontrei gabarito da versão ${code}. Importe o CSV das provas impressas.`;$('gradeVersion').value='';renderGradeAnswers();updateGradeCount();return;}
+  $('gradeVersion').value=code;
+  $('gradeCode').value=code;
+  const saved=gradeRecordForCode(c,code);
+  if(saved){const [key,r]=saved;gradeEditingKey=key;gradeAnswers={...(r.answers||{})};$('gradeStudent').value=r.student||'';$('gradeQuick').value=gradeSequence();}
+  $('gradeKeyNotice').textContent=saved?`${code} já foi corrigida. Você pode conferir e atualizar.`:`${code} disponível. Digite as respostas abaixo; ao completar, a correção será salva.`;
+  renderGradeAnswers();updateGradeCount();
+}
+function parseQuick(){return $('gradeQuick').value.toUpperCase().replace(/[\s,;|.]/g,'')}
+function applyQuickSequence(silent=false){
+  const rows=gradeRows();if(!rows.length)return false;
+  const seq=parseQuick();
+  if(seq.length!==rows.length||![...seq].every(x=>letters.includes(x)||x==='-')){
+    if(!silent)alert(`Informe exatamente ${rows.length} letras (A, B, C ou D), em ordem. Use hífen para respostas em branco.`);
+    return false;
+  }
+  gradeAnswers=Object.fromEntries(rows.map((r,i)=>[r.q,seq[i]]));renderGradeAnswers();return true;
+}
+function saveGrade(silent=false){
+  const c=gradeClassKey(),v=gradeVersion(),rows=gradeRows(),name=$('gradeStudent').value.trim();
+  if(!c||!v||!rows.length){if(!silent)alert('Informe uma versão da prova cujo gabarito esteja carregado.');return false;}
+  if(!applyQuickSequence(silent))return false;
+  const info=gradeScoreInfo(rows,gradeAnswers);
+  if(info.answered!==info.total){if(!silent)alert('Informe todas as respostas antes de salvar.');return false;}
+  const key=gradeRecordId(c,v,name);
+  const previous=gradeRecordForCode(c,v);
+  // Uma correção por código de prova, independentemente de o nome ter sido preenchido.
+  if(previous && previous[0]!==key)delete state.gradeRecords[previous[0]];
+  state.gradeRecords[key]={classKey:c,version:v,student:name,answers:{...gradeAnswers},savedAt:new Date().toISOString()};
+  gradeEditingKey=key;
+  saveState();renderGradeDashboard();renderGradeHistory();
+  $('gradeKeyNotice').textContent=`${v} corrigida e salva automaticamente neste navegador. ${info.correct}/${info.total} acertos · nota ${formatScore(info.score)}.`;
+  if(!silent)$('gradeQuick').focus();
+  return true;
+}
+function onQuickInput(){
+  updateGradeCount();const rows=gradeRows(),seq=parseQuick();
+  if(!rows.length)return;
+  if(seq.length>rows.length){$('gradeKeyNotice').textContent=`Respostas excedentes: esta prova possui ${rows.length} respostas.`;return;}
+  if(![...seq].every(x=>letters.includes(x)||x==='-')){$('gradeKeyNotice').textContent='Use apenas A, B, C, D ou - para branco.';return;}
+  gradeAnswers=Object.fromEntries(rows.slice(0,seq.length).map((r,i)=>[r.q,seq[i]]));
+  renderGradeAnswers();
+  if(seq.length===rows.length){
+    const id=`${gradeClassKey()}|${gradeVersion()}|${seq}|${$('gradeStudent').value.trim()}`;
+    if(id!==gradeAutoSaveKey){if(saveGrade(true))gradeAutoSaveKey=id;}
+  } else $('gradeKeyNotice').textContent=`${gradeVersion()} · ${seq.length}/${rows.length} respostas. Preencha as restantes para salvar.`;
+}
+function resetGrade(){
+  gradeAnswers={};gradeEditingKey='';gradeAutoSaveKey='';$('gradeCode').value='';$('gradeStudent').value='';$('gradeQuick').value='';$('gradeVersion').innerHTML='';
+  $('gradeKeyNotice').textContent='Informe o próximo código de prova.';renderGradeAnswers();updateGradeCount();$('gradeCode').focus();
+}
+function renderGradeHistory(){
+  const list=Object.values(state.gradeRecords).sort((a,b)=>(b.savedAt||'').localeCompare(a.savedAt||''));
+  $('gradeHistory').innerHTML=list.length?list.map(r=>{
+    const rows=(state.keysByClass[r.classKey]||[]).filter(x=>x.version===r.version),sc=gradeScoreInfo(rows,r.answers||{});
+    return `<tr><td>${escapeHtml(state.classes[r.classKey]?.nome||r.classKey)}</td><td>${escapeHtml(r.student||'—')}</td><td><b>${escapeHtml(r.version)}</b></td><td class="numeric">${sc.correct}/${sc.total}</td><td class="numeric">${formatScore(sc.score)}</td><td>${sc.answered===sc.total?'Corrigida':`Parcial (${sc.answered}/${sc.total})`}</td><td><button type="button" data-open="${escapeHtml(r.version)}">Abrir</button></td></tr>`;
+  }).join(''):'<tr><td colspan="7" class="empty-history">Nenhuma correção salva.</td></tr>';
+}
+function csvEncodeRow(row){return row.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(';')}
+function exportGradeResults(){
+  const rows=[['Turma','Aluno','Versão','Acertos','Total','Respostas marcadas','Nota 0-10','Situação','Sequência de respostas','Última gravação']];
+  Object.values(state.gradeRecords).forEach(r=>{
+    const keys=(state.keysByClass[r.classKey]||[]).filter(x=>x.version===r.version),sc=gradeScoreInfo(keys,r.answers||{});
+    rows.push([state.classes[r.classKey]?.nome||r.classKey,r.student,r.version,sc.correct,sc.total,sc.answered,
+      sc.score===null?'':sc.score.toFixed(2).replace('.',','),sc.answered===sc.total?'Corrigida':'Parcial',
+      keys.map(x=>r.answers?.[x.q]??'?').join(''),r.savedAt||'']);
+  });
+  download('notas_correcao_tma.csv','\ufeff'+rows.map(csvEncodeRow).join('\r\n'),'text/csv;charset=utf-8');
+}
+function csvParse(text){
+  const raw=String(text).replace(/^\ufeff/,'');let rows=[],row=[],field='',quoted=false;
+  for(let i=0;i<raw.length;i++){
+    const c=raw[i];
+    if(c==='"'){if(quoted&&raw[i+1]==='"'){field+='"';i++;}else quoted=!quoted;}
+    else if(c===';'&&!quoted){row.push(field);field='';}
+    else if((c==='\r'||c==='\n')&&!quoted){if(c==='\r'&&raw[i+1]==='\n')i++;row.push(field);field='';if(row.some(x=>x.trim()))rows.push(row);row=[];}
+    else field+=c;
+  }
+  if(quoted)throw Error('Aspas não fechadas no CSV.');
+  if(field.length||row.length){row.push(field);if(row.some(x=>x.trim()))rows.push(row);}
+  return rows;
+}
+function importGradeCSV(file){
+  const reader=new FileReader();reader.onload=()=>{try{
+    const table=csvParse(reader.result),header=(table.shift()||[]).map(x=>x.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''));
+    const col=(label)=>header.indexOf(label),vi=col('versao'),qi=col('questao'),ai=col('resposta');
+    if([vi,qi,ai].some(x=>x<0))throw Error('Cabeçalho inválido. Esperado: Versão; Questão; Resposta.');
+    const grouped={};table.forEach(line=>{
+      const v=(line[vi]||'').trim().toUpperCase(),q=(line[qi]||'').trim().toUpperCase(),a=(line[ai]||'').trim().toUpperCase();
+      if(!/^[A-C]-\d{2,3}$/.test(v)||!/^\d{1,3}[AB]?$/.test(q)||!letters.includes(a))throw Error(`Linha inválida: ${v} / ${q} / ${a}`);
+      const k=codeToClass(v);if(!k)throw Error('Turma da versão '+v+' não encontrada.');
+      (grouped[k]??=[]).push({version:v,q,answer:a,type:line[header.indexOf('tipo')]||'',cat:line[header.indexOf('competencia')]||''});
+    });
+    if(!Object.keys(grouped).length)throw Error('CSV sem gabaritos.');
+    for(const [k,items] of Object.entries(grouped)){
+      for(const v of new Set(items.map(r=>r.version))){const rr=items.filter(r=>r.version===v);if(new Set(rr.map(r=>r.q)).size!==rr.length)throw Error('Questão duplicada: '+v);}
+      const old=state.keysByClass[k]||[];
+      if(old.length&&JSON.stringify(old)!==JSON.stringify(items)&&Object.values(state.gradeRecords).some(r=>r.classKey===k))throw Error('Já há correções desta turma. Não substituirei o gabarito.');
+    }
+    for(const [k,items] of Object.entries(grouped))state.keysByClass[k]=items;
+    saveState();renderGradeDashboard();onGradeCodeChange();alert(`Importados ${table.length} registros de gabarito.`);
+  }catch(e){alert('Não foi possível importar gabarito: '+e.message);}finally{$('gradeImportKeyFile').value='';}};
+  reader.readAsText(file,'UTF-8');
+}
+$('tabGenerate').addEventListener('click',()=>switchTab('generate'));
+$('tabCorrect').addEventListener('click',()=>switchTab('correct'));
+$('gradeCode').addEventListener('change',onGradeCodeChange);
+$('gradeCode').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();onGradeCodeChange();$('gradeQuick').focus();}});
+$('gradeQuick').addEventListener('input',onQuickInput);
+$('gradeQuick').addEventListener('paste',()=>setTimeout(onQuickInput,0));
+$('gradeStudent').addEventListener('change',()=>{
+  const rows=gradeRows();if(rows.length&&parseQuick().length===rows.length)saveGrade(true);
+});
+$('gradeSave').addEventListener('click',()=>saveGrade(false));
+$('gradeReset').addEventListener('click',resetGrade);
+$('gradeAnswers').addEventListener('click',e=>{
+  const btn=e.target.closest('button[data-q]');if(!btn)return;
+  gradeAnswers[btn.dataset.q]=btn.dataset.letter;
+  const rows=gradeRows();$('gradeQuick').value=rows.map(r=>gradeAnswers[r.q]??'?').join('').replace(/\?+$/,'');
+  onQuickInput();
+});
+$('gradeImportKey').addEventListener('click',()=>$('gradeImportKeyFile').click());
+$('gradeImportKeyFile').addEventListener('change',e=>{if(e.target.files[0])importGradeCSV(e.target.files[0]);});
+$('gradeExportResults').addEventListener('click',exportGradeResults);
+$('gradeExportBackup').addEventListener('click',exportConfig);
+$('gradeImportBackup').addEventListener('click',()=>$('gradeImportBackupFile').click());
+$('gradeImportBackupFile').addEventListener('change',e=>{if(e.target.files[0])importConfig(e.target.files[0]);});
+$('gradeHistory').addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(!b)return;$('gradeCode').value=b.dataset.open;onGradeCodeChange();$('gradeCode').scrollIntoView({behavior:'smooth',block:'center'});});
+$('gradePending').addEventListener('click',e=>{const b=e.target.closest('[data-pending]');if(!b)return;$('gradeCode').value=b.dataset.pending;onGradeCodeChange();$('gradeQuick').focus();});
+refreshGradeClassOptions();renderGradeHistory();
+
+</script>
+</body>
+</html>
